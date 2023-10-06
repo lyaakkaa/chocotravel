@@ -11,7 +11,7 @@ header {
     background-color: #fff;
     color: #333;
     padding: 0 30px;
-    margin: 0;
+    margin-top: 0;
 }
 
 .header_list {
@@ -21,24 +21,36 @@ header {
     width: 100%;
 }
 
-header li {
-    display: inline-block; /* Отображение элементов списка в строку */
-    margin: 0 10px; /* Внешний отступ между элементами списка */
+.menu-item {
+    display: inline-block; 
+    margin: 0 10px;
     font-size: 14px; /* Размер шрифта */
     border-left: 1px solid #ccc;
     padding: 10px;
 }
 
-header li:hover {
-    text-decoration: underline; /* Подчеркивание текста при наведении курсора */
-    cursor: pointer; /* Изменение курсора при наведении */
+.menu-item-signin{
+    display: inline-block; 
+    margin: 0 10px;
+    font-size: 14px; /* Размер шрифта */
+    padding: 10px;
 }
 
-/* Стилизация обычных состояний ссылок */
+.info{
+    display: flex;
+    flex-direction: column;
+}
+
+header li:hover {
+    text-decoration: underline;
+    cursor: pointer; 
+}
+
+
 a {
-    text-decoration: none; /* Убираем подчеркивание */
-    color: #007BFF; /* Задаем цвет текста */
-    font-weight: bold; /* Задаем жирное начертание текста */
+    text-decoration: none; 
+    color: #007BFF; 
+    font-weight: bold; 
 }
 
 /* Стилизация ссылок при наведении */
