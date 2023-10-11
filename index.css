@@ -364,3 +364,125 @@ a:hover {
     margin-bottom: 30px;
     border-radius: 8px
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.footer {
+    width: 100%;
+    margin: auto;
+    background-color: #387fbf;
+    border-top: 4px solid #fe9922
+}
+
+.footer_row {
+    max-width: 1000px;
+    display: flex;
+    justify-content: flex-start;
+    margin: auto;
+    padding: 20px 20px 0
+}
+
+.footer_row:last-child {
+    border-top: 1px solid hsla(0,0%,100%,.5);
+    margin-top: 15px;
+    padding-bottom: 15px;
+    padding-top: 20px
+}
+
+.footer_col {
+    width: 25%;
+    color: #fff
+}
+
+.footer_row a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 12px
+}
+
+.footer_row a:hover {
+    text-decoration: underline
+}
+
+.footer_row li {
+    padding-bottom: 1px
+}
+
+.footer_row .header_footer_list {
+    font-size: 14px;
+    text-transform: uppercase;
+    padding-bottom: 15px
+}
+
+.footer_img img {
+    display: inline-block;
+    margin-top: 10px
+}
+
+
+.footer-icons {
+    display: flex;
+    justify-content: flex-start
+}
+
+.footer-icons_item {
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    margin: 6px
+}
+
+.footer-icons_item:first-child {
+    margin-left: 0
+}
+
+.footer-icons_item:last-child {
+    margin-right: 0
+}
+
+.footer-icons_item_visa {
+    background-image: url(images/visa-pay-logo.svg);
+    width: 46px;
+    height: 16px
+}
+
+.footer-icons_item_master{
+    background-image: url(images/master-card.svg);
+    height: 17px;
+    width: 28px
+}
+
+.footer-icons_item_union-pay{
+    background-image: url(images/union-pay.svg);
+    width: 32px
+}
+
+.footer-icons_item--depositphotos{
+    background-image: url(images/depositphotos.svg);
+    width: 105px;
+    height: 17px
+}
+
+.footer-icons_item--astana_hub{
+    background-image: url(images/astana-hub.png);
+    width: 100px;
+    height: 30px
+}
