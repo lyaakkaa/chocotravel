@@ -7,117 +7,88 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="icon" type="image/png" href="/favicon.png">
-    <link rel="stylesheet" href="main1.css">
+    <link rel="stylesheet" href="home.css">
 </head>
 
 <body>
 
-
-    <input type="hidden" name="csrf" value="52bf83155a9f06d49125c8efb61c93ccf7affbcc" />
-
     <div class="chocofamily-logos">
         <div id="choco-projects" class="choco-projects">
             <ul class="choco-projects__list">
-                <li class="choco-projects__item choco-projects__item--chocolife">
+                <li class="choco-projects__item choco-projects__item_chocolife">
                     <a href="//chocolife.me/?utm_source=chocotravel.com&utm_medium=plashka" class="choco-projects__link" rel="nofollow" target="_blank">
                         <span class="choco-projects__title">Скидки до 90%</span>
                         <div class="choco-projects__logo"></div>
                     </a>
                 </li>
-                <li class="choco-projects__item choco-projects__item--tripfor">
+
+                <li class="choco-projects__item choco-projects__item_tripfor">
                     <span class="choco-projects__title">Авиабилеты</span>
                     <div class="choco-projects__logo"></div>
                 </li>
-                <li class="choco-projects__item choco-projects__item--chocofood">
+
+                <li class="choco-projects__item choco-projects__item_chocofood">
                     <a href="http://chocofood.kz/?utm_source=chocotravel.com&utm_medium=plashka" class="choco-projects__link" rel="nofollow" target="_blank">
                         <span class="choco-projects__title">Заказ Еды</span>
                         <div class="choco-projects__logo"></div>
                     </a>
                 </li>
-                <li class="choco-projects__item choco-projects__item--idoctor">
+
+                <li class="choco-projects__item choco-projects__item_idoctor">
                     <a href="http://idoctor.kz/?utm_source=chocotravel&utm_medium=plashka" class="choco-projects__link" rel="nofollow" target="_blank">
                         <span class="choco-projects__title">Поиск врачей</span>
                         <div class="choco-projects__logo"></div>
                     </a>
                 </li>
+
             </ul>
+
             <div class="login">
                 <input id="is-authorized-input" type="hidden" value="">
-                <div class="text-xs font-semibold">
-                    <div id="auth-links" class="flex items-center ">
-                        <a href="https://b2b.chocotravel.com/" class="mr-4 text-blue-400 underline">
-                            Бизнес аккаунт                        </a>
-                        <button id="login-button" type="button" class="
-                                py-1 px-4 
-                                bg-blue-500 border-solid border border-white lg:border-none rounded-lg
-                                text-white leading-normal
-                                cursor-pointer
-                            ">
-                            Войти                        </button>
+                <div class="login-container">
+                    <div id="auth-links" class="container-flex">
+                        <a href="https://b2b.chocotravel.com/" class="login__link">
+                            Бизнес аккаунт
+                        </a>
+                        <button id="login-button" type="button" class="login__button
+                            ">Войти
+                        </button>
                     </div>
                     <div id="post-auth-links" class="relative flex items-center hidden">
-                        <a id="cab_link" href="/cabinet" title="" class="mr-4 text-blue-400 underline">
-                            Личный кабинет                        </a>
-                        <a href="/avia/auth/logout" class="
-                                py-1 px-4 
-                                bg-blue-500 border-solid border border-white lg:border-none rounded-lg
-                                text-white leading-normal
-                                cursor-pointer
-                                no-underline
-                            " style="font-size: 12px; font-weight: 600;">
-                            Выход                        </a>
+                        <a id="cab_link" href="/cabinet" title="" class="login__link">
+                            Личный кабинет
+                        </a>
+
+                        <a href="/avia/auth/logout" class="login__button" style="font-size: 12px; font-weight: 600; text-decoration: none;">
+                            Выход
+                        </a>
                     </div>
-                </div>
-            </div>
-            <div class="lang-switcher" tabindex="1">
-                <div class="lang-switcher__item lang-switcher__item--active lang-switcher__item--ru">
-                    Рус <img class="lang-switcher__arrow" src="images/arrow-black.svg" role="presentation" width="12" height="12" alt="" />
-                </div>
-                <div class="lang-switcher__items">
-                    <div class="
-              lang-switcher__item
-              lang-switcher__item--mobile
-              lang-switcher__item--active
-              lang-switcher__item--inner
-              lang-switcher__item--ru" data-lang="ru">
-                        Рус </div>
-                    <div class="
-                    lang-switcher__item
-                    lang-switcher__item--inner
-                    lang-switcher__item--kz" data-lang="kz">
-                        Қаз </div>
-                    <div class="
-                    lang-switcher__item
-                    lang-switcher__item--inner
-                    lang-switcher__item--en" data-lang="en">
-                        Eng </div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="choco-main-mobile-header" class="lg:hidden" style="height: 51px">
-        <main-header />
-    </div>
+
+
     <div class="wrapper">
         <div class="center">
-            <div class="header hidden lg:flex">
-                <div class="header__logo" itemscope itemtype="http://schema.org/Organization">
+            <div class="header">
+                <div class="header__logo">
                     <a href="/ru" itemprop="url">
-              <img itemprop="logo" src="images/chocotravel-logo.svg" width="273" height="51" alt="Chocotravel.com" title="Авиабилеты дешево онлайн">
-            </a>
+                        <img itemprop="logo" src="images/chocotravel-logo.svg" width="273" height="51" alt="Chocotravel.com" title="Авиабилеты дешево онлайн">
+                    </a>
                 </div>
                 <div class="menu__main">
                     <a href="/ru" class="avia js-link-event selected" data-event="search-results.avia">
-                <img src="images/plane_active.svg" alt="Авиабилеты">
-                <span>Авиабилеты</span>
-            </a>
+                        <img src="images/plane_active.svg" alt="Авиабилеты">
+                        <span>Авиабилеты</span>
+                    </a>
                     <a href="/ru/railways" class="railways js-link-event " data-event="search-results.RWtickets">
                     <img
                         src="images/jd_ticket.png"
                         alt="ЖД билеты"
                     >
                     <span>ЖД билеты</span>
-                </a>
+                    </a>
                     <a class="hotel js-link-event" href="https://www.booking.com/?aid=874524" target="_blank" data-event="search-results.hotels" rel="nofollow">
                 <img src="images/hotel.svg" alt="Гостиницы">
                 <span>Гостиницы</span>
@@ -143,17 +114,16 @@
                         <span>Туры</span>
                     </a>
                 </div>
-                <div class="clear"></div>
             </div>
             <div class="content">
                 <div class="content-center">
                     <main>
                         <h1 class="
-      mt-4 mb-6 lg:my-6
-      text-black text-xl lg:text-4xl text-center
-      font-semibold
-      leading-8
-    ">
+                            mt-4 mb-6 lg:my-6
+                            text-black text-xl lg:text-4xl text-center
+                            font-semibold
+                            leading-8
+                            ">
                             Авиабилеты в Казахстане </h1>
                         <section id="choco-main-spa-app" style="min-height: 150px">
                             <main-page-app />
@@ -163,8 +133,8 @@
                                 <div class="promo-banners-slider__item">
 
                                     <a href="https://special.chocotravel.com/tel-aviv-air-astana?utm_source=chocotravel&utm_medium=main-banner&utm_campaign=tel-aviv-air-astana" rel="nofollow" class="js-link-event" data-event="Main.BannerTop" target="_blank" style="width: 100%">
-    <img src="https://s3.eu-central-1.amazonaws.com/chocotravel/media/banners/Air Astana Тель-Авив — Чоко — 1000 х 140.png" style="width: inherit" />
-</a>
+                                        <img src="https://s3.eu-central-1.amazonaws.com/chocotravel/media/banners/Air Astana Тель-Авив — Чоко — 1000 х 140.png" style="width: inherit" />
+                                    </a>
                                 </div>
                             </div>
                             <section class="mainpage-advantages" data-intersection-event="mainpage.advantages">
@@ -360,26 +330,11 @@
                     </main>
                 </div>
                 <!-- content-center end -->
-                <div class="clear"></div>
             </div>
             <!-- content -->
         </div>
-        <!-- center end -->
 
-        <!-- blog for dynamic dialog windows-->
-        <div id="win2" class="win-bg2">
-            <div class="win-block">
-                <div class="win-close">
-                    <!-- -->
-                </div>
-                <div class="win-content"></div>
-            </div>
-        </div>
-        <div id="wait" class="loader-bg-main">
-            <div class="loader-block">
-                <img src="images/3.gif">
-            </div>
-        </div>
+
 
     </div>
     <!-- wrapper end -->
@@ -485,45 +440,6 @@
                     </ul>
                 </div>
             </div>
-            <div class="footer__row">
-                <div class="footer__col --icons">
-                    <ul>
-                        <li class="footer_img">
-                            <div class="footer-icons">
-                                <div class="footer-icons__item footer-icons__item--visa"></div>
-                                <div class="footer-icons__item footer-icons__item--master"></div>
-                                <div class="footer-icons__item footer-icons__item--union-pay"></div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer__col --icons">
-                    <ul>
-                        <li class="footer_img">
-                            <div class="footer-icons">
-                                <a class="footer-icons__item footer-icons__item--astana_hub" target="_blank" rel="nofollow" href="https://astanahub.com/"></a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer__col --icons">
-                    <ul>
-                        <li class="footer_img">
-                            <a href="https://www.instagram.com/chocotravel" target="_blank" class="social social--inst"></a>
-                            <a href="https://www.facebook.com/chocotravelcom" target="_blank" class="social social--fb"></a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer__col --icons">
-                    <ul>
-                        <li class="footer_img">
-                            <div class="footer-icons">
-                                <div class="footer-icons__item footer-icons__item--depositphotos"></div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
         </div>
         <div class="mobile-footer">
             <button class="mobile-footer__menu-control">меню</button>
@@ -613,47 +529,7 @@
             </ul>
         </div>
     </footer>
-    <div class="link_home" id="https://www.chocotravel.com/" style="display: none;"></div>
-    <div id="admin-notification"></div>
-    <input type="hidden" value="ru" name="locale">
-    <input type="hidden" class="msb-company-name" name="msb_company_name" value="">
-    <script>
-        (function() {
-            var js = "window['__CF$cv$params']={r:'811bcd0bdf9f2a44',t:'MTY5NjU3MzI1My4zMTMwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";
-            var _0xh = document.createElement('iframe');
-            _0xh.height = 1;
-            _0xh.width = 1;
-            _0xh.style.position = 'absolute';
-            _0xh.style.top = 0;
-            _0xh.style.left = 0;
-            _0xh.style.border = 'none';
-            _0xh.style.visibility = 'hidden';
-            document.body.appendChild(_0xh);
 
-            function handler() {
-                var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;
-                if (_0xi) {
-                    var _0xj = _0xi.createElement('script');
-                    _0xj.innerHTML = js;
-                    _0xi.getElementsByTagName('head')[0].appendChild(_0xj);
-                }
-            }
-            if (document.readyState !== 'loading') {
-                handler();
-            } else if (window.addEventListener) {
-                document.addEventListener('DOMContentLoaded', handler);
-            } else {
-                var prev = document.onreadystatechange || function() {};
-                document.onreadystatechange = function(e) {
-                    prev(e);
-                    if (document.readyState !== 'loading') {
-                        document.onreadystatechange = prev;
-                        handler();
-                    }
-                };
-            }
-        })();
-    </script>
 </body>
 
 </html>
