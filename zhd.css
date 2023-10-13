@@ -351,47 +351,6 @@ a:hover {
     border-radius: 50%
 }
 
-.form-zakaz {
-    display: flex;
-    background-color: white;
-    padding: 10px;
-    align-items: center;
-    justify-content: center;
-    margin: 50px;
-    border-radius: 10px;
-
-
-}
-
-
-
-.form-group {
-    display: inline-block;
-    margin-right: 10px; /* Можете настроить отступы по своему усмотрению */
-}
-
-
-
-input, select {
-    flex: 1;
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: max-content;
-}
-
-.find {
-    padding: 15px 20px;
-    background-color: #ff8a00;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.find:hover {
-    background-color: #0056b3;
-}
 
 
 .footer {
