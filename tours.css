@@ -1,0 +1,299 @@
+.my-16{
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+
+.relative{
+    position: relative;
+}
+
+.text-black{
+    --text-opacity: 1;
+    color: rgba(61, 61, 61, var(--text-opacity));
+}
+
+.tours-container{
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    max-width: 1060px;
+}
+
+.mb-16{
+    margin-bottom: 4rem;
+}
+
+.mb-4{
+    margin-bottom: 1rem;
+}
+
+.text-5x1{
+    font-size: 3rem;
+}
+.font-extrabold{
+    font-weight: 800;
+}
+.mb-8{
+    margin-bottom: 2rem;
+}
+.text-x1{
+    font-size: 1.25rem;
+}
+
+.bg-white{
+    --bg-opacity: 1;
+    background-color: #fff;
+    background-color: rgba(255, 255, 255, var(--bg-opacity));
+}
+
+.rounded-2x1{
+    border-radius: 16px;
+}
+
+.px-10{
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+}
+
+.py-12{
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.text-x1{
+    font-size: 1.25rem;
+}
+
+.flex{
+    display: flex;
+}
+.flex-col{
+    flex-direction: column;
+}
+
+.w-full{
+    width: 100%;
+}
+.p-4{
+    padding: 1rem;
+}
+
+.bg-gray-300{
+    --bg-opacity: 1;
+    background-color: rgba(240, 241, 244, var(--bg-opacity));
+}
+
+.rounded-lg{
+    border-radius: 8px;
+}
+
+.border-none{
+    border-style: none;
+}
+
+.mt-6{
+    margin-top: 1.5rem;
+}
+
+.base-button{
+    appearance: none;
+    box-sizing: border-box;
+    transition-property: all;
+    transition-duration: .2s;
+    transition-timing-function: linear;
+}
+
+.base-button.\--accent{
+    --bg-opacity: 1;
+    background-color: rgba(255, 138, 0, var(--bg-opacity));
+    --border-opacity: 1;
+    border-color: #ff8a00;
+    border: 1px solid rgba(255, 138, 0, var(--border-opacity));
+    font-family: Open Sans,Arial,sans-serif;
+    --text-opacity: 1;
+    color: rgba(255, 255, 255, var(--text-opacity));
+}
+.base-button.\--default{
+    border-radius: 4px;
+    cursor: pointer;
+}
+.base-button.\--outline{
+    background-color: transparent;
+    --border-opacity: 1;
+    border-color: #387fbf;
+    border: 1px solid rgba(56, 127, 191, var(--border-opacity));
+    font-family: Open Sans,Arial,sans-serif;
+    --text-opacity: 1;
+    color: rgba(56, 127, 191, var(--text-opacity));
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.justify-center{
+    justify-content: center;
+}
+
+.text-base{
+    font-size: 1rem;
+}
+
+.font-bold{
+    font-weight: 700;
+}
+
+.absolute{
+    position: absolute;
+}
+
+.right-0{
+    right: 0;
+}
+
+.hidden{
+    display: none;
+}
+
+.bg-tours-pattern {
+    background-image: url(images/background_pattern.png);
+}
+
+.py-16{
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+.py-4{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+.font-semibold{
+    font-weight: 600;
+}
+.no-underline{
+    text-decoration: none;
+}
+.py-10{
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+}
+.py-px{
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+.mb-24{
+    margin-bottom: 6rem;
+}
+.mb-2{
+    margin-bottom: 0.5rem;
+}
+
+.bg-blue-500{
+    --bg-opacity: 1;
+    background-color: rgba(56, 127, 191, var(--bg-opacity));
+}
+.mx-auto{
+    margin-left: auto;
+    margin-right: auto;
+}
+.text-center{
+    text-align: center;
+}
+.text-4x1{
+    font-size: 2.25rem;
+}
+.mt-0{
+    margin-top: 0;
+}
+.mb-8{
+    margin-bottom: 2rem;
+}
+.border-solid{
+    border-style: solid;
+}
+.border-opcaity-50{
+    --border-opacity: 0.5;
+}
+.border-white{
+    --border-opacity: 1;
+    border-color: rgba(255, 255, 255, var(--border-opacity));
+}
+.border-r-0{
+    border-right-width: 0;
+}
+.text-left{
+    text-align: left;
+}
+.border-gray-300 {
+    --border-opacity: 1;
+    border-color: rgba(240, 241, 244, var(--border-opacity));
+}
+
+.text-white{
+    --text-opacity: 1;
+    color: rgba(255, 255, 255, var(--text-opacity));
+}
+
+.justify-between{
+    justify-content: space-between;
+}
+
+.items-start{
+    align-items: flex-start;
+}
+
+.tours-carousel-btn.\--left{
+    background: no-repeat 50% url(img/btn_left_grey.svg);
+}
+.tours-carousel-btn.\--right{
+    background: no-repeat 50% url(img/btn_right_grey.svg);
+}
+.tours-carousel-btn{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-width: 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition-property: all;
+    transition-duration: .2s;
+}
+.mb-10{
+        margin-bottom: 2.5rem;
+}
+.mr-5{
+    margin-right: 1.25rem;
+}
+
+.px-4{
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.block{
+    display: block;
+}
+
+.border{
+    border-width: 1px;
+}
+.border-t-0{
+    border-top-width: 0;
+}
+.border-b-0{
+    border-bottom-width: 0;
+}
+
+.border-solid{
+    border-style: solid;
+}
+.border-opcaity-50{
+    --border-opacity: 0.5;
+}
+.border-white{
+    --border-opacity: 1;
+    border-color: rgba(255, 255, 255, var(--border-opacity));
+}
+
+.bg-tours-gradient{
+    background: no-repeat 50% url(images/background_gradient.png);
+    background-size: cover;
+}

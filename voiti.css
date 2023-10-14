@@ -1,0 +1,118 @@
+body {
+    background-color: #fff;
+}
+
+#img1 {
+    margin-left: 475px;
+    margin-top: 185px;
+}
+
+@font-face {
+    font-family: Stem Bold;
+    src: url(Stem-Bold.ttf);
+}
+
+#box {
+    width:370px;
+    height:290px;
+    margin-left: 500px;
+    margin-top: 12px;
+    background-color:#ffffff; 
+    opacity: 1;
+    box-shadow: 1px 1px 20px 0 #000000;
+    -webkit-border-radius: 28px;
+    font-family: Stem Bold;
+    /* background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)); */
+}
+
+#tex {
+    margin-left: 20px;
+    padding-top: 20px;
+}
+
+input {
+    width: 100%;
+    font-size: 20px;
+    font-weight: 10%;
+    padding-left: 10px;
+}
+
+#box2 {
+    width:330px;
+    height:50px;
+    /* margin-left: 500px; */
+    margin-top: 12px;
+    background-color:#e9e6e6; 
+    opacity: 1;
+    margin-left: -5px;
+    border-radius: 13px;
+    font-family: Stem Bold;
+    /* background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)); */
+}
+
+.btn_1 {
+    margin-top: 30px;
+    margin-bottom: 0;
+    background: #000000;
+    width:330px;
+    height:50px;
+    border-radius: 13px;
+    color: #FFFFFF;
+    font-family: Stem Bold;
+    font-size: 15px;
+    font-weight: 25%;
+    padding: 10px;
+    box-shadow: 1px 1px 20px 0 #000000;
+    border: solid #000000 1px;
+    text-decoration: none;
+    display: inline-block;
+ 
+ }
+
+ .btn_2 {
+    margin-top:15px;
+    background: #ffffff;
+    border-radius: 13px;
+    width:330px;
+    height:50px;
+    color: #000000;
+    font-family: Stem Bold;
+    font-size: 15px;
+    font-weight: 25%;
+    padding: 10px;
+    border: solid #000000 1px;
+    text-decoration: none;
+    display: inline-block;
+ }
+
+#box3 {
+    width:330px;
+    height:50px;
+    /* margin-left: 500px; */
+    margin-top: 25px;
+    background-color:#000000; 
+    opacity: 1;
+    -webkit-border-radius: 12px;
+    font-family: Stem Bold;
+    /* background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)); */
+}
+
+#box4 {
+    width:330px;
+    height:50px;
+    /* margin-left: 500px; */
+    margin-top: 5px;
+    background-color:#e9e6e6; 
+    opacity: 1;
+    -webkit-border-radius: 12px;
+    font-family: Stem Bold;
+    color: white;
+    /* background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)); */
+}
+
+#tex1 {
+    margin-left: 120px;
+    padding-top: 60000px;
+    margin-top: 40000px;
+    /* justify-content: center; */
+}
