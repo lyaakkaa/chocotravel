@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="main.css">
+    <title>
+        Дешевые авиабилеты онлайн: купить авиабилеты в Казахстане. Поиск и бронирование билетов на самолет по доступным
+        ценам
+    </title>
+    <link href="main.css" rel="stylesheet" type="text/css">
+    <link href="rentalcars.css" rel="stylesheet" type="text/css">
 </head>
+
 <body>
-    
     <div class="chocofamily-logos">
         <div id="choco-projects" class="choco-projects">
             <ul class="choco-projects__list">
@@ -64,7 +67,6 @@
         </div>
     </div>
 
-    
 
     <div class="header">
         <div class="main_logo">
@@ -74,7 +76,7 @@
         </div>
 
         <div class="menu_options">
-            <a classs="menu_option" id="aviaBilet" href="index.html">
+            <a classs="menu_option" id="aviaBilet" href="main.html">
                 <img src="images/plane_active.svg">
                 <span>Авиабилеты</span>
             </a>
@@ -105,209 +107,127 @@
         </div>
     </div>
 
-    <div class="wrapper">
-        <div class="center">
-            <div class="content">
-                <div class="content-center">
-                    <div class="div-text">
-                        <h1>Авиабилеты в Казахстане</h1>
-                    </div>
-                    <form class="form-zakaz">
-                        <div class="labels">
-                            <div class="form-group">
-                                <select id="from" name="from" required>
-                                    <option value="" disabled selected>Откуда</option>
-                                    <option value="city1">Алматы</option>
-                                    <option value="city2">Астана</option>
-                                    <option value="city3">Город 3</option>
-                        
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <select id="to" name="to" required>
-                                    <option value="" disabled selected>Куда</option>
-                                    <option value="cityA">Город A</option>
-                                    <option value="cityB">Город B</option>
-                                    <option value="cityC">Город C</option>
-                                    
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <input type="date" id="date" name="date" placeholder="14 окт" required>
-                            </div>
-                            <div class="form-group">
-                                <select id="ticket-type" name="ticket-type" required>
-                                    <option value="economy">Эконом</option>
-                                    <option value="business">Бизнес</option>
-                                    <option value="first-class">Первый класс</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <button class="find" type="submit">Найти</button>
+
+    <div class="auto-center">
+        <div class="rental-cars">
+            <div class="rental-cars__block rental-cars__block_top" id="forms">
+                <div class="rental-cars__block_content">
+                    <div class="rental-cars__block">
+                        <div class="rental-cars__block">
+                            <div class="rental-cars__forms">
+                                <div class="rental-cars__forms_tabs">
+                                    <div class="rental-cars__forms_tabs_tab rental-cars__forms_tabs_tab_active" tab="1" onclick="selectTab(1)">
+                                        Предварительный расчет и бронирование
+                                    </div>
+                                    <div class="rental-cars__forms_tabs_tab" tab="2" onclick="selectTab(2)">
+                                        Изменить иои отменить бронирование
+                                    </div>
+                                </div>
+                                <div class="rental-cars__forms_content">
+                                    <iframe tab="1" class="rental-cars__forms_content_tab rental-cars__forms_content_tab_active" src="https://eixnbeweb01.rent-at-avis.com/avisonline/ru/IBE.nsf/ReservationStep1?OpenForm&MST=38CB55A0B8DEA242C12582BA005A5379" width="100%" height="600" align="middle" frameborder="0"></iframe>
+                                    <iframe tab="2" class="rental-cars__forms_content_tab" src="https://eixnbeweb01.rent-at-avis.com/avisonline/ru/IBE.nsf/modifycancel?OpenForm&MST=38CB55A0B8DEA242C12582BA005A5379" width="100%" height="600" align="middle" frameborder="0"></iframe>
+                                </div>
                             </div>
                         </div>
-                    </form>
-
-                    <div class="div-text">
-                        <h2>Подробнее о поиске авиабилетов на Chocotravel</h1>
-                        <p>Именно по этим причинам люди используют Chocotravel как бесплатный<br>
-                            сервис по поиску авиабилетов</p>
-                    </div>
-
-                    <div class="blocks">
-                        <div class="one-block">
-                            <img src="images/mainpage-features-plane-2.svg">
-                            <h3>1000 авиакомпаний</h3>
-                            <p>Chocotravel.com сравнивает предложения более 1000 авиакомпаний мира, чтобы найти для вас лучший
-                                вариант перелета</p>
-                        </div>
-                        <div class="one-block">
-                            <img src="images/mainpage-features-wallet-2.svg">
-                            <h3>Авиабилеты по цене авиакомпаний</h3>
-                            <p>На Chocotravel.com вы приобретаете билеты по стоимости авиакомпании, без скрытых комиссий и
-                                сборов, а иногда даже дешевле</p>
-                        </div>
-                        <div class="one-block">
-                            <img src="images/mainpage-features-clock-2.svg">
-                            <h3>Круглосуточная поддержка</h3>
-                            <p>Мы решаем ваши проблемы 24 часа в сутки</p>
-                        </div>
-                        <div class="one-block">
-                            <img src="images/mainpage-features-touch-2.svg">
-                            <h3>Покупка за 3 минуты</h3>
-                            <p>Вы экономите время, больше не нужно ездить в агентства. Проводите время с любимыми</p>
-                        </div>
-                        <div class="one-block">
-                            <img src="images/mainpage-features-mobile-2.svg">
-                            <h3>Все билеты в твоем мобильном</h3>
-                            <p>Полнофункциональные мобильные приложения для Android и IOS</p>
-                        </div>
-                        <div class="one-block">
-                            <img src="images/mainpage-features-handshake-2.svg">
-                            <h3>Надежность</h3>
-                            <p>Нам доверяют более 200 000 казахстанцев ежегодно</p>
-                        </div>
-                    </div>
-
-
-                    <div class = "aboutUs">
-                        <p>
-                            Часто сталкиваетесь с необходимостью купить билеты на самолет? Думали ли Вы о том,как было бы здорово, если бы бронирование авиабилетов занимало всего 5 минут? Теперь это стало реально! Благодаря сервису Chocotravel.com купить авиабилеты онлайн в Казахстане можно в несколько кликов.
-                        </p>
-                        <p>
-                            <strong>Покупка ЖД и авиабилетов онлайн:</strong>
-                        </p>
-                        <p>
-                            1. Экономит Ваше время.
-                        </p>
-                        <p>
-                            Автоматизированная система поиска в режиме онлайн после ввода параметров находит лучшие варианты авиаперелета, предлагаемые всеми доступными авиакомпаниями. За считанные минуты перед Вами появится перечень выгодных предложений более чем от 1000 авиакомпаний. При этом Вам совершенноне нужно ехать в другой конец города и напрасно тратить время в длинных очередях в кассе!
-                        </p>
-                        <p>
-                            2. Экономит Ваши деньги.
-                        </p>
-                        <p>
-                            Вы сможете подобрать дешевые авиабилеты по различным направлениям. Цены на авиабилеты порадуют Вас, ведь мы продаем их без наценок.
-                        </p>
-                        <p>
-                            3. Множество способов оплаты.
-                        </p>
-                        <p>
-                            Вы можете оплатить покупку любым удобным для вас способом:
-                        </p>
-                        <ol>
-                            <li>банковскими картами VISA, Mastercard и Union Pay;</li>
-                            <li>через приложение Рахмет;</li>
-                            <li>в рассрочку Freedom Finance credit</li>
-                        </ol>
-                        <p>
-                            <strong>Преимущества портала Chocotravel.com:</strong>
-                        </p>
-                        <ul>
-                            <li>На сайте Вы можете найти, забронировать и купить авиабилеты онлайн на рейсы практически любой авиакомпании в мире.</li>
-                            <li>Мы помогаем найти билет на любое направление по минимальной стоимости.</li>
-                            <li>У нас Вы также можете приобрести железнодорожные билеты онлайн.</li>
-                            <li>При заполнении формы заказа Вам понадобится лишь один раз вписать информацию о себе. При последующих покупках система автоматически сохраняет данные, избавляя Вас от утомительной процедуры ввода данных. Возможность страхования по выбранной программе.</li>
-                        </ul>
-                    </div>
-
-
-                    <div class = "main_articles">
-                        <div class = "main_articles_title">
-                            <p>СМИ о нас</p>
-                            <a href = "#">Посмотреть все статьи</a>
-                        </div>
-        
-                        <div class="article-tab">
-                            <a>
-                              <div>
-                                <img src = "images/tengri1.jpg">
-                              </div>  
-                            </a>
-                        </div>
-        
-                        <div class="article-tab">
-                            <a>
-                              <div>
-                                <img src = "images/forbes.png">
-                              </div>  
-                            </a>
-                        </div>
-        
-                        <div class="article-tab">
-                            <a>
-                              <div>
-                                <img src = "images/forbes.png">
-                              </div>  
-                            </a>
-                        </div>
-        
-                        <div class="article-tab">
-                            <a>
-                              <div>
-                                <img src = "images/kazinf.jpg">
-                              </div>  
-                            </a>
-                        </div>
-        
-                        <div class="article-tab">
-                            <a>
-                              <div>
-                                <img src = "images/tengri1.jpg">
-                              </div>  
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="clear"></div>
-
-                    <div class = "install-app">
-                        <img src="images/download-app.png" width="424" height="404">
-                        <div class = "install-app-container">
-                            <div class = "install-app_text">
-                                <h3>УСТАНОВИ ПРИЛОЖЕНИЕ CHOCOTRAVEL!</h3>
-                                <p>Все билеты без наценок в твоем мобильном.</p>
-                            </div>
-        
-                            <div class = "install-app_shops">
-                                <a href = "#">
-                                    <img src = "images/app-store-badge.svg" width="138" height="45">
-                                </a>
-                                <a href = "#">
-                                    <img src = "images/google-play-badge.png" width="152" height="45">
-                                </a>
-                                <a href = "#">
-                                    <img src = "images/app-gallery-badge.png" width="152" height="45">
-                                </a>
+                        <div class="rental-cars__block">
+                            <div>
+                                <div class="rental-cars__header" style="color: white; text-align: right;">
+                                    <img src="images/chocotravellogo.svg">
+                                    <br> Аренда автомобилей по всему миру онлайн
+                                </div>
+                                <img src="images/car.png" class="block rental-cars__block_top__img">
                             </div>
                         </div>
                     </div>
-
+                </div>
+            </div>
+            <div class="rental-cars__block">
+                <div class="rental-cars__block_content">
+                    <div class="rental-cars__header"> Попробуйте свободу на вкус, арендуя автомобиль в Avis</div>
+                    <div class="rental-cars__block rental-cars__block_feature">
+                        <img src="images/features_1.svg" style="margin-right: 76px;">
+                        <div>
+                            <b>Свобода передвижения.</b>
+                            <br> Вы составляете собственный маршрут, не обращая внимание на расписание общественного транспорта.
+                        </div>
+                    </div>
+                    <div class="rental-cars__block rental-cars__block_feature">
+                        <img src="images/features_2.svg" style="margin-right: 76px;">
+                        <div style="white-space: pre-line">
+                            <b>Свобода выбора.</b>
+                            <br> Вы можете выбрать: · автомобиль, который больше всего подходит под все Ваши требования; · станцию проката наиболее удобную для Вас; · дополнительные услуги и страховки, которые сделают Ваше путешествие еще более комфортным; · самое оптимальное для Вас время получения и возврата авто
+                        </div>
+                    </div>
+                    <div class="rental-cars__block rental-cars__block_feature">
+                        <img src="images/features_3.svg" style="margin-right: 76px;">
+                        <div>
+                            <b>Свободные руки.</b>
+                            <br> Ведь все вещи Вы можете положить в багажник авто и забыть о тяжестях и усталости.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="background: #687482; color: white;">
+                <div class="rental-cars__block rental-cars__block_comfort" style="width: calc(50vw + 500px); justify-content: space-between;">
+                    <img src="images/comfort.png" style="margin-right: 70px; object-fit: cover; object-position: 100% 0;">
+                    <div style="padding: 52px 0; max-width: 1000px;">
+                        <div class="rental-cars__header_2">Путешествуйте с комфортом</div>
+                        <p>Автомат или механика, небольшой автомобиль или микроавтобус, Вы сможете подобрать автомобиль под любые цели.</p>
+                        <p>А для того, чтобы сделать Ваше путешествие еще более комфортным и безопасным мы предлагаем ряд дополнительных опций, таких как навигатор и детское кресло.</p>
+                        <p>Вы можете заказать эти опции заранее при бронировании или во время получения авто на станции проката, при условии их наличия.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="rental-cars__block_content">
+                <div class="rental-cars__block rental-cars__block_extra">
+                    <div>
+                        <div class="rental-cars__header" style="text-align: left;">Допольнительные услуги</div>
+                        <p>Также мы предлагаем дополнительные услуги, такие как расширенное страхование и доставка автомобиля к отелю. В стоимость аренды в большинстве стран аренды уже будет включена стандартная страховка от ущерба и угона с франшизой.</p>
+                        <p>Франшиза (максимальная финансовая ответственность водителя при наступлении страхового случая) может отличаться в зависимости от страны и выбранной группы авто. Если Вы хотите воспользоваться полным страхованием или приобрести дополнительные страховки, просим Вас сообщать об этом нашим сотрудникам на станции проката.</p>
+                        <p>После бронирования просим Вас ознакомиться с информацией по Вашей аренде в подтверждении бронирования, все ли верно там указано.</p>
+                    </div>
+                    <img src="images/extra.png">
+                </div>
+            </div>
+            <div style="background: #687482; color: white;">
+                <div class="rental-cars__block_content">
+                    <div class="rental-cars__header" style="color: white; margin-bottom: 64px;">
+                        Обращаем ваше внимание
+                        <div style="font-size: 20px;">
+                            Документы, которые водителю необходимо иметь при себе на станции проката:
+                        </div>
+                    </div>
+                    <div class="rental-cars__block" style="flex-wrap: wrap; justify-content: center;">
+                        <div class="rental-cars_doc">
+                            <img src="images/passport.svg">
+                            Действующий заграничный паспорт
+                        </div>
+                        <div class="rental-cars_doc">
+                            <img src="images/credit-card.svg">
+                            Кредитную карту на имя водителя
+                        </div>
+                        <div class="rental-cars_doc">
+                            <img src="images/calendar.svg">
+                            Подтверждение бронирования
+                        </div>
+                        <div class="rental-cars_doc">
+                            <img src="images/driver-license.svg">
+                            Действующие национальное и международное водительские удостоверения
+                        </div>
+                        <div class="rental-cars_doc">
+                            <img src="images/contract.svg">
+                            Ваучер <br>(если оплата была произведена в Казахстане)
+                        </div>
+                        <div class="rental-cars_doc">
+                            <img src="images/internet.svg">
+                            Подтверждение скидки <br>(если Вы воспользовались скидочным кодом, предъявите купон при получении авто)
+                        </div>
+                    </div>
+                    <button class="rental-cars__button" onclick="toTop()">Забронировать авто</button>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="footer">
         <div class = "footer-row">
             <div class = "footer-col">
@@ -525,9 +445,6 @@
             </div>
         </div>
     </div>
-
-
-
-
 </body>
+
 </html>
