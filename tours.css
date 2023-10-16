@@ -28,6 +28,10 @@
     margin-bottom: 1rem;
 }
 
+.mb-5{
+    margin-bottom: 1.25rem;
+}
+
 .text-5x1{
     font-size: 3rem;
 }
@@ -296,4 +300,94 @@
 .bg-tours-gradient{
     background: no-repeat 50% url(images/background_gradient.png);
     background-size: cover;
+}
+
+.my-0{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.w-6-12{
+    width: 50%;
+}
+
+.mb-12{
+    margin-bottom: 3rem;
+}
+
+.text-gray-500{
+    --text-opacity: 1;
+    color: #9ea3b7;
+    color: rgba(158,163,183,var(--text-opacity));
+}
+
+.hide-scrollbar{
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.overflow-x-scroll{
+    overflow-x: scroll;
+}
+
+.inline-flex{
+    display: inline-flex;
+}
+
+.mt-px{
+    margin-top: 1px;
+}
+
+.px-2{
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.h-5{
+    height: 1.25rem;
+}
+
+.border-orange-500{
+    --border-opacity: 1;
+    border-color: #ff8a00;
+    border-color: rgba(255,138,0,var(--border-opacity));
+}
+
+.rounded{
+    border-radius: 4px;
+}
+
+.px-5{
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+
+.pb-6{
+    padding-bottom: 1.5rem;
+}
+
+.text-3x1{
+    font-size: 1.875rem;
+}
+
+.p-3{
+    padding: 0.75rem;
+}
+
+.mb-3{
+    margin-bottom: 0.75rem;
+}
+
+.px-24{
+    padding-left: 6rem;
+    padding-right: 6rem;
+}
+
+.items-center{
+    align-items: center;
+}
+
+.px-6{
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
 }
