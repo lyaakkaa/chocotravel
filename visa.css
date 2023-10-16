@@ -151,3 +151,78 @@
     right: -3px;
   }
 }
+
+.visa-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #387fbf;
+  color: white;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  padding-left: 32px;
+  padding-right: 32px;
+  border-radius: 4px;
+}
+
+.visa-form_header{
+  text-align: center;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.visa-form_text{
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+.form-label{
+  width: 100%;
+  cursor: default;
+}
+
+.visa-form-span{
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.visa-form-input{
+  width: 41.666667%;
+  box-sizing: border-box;
+  border-style: solid;
+  border-radius: 4px;
+  border-width: 1px;
+  border-color: #cfd1db;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  margin-bottom: 0.5rem;
+  font-size: .875rem;
+  height: 2.5rem;
+}
+
+visa-form-select{
+  width: 41.666667%;
+  box-sizing: border-box;
+  border-style: solid;
+  border-radius: 4px;
+  border-width: 1px;
+  border-color: #cfd1db;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  font-size: .875rem;
+}
+
+.base-button{
+  background-color: #ff8a00;
+  border: 1px solid rgba(255,138,0,1);
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 0.75rem;
+  margin-top: 1rem;
+  font-weight: 700;
+  font-family: Open Sans,Arial,sans-serif;
+  font-size: .875rem;
+  color: #fff;
+  color: rgba(255,255,255,1);
+}
