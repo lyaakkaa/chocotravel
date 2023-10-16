@@ -1,0 +1,106 @@
+.about>h1 {
+    padding: 10px 0;
+    text-align: center;
+    background: #fff;
+    margin: 0
+}
+
+.about .content,
+.about>h1 {
+    border-top: 1px solid #9ea3b7
+}
+
+.about .content {
+    padding: 5px 20px;
+    font-size: 14px
+}
+
+.about .table {
+    margin-top: 10px
+}
+
+.about .text {
+    margin-bottom: 40px
+}
+
+.about_table {
+    font-size: 0;
+    padding: 20px 0;
+    display: flex;
+    flex-wrap: wrap
+}
+
+.about_item {
+    width: 50%;
+    font-size: 14px
+}
+
+.about_item_img {
+    float: left;
+    height: 120px;
+    padding-right: 10px
+}
+
+.about_item_text h4 {
+    margin-top: 0;
+    margin-bottom: 0
+}
+
+.about_item_text {
+    float: left;
+    width: 300px
+}
+
+.about .line {
+    border-top: 1px solid #c7cfdf;
+    margin: 15px 0
+}
+
+.about .our_advantages .adv_container {
+    display: flex;
+    justify-content: space-between;
+    margin: 35px 0
+}
+
+.about .our_advantages .adv_item img {
+    float: left;
+    width: 35px
+}
+
+.about .our_advantages .adv_item p {
+    float: left;
+    margin: 0;
+    padding-left: 5px;
+    font-size: 12px
+}
+
+.about .our_awards {
+    display: flex;
+    flex-wrap: wrap
+}
+
+.about .our_awards h2 {
+    flex-basis: 100%
+}
+
+.about .our_awards .award_item {
+    width: 50%;
+    margin-bottom: 30px
+}
+
+.about .our_awards .award_item div {
+    float: left;
+    width: 150px;
+    text-align: center;
+    margin-right: 10px
+}
+
+.about .our_awards .award_item div .about_lg {
+    width: 120px
+}
+
+.about .our_awards .award_item p {
+    margin: 0;
+    margin-top: 5px;
+    padding-right: 10px
+}

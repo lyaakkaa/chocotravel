@@ -1,0 +1,841 @@
+
+body {
+    background: #ecfbff;
+    font-family: "Open Sans", Arial, sans-serif;
+    font-size: 14px;
+    color: #212c5b;
+    position: relative;
+    background-size: cover;
+}
+
+body, img {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+li, ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    color: #212c5b;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+
+
+/* chocofamily start ----------------------------------------------------------*/
+
+.chocofamily-logos {
+    font-family: Open Sans, Arial, sans-serif;
+    background: #fff;
+    height: 42px;
+    border-bottom: 3px solid #d4f2ff;
+    font-size: 14px;
+    box-sizing: content-box;
+}
+
+
+#choco-projects {
+    height: inherit;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.choco-projects__item {
+    width: 109px;
+    text-align: center;
+    border-right: 1px solid #ccc;
+    position: relative
+}
+
+.choco-projects__item:first-child {
+    border-left: 1px solid #ccc
+}
+
+.choco-projects__item_tripfor {
+    border-bottom: 3px solid #387fbf;
+    border-bottom: 3px solid var(--color-primary);
+    border-left: none;
+    border-right: none
+}
+
+.choco-projects__item_tripfor+.choco-projects__item {
+    border-left: 1px solid #ccc
+}
+
+.choco-projects__link {
+    display: block;
+    height: 100%;
+    width: 100%;
+    text-decoration: none
+}
+
+.choco-projects__title {
+    font-size: 10.5px;
+    color: #1463aa;
+    color: var(--color-primary-dark)
+}
+
+.choco-projects__logo {
+    height: 22px;
+    background-repeat: no-repeat;
+    background-position: center 1px;
+}
+
+.choco-projects__item:not(.choco-projects__item_tripfor) .choco-projects__logo {
+    opacity: .5;
+    filter: grayscale(70%)
+}
+
+.choco-projects__item:hover .choco-projects__logo {
+    opacity: 1;
+    filter: none;
+}
+
+.choco-projects__item_chocolife .choco-projects__logo {
+    background-image: url(images/chocolife.svg);
+    background-size: 73px;
+    background-position-y: 3px;
+}
+
+.choco-projects__item_tripfor .choco-projects__logo {
+    background-image: url(images/chocotravel.svg);
+    background-size: 89px;
+}
+
+.choco-projects__item_chocofood .choco-projects__logo {
+    background-image: url(images/chocofood.svg);
+    background-size: 89px;
+}
+
+.choco-projects__item_idoctor .choco-projects__logo {
+    background-image: url(images/idoctor.svg);
+    background-size: 59px;
+    background-position-y: 3px;
+}
+
+.choco-projects__list {
+    list-style: none;
+    display: flex;
+    height: inherit;
+}
+
+.choco-projects__item {
+    height: inherit;
+}
+
+#choco-projects .login {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    color: #bfbfbf;
+    font-family: Open Sans, Arial, sans-serif
+}
+
+
+#choco-projects .login-container{
+    font-size: .75rem;
+    font-weight: 600;
+}
+
+.container-flex{
+    display: flex;
+    align-items: center;
+}
+
+#choco-projects .login__link {
+    text-decoration: underline;
+    padding-right: 5px;
+    padding-left: 5px;
+    color: #6099cc;
+}
+
+#choco-projects .login__button {
+    padding-top: .45rem;
+    padding-bottom: .45rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: #387fbf;
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none
+}
+
+
+@media screen and (max-width: 1000px) {
+
+    .chocofamily-logos {
+        margin: 0 -20px
+    }
+    
+    .chocofamily-logos {
+        border-bottom: none
+    }
+    #choco-projects {
+        background: #387fbf;
+        padding: 0 20px
+    }
+    .choco-projects__list {
+        float: right;
+        padding-right: 10px;
+        display: none
+    }
+    #choco-projects .login {
+        border-left: none;
+        margin-left: auto
+    }
+    #choco-projects .lang {
+        border-right: none
+    }
+    #choco-projects .login div {
+        color: #fff
+    }
+    #choco-projects .login div a {
+        font-family: Open Sans, Arial, sans-serif;
+        color: #fff
+    }
+}
+
+/* chocofamily end ----------------------------------------------------------*/
+
+
+
+
+
+
+/* header start ----------------------------------------------------------*/
+.header {
+    display: flex;
+    justify-content: center;
+    padding: 18px 0;
+}
+
+.main_logo {
+    display: flex;
+}
+
+
+.chocotravel-logo {
+    width: 226.156px;
+}
+
+
+.menu_options {
+    display: flex;
+    width: 800px;
+    justify-content: space-between;
+    margin: 5px 0 0 20px;
+}
+
+.menu_options a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    text-decoration: none;
+    padding: 0 3px;
+    line-height: 29px;
+    border-bottom: 2px solid #9ea3b7;
+}
+
+.menu_options a:active{
+    color: #ff8a00;
+    border-bottom: 2px solid #9ea3b7;
+}
+
+.menu_option img {
+    width: 13px;
+}
+
+.menu_option span {
+    padding-left: 10px;
+}
+
+@media screen and (max-width: 999px) {
+    .header {
+        display: none;
+    }
+}
+
+/* header end ----------------------------------------------------------*/
+
+
+
+/* wrapper start ----------------------------------------------------------*/
+
+.wrapper {
+    width: 100%;
+    margin: 0;
+    height: auto;
+    min-height: 100%;
+    position: relative;
+}
+
+.center {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.content-center {
+    margin: 10px 0;
+}
+
+
+.div-text h1 {
+    text-align: center;
+    width: 100%;
+    height: 27px;
+    margin: 20px 0 40px 0;
+    font-size: 2.25rem;
+    font-weight: 600;
+    color: #000;
+}
+
+.div-text h2 {
+    text-align: center;
+    width: 100%;
+    height: 27px;
+    margin: 20px 0 40px 0;
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: #000;
+}
+
+.div-text p {
+    text-align: center;
+    width: 100%;
+    height: 27px;
+    margin: 20px 0 40px 0;
+    font-size: 16px;
+    margin: 0 auto 32px;
+}
+
+.div-text h3 {
+    font-weight: 600;
+    font-size: 20px;
+    color: #212c5b;
+    margin-top: 0;
+}
+
+.div-text h2 {
+    font-size: 22px;
+    color: #383838;
+    text-align: center;
+    line-height: 32px;
+    margin: 0 0 10px;
+    font-weight: 700;
+}
+
+.form-zakaz {
+    display: flex;
+    background-color: white;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    margin: 50px;
+    border-radius: 10px;
+}
+
+
+.form-group {
+    display: inline-block;
+    margin-right: 10px; 
+}
+
+input, select {
+    flex: 1;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: max-content;
+}
+
+.find {
+    padding: 15px 20px;
+    background-color: #ff8a00;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.find:hover {
+    background-color: #0056b3;
+}
+
+.blocks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.one-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px 20px 38px;
+    width: 320px;
+    height: 275px;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.one-block img {
+    margin-bottom: 14px;
+    display: block;
+    width: 60px;
+    height: 60px;
+}
+
+.one-block h3 {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: #383838;
+    margin: 0 0 10px;
+}
+
+.one-block p {
+    font-size: 15px;
+    font-weight: 400;
+    color: #9ea3b7;
+    text-align: center;
+    margin: 0;
+}
+
+.aboutUs{
+    clear: both;
+    margin-top: 20px;
+    padding-top: 10px;
+    color: #3b3e4d;
+    font-size: 13px;
+    text-align: justify;
+    border-top: 2px solid #9ea3b7;
+}
+.aboutUs p{
+    padding-top: 0;
+    margin: 0 0 7px;
+}
+.aboutUs ol ul{
+    margin: 10px 0 10px 10px;
+    padding: 0;
+}
+
+.aboutUs ol li{
+    list-style: decimal inside;
+}
+
+.aboutUs ul li {
+    list-style: square inside;
+}
+
+
+.main_articles {
+    padding-top: 80px;
+}
+.main_articles_title{    
+    overflow: hidden;
+    border-bottom: 2px solid #9ea3b7;
+}
+
+.main_articles_title p{
+    float: left;
+    font-size: 16px;
+    font-weight: 600;
+    padding-left: 10px;
+    margin-bottom: 5px;
+}
+.main_articles_title a{
+    float: right;
+    margin-top: 16px;
+    font-size: 13px;
+}
+
+.article-tab{
+    padding-top: 10px;
+    float: left;
+    width: 152px;
+    margin-right: 60px;
+}
+.article-tab a{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.article-tab div{
+    position: relative;
+    text-align: center;
+    width: 150px;
+    height: 90px;
+    background: url(images/articles-bg.png) no-repeat;
+    cursor: pointer;
+}
+.article-tab img{
+    width: 65px;
+    margin-top: 10px;
+}
+.article-tab:last-child{
+    margin-right: 0;
+}
+
+.clear{
+    clear: both;
+}
+
+
+.install-app{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background: #6290c1;
+    padding: 0 30px;
+    box-sizing: border-box;
+    margin-top: 45px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+}
+
+.install-app-container {
+    margin-left: 2.5rem;
+}
+
+.install-app_text h3{
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 32px;
+    text-transform: uppercase;
+}
+
+.install-app_text p{
+    font-size: 16px;
+    color: #fff;
+    margin: 0 0 22px;
+}
+
+
+
+@media screen and (max-width: 999px) {
+    .wrapper {
+        width: auto;
+        padding: 0 20px
+    }
+
+    .div-text h1 {
+        text-align: center;
+        font-size: 1.25rem;
+    }
+    .div-text h2 {
+        margin-bottom: 40px;
+        text-align: center;
+        font-size: 1.25rem;
+    }
+
+    .center {
+        width: 100%
+    }
+
+    .main_articles{
+        display: none
+    }
+
+    .install-app {
+        width: 100%;
+        flex-wrap: wrap;
+        padding: 0 0 25px
+    }
+    .install-app-container {
+        margin-left: 50px;
+        padding: 0 20px;
+        box-sizing: border-box
+    }
+    .install-app-container h3 {
+        font-size: 20px;
+        margin-top: 30px;
+        margin-bottom: 10px
+    }
+    .install-app-container p{
+        display: none
+    }
+    .install-app img{
+        width: fit-content;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    body {
+        max-width: 100%
+    }
+    .wrapper {
+        width: auto;
+        padding: 0 20px
+    }
+    .main_logo {
+        width: 50%
+    }
+    .main_logo img {
+        width: 220px;
+        height: auto
+    }
+    .menu_options {
+        width: 100%;
+        margin: 0;
+        flex-wrap: wrap;
+        margin-top: 10px
+    }
+    .menu_options a {
+        justify-content: flex-start;
+        margin: 0 0 5px;
+        padding: 0;
+        width: calc(50% - 10px)
+    }
+    .menu_options a.rentalcars {
+        display: none
+    }
+    .menu_options a span {
+        padding: 5px 0 5px 10px;
+        line-height: 15px
+    }
+    .install-app {
+        width: 100%;
+        flex-wrap: wrap;
+        padding: 0 0 25px
+    }
+    .install-app_text {
+        margin-left: 50px;
+        padding: 0 20px;
+        box-sizing: border-box
+    }
+    .install-app_text р3 {
+        font-size: 20px;
+        margin-top: 30px;
+        margin-bottom: 10px
+    }
+    .iinstall-app_text,
+    .install-app-mainpage-form {
+        display: none
+    }
+}
+
+@media screen and (max-width: 999px) {
+    .content {
+        padding-bottom: 10px
+    }
+}
+
+@media (max-width: 500px) {
+    .main_logo img {
+        width: 100%
+    }
+    .install-app img {
+        width: 75%;
+        display: block;
+        margin: auto
+    }
+    .install-app_text {
+        width: 100%;
+        margin-left: 0
+    }
+}
+
+
+@media screen and (max-width: 999px) {
+    .header {
+        flex-wrap: wrap;
+    }
+    
+    .wrapper {
+        width: auto;
+        padding: 0 20px
+    }
+
+    .center,
+    .footer {
+        width: 100%
+    }
+    .footer {
+        position: relative
+    }
+    .main_articles{
+        display: none
+    }
+
+    .install-app {
+        width: 100%;
+        flex-wrap: wrap;
+        padding: 0 0 25px
+    }
+    .install-app_text {
+        margin-left: 50px;
+        padding: 0 20px;
+        box-sizing: border-box
+    }
+    .install-app_text h3 {
+        font-size: 20px;
+        margin-top: 30px;
+        margin-bottom: 10px
+    }
+    .install-app_text p{
+        display: none
+    }
+
+    .mainpage-advantages {
+        margin-top: 50px
+    }
+    .blocks {
+        justify-content: space-around;
+        justify-content: center;
+    }
+    .one-block {
+        margin: 10px;
+    }
+}
+
+
+
+.footer {
+    width: 100%;
+    margin: auto;
+    background-color: #387fbf;
+    border-top: 4px solid #fe9922;
+}
+
+.footer-row{
+    max-width: 1000px;
+    display: flex;
+    justify-content: flex-start;
+    margin: auto;
+    padding: 20px 20px 0px;
+}
+.footer-col{
+    width: 25%;
+    color: #fff;
+}
+.footer-row a{
+    text-decoration: none;
+    color: #fff;
+    font-size: 12px;
+}
+.footer-col ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.footer-col .footer-header{
+    font-size: 14px;
+    text-transform: uppercase;
+    padding-bottom: 15px;
+}
+.footer-col li{
+    padding-bottom: 1px;
+}
+
+.footer-row:last-child{
+    border-top: 1px solid hsla(0,0%,100%,.5);
+    margin-top: 15px;
+    padding-bottom: 15px;
+    padding-top: 20px;
+}
+.footer-col_icons{
+    width: 25%;
+    color: #fff;
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+}
+.cards-logo{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.footer-col_icons ul{
+    list-style: none;
+}
+
+.item{
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    margin: 6px;
+}
+.item:first-child{
+    margin-left: 0px;
+}
+.text-sm{
+    font-size: .875rem;
+}
+.visa{
+    background-image: url(images/visa-pay-logo.svg);
+    width: 46px;
+    height: 16px;
+}
+.mastercard{
+    background-image: url(images/master-card.svg);
+    height: 17px;
+    width: 28px;
+}
+.unionpay{
+    background-image: url(images/union-pay.svg);
+    width: 32px;
+}
+.item:last-child{
+    margin-right: 0px;
+}
+.astanahub{
+    background-image: url(images/astana-hub.png);
+    width: 100px;
+    height: 30px;
+}
+.socialInst{
+    width: 25px;
+    height: 25px;
+    background-size: 25px 25px;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    display: inline-block;
+    opacity: .5;
+    margin-right: 18px;
+    background-image: url(images/social__inst.svg);
+}
+.socialFacb{
+    width: 25px;
+    height: 25px;
+    background-size: 25px 25px;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    display: inline-block;
+    opacity: .5;
+    margin-right: 18px;
+    background-image: url(images/social__fb.svg);
+}
+.depositphotos{
+    background-image: url(images/depositphotos.svg);
+    width: 105px;
+    height: 17px;
+}
+
+@media screen and (max-width: 999px) {
+    .footer-col {
+        display: none;
+    }
+}

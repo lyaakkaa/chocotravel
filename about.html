@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="about.css">
 </head>
 <body>
     
@@ -109,196 +110,95 @@
         <div class="center">
             <div class="content">
                 <div class="content-center">
-                    <div class="div-text">
-                        <h1>Авиабилеты в Казахстане</h1>
-                    </div>
-                    <form class="form-zakaz">
-                        <div class="labels">
-                            <div class="form-group">
-                                <select id="from" name="from" required>
-                                    <option value="" disabled selected>Откуда</option>
-                                    <option value="city1">Алматы</option>
-                                    <option value="city2">Астана</option>
-                                    <option value="city3">Город 3</option>
-                        
-                                </select>
+                    <div class="about" style="background-color: white;">
+                        <h1 class="about-title">О проекте Chocotravel.com</h1>
+                        <div class="content">
+                            <div class="text">
+                                <p>Chocotravel.com — туристический портал, основанный в 2013 году. На данный момент, является одним из лидеров online рынка авиабилетов в Республике Казахстан. Наш сайт позволяет быстро и просто находить дешевые авиабилеты и отели без дополнительных
+                                    сборов. Наша уникальная система рекомендаций позволяет путешественникам найти минимальные тарифы, обнаруженные за последние три дня, в любую точку мира.
+                                </p>
+                                <p>Компания входит в холдинг Chocofamily, который состоит из 7 интернет-проектов, все из которых являются лидерами в своих сферах.</p>
+                                <div class="about_table">
+                                    <div class="about_item">
+                                        <div class="about_item_text">
+                                            <h4>450 000+ человек </h4>
+                                            <p>Ежемесячно находят авиабилеты на нашем сайте.</p>
+                                        </div>
+                                    </div>
+                                    <div class="about_item">
+                                        <div class="about_item_text">
+                                            <h4>1000+ авиакомпаний</h4>
+                                            <p>Предоставляют нам информацию о своих рейсах, стоимости и спецпредложениях.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
                             </div>
-                            <div class="form-group">
-                                <select id="to" name="to" required>
-                                    <option value="" disabled selected>Куда</option>
-                                    <option value="cityA">Город A</option>
-                                    <option value="cityB">Город B</option>
-                                    <option value="cityC">Город C</option>
-                                    
-                                </select>
+                            <div class="line"></div>
+                            <div class="our_advantages">
+                                <h2 class="heading-action-medium">Наши преимущества</h2>
+                                <div class="adv_container">
+                                    <div class="adv_item">
+                                        <img src="images/about_adv1.png">
+                                        <p>Комиссия <br>0 тенге</p>
+                                    </div>
+                                    <div class="adv_item">
+                                        <img src="images/about_adv4.png">
+                                        <p>Покупка за<br> 3 минуты</p>
+                                    </div>
+                                    <div class="adv_item">
+                                        <img src="images/about_adv5.png">
+                                        <p>1000+ <br>авиакомпаний</p>
+                                    </div>
+                                    <div class="adv_item">
+                                        <img src="images/about_adv6.png">
+                                        <p>Регулярные<br> подарки</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input type="date" id="date" name="date" placeholder="14 окт" required>
-                            </div>
-                            <div class="form-group">
-                                <select id="ticket-type" name="ticket-type" required>
-                                    <option value="economy">Эконом</option>
-                                    <option value="business">Бизнес</option>
-                                    <option value="first-class">Первый класс</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <button class="find" type="submit">Найти</button>
-                            </div>
-                        </div>
-                    </form>
-
-                    <div class="div-text">
-                        <h2>Подробнее о поиске авиабилетов на Chocotravel</h1>
-                        <p>Именно по этим причинам люди используют Chocotravel как бесплатный<br>
-                            сервис по поиску авиабилетов</p>
-                    </div>
-
-                    <div class="blocks">
-                        <div class="one-block">
-                            <img src="images/mainpage-features-plane-2.svg">
-                            <h3>1000 авиакомпаний</h3>
-                            <p>Chocotravel.com сравнивает предложения более 1000 авиакомпаний мира, чтобы найти для вас лучший
-                                вариант перелета</p>
-                        </div>
-                        <div class="one-block">
-                            <img src="images/mainpage-features-wallet-2.svg">
-                            <h3>Авиабилеты по цене авиакомпаний</h3>
-                            <p>На Chocotravel.com вы приобретаете билеты по стоимости авиакомпании, без скрытых комиссий и
-                                сборов, а иногда даже дешевле</p>
-                        </div>
-                        <div class="one-block">
-                            <img src="images/mainpage-features-clock-2.svg">
-                            <h3>Круглосуточная поддержка</h3>
-                            <p>Мы решаем ваши проблемы 24 часа в сутки</p>
-                        </div>
-                        <div class="one-block">
-                            <img src="images/mainpage-features-touch-2.svg">
-                            <h3>Покупка за 3 минуты</h3>
-                            <p>Вы экономите время, больше не нужно ездить в агентства. Проводите время с любимыми</p>
-                        </div>
-                        <div class="one-block">
-                            <img src="images/mainpage-features-mobile-2.svg">
-                            <h3>Все билеты в твоем мобильном</h3>
-                            <p>Полнофункциональные мобильные приложения для Android и IOS</p>
-                        </div>
-                        <div class="one-block">
-                            <img src="images/mainpage-features-handshake-2.svg">
-                            <h3>Надежность</h3>
-                            <p>Нам доверяют более 200 000 казахстанцев ежегодно</p>
-                        </div>
-                    </div>
-
-
-                    <div class = "aboutUs">
-                        <p>
-                            Часто сталкиваетесь с необходимостью купить билеты на самолет? Думали ли Вы о том,как было бы здорово, если бы бронирование авиабилетов занимало всего 5 минут? Теперь это стало реально! Благодаря сервису Chocotravel.com купить авиабилеты онлайн в Казахстане можно в несколько кликов.
-                        </p>
-                        <p>
-                            <strong>Покупка ЖД и авиабилетов онлайн:</strong>
-                        </p>
-                        <p>
-                            1. Экономит Ваше время.
-                        </p>
-                        <p>
-                            Автоматизированная система поиска в режиме онлайн после ввода параметров находит лучшие варианты авиаперелета, предлагаемые всеми доступными авиакомпаниями. За считанные минуты перед Вами появится перечень выгодных предложений более чем от 1000 авиакомпаний. При этом Вам совершенноне нужно ехать в другой конец города и напрасно тратить время в длинных очередях в кассе!
-                        </p>
-                        <p>
-                            2. Экономит Ваши деньги.
-                        </p>
-                        <p>
-                            Вы сможете подобрать дешевые авиабилеты по различным направлениям. Цены на авиабилеты порадуют Вас, ведь мы продаем их без наценок.
-                        </p>
-                        <p>
-                            3. Множество способов оплаты.
-                        </p>
-                        <p>
-                            Вы можете оплатить покупку любым удобным для вас способом:
-                        </p>
-                        <ol>
-                            <li>банковскими картами VISA, Mastercard и Union Pay;</li>
-                            <li>через приложение Рахмет;</li>
-                            <li>в рассрочку Freedom Finance credit</li>
-                        </ol>
-                        <p>
-                            <strong>Преимущества портала Chocotravel.com:</strong>
-                        </p>
-                        <ul>
-                            <li>На сайте Вы можете найти, забронировать и купить авиабилеты онлайн на рейсы практически любой авиакомпании в мире.</li>
-                            <li>Мы помогаем найти билет на любое направление по минимальной стоимости.</li>
-                            <li>У нас Вы также можете приобрести железнодорожные билеты онлайн.</li>
-                            <li>При заполнении формы заказа Вам понадобится лишь один раз вписать информацию о себе. При последующих покупках система автоматически сохраняет данные, избавляя Вас от утомительной процедуры ввода данных. Возможность страхования по выбранной программе.</li>
-                        </ul>
-                    </div>
-
-
-                    <div class = "main_articles">
-                        <div class = "main_articles_title">
-                            <p>СМИ о нас</p>
-                            <a href = "#">Посмотреть все статьи</a>
-                        </div>
-        
-                        <div class="article-tab">
-                            <a>
-                              <div>
-                                <img src = "images/tengri1.jpg">
-                              </div>  
-                            </a>
-                        </div>
-        
-                        <div class="article-tab">
-                            <a>
-                              <div>
-                                <img src = "images/forbes.png">
-                              </div>  
-                            </a>
-                        </div>
-        
-                        <div class="article-tab">
-                            <a>
-                              <div>
-                                <img src = "images/forbes.png">
-                              </div>  
-                            </a>
-                        </div>
-        
-                        <div class="article-tab">
-                            <a>
-                              <div>
-                                <img src = "images/kazinf.jpg">
-                              </div>  
-                            </a>
-                        </div>
-        
-                        <div class="article-tab">
-                            <a>
-                              <div>
-                                <img src = "images/tengri1.jpg">
-                              </div>  
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="clear"></div>
-
-                    <div class = "install-app">
-                        <img src="images/download-app.png" width="424" height="404">
-                        <div class = "install-app-container">
-                            <div class = "install-app_text">
-                                <h3>УСТАНОВИ ПРИЛОЖЕНИЕ CHOCOTRAVEL!</h3>
-                                <p>Все билеты без наценок в твоем мобильном.</p>
-                            </div>
-        
-                            <div class = "install-app_shops">
-                                <a href = "#">
-                                    <img src = "images/app-store-badge.svg" width="138" height="45">
-                                </a>
-                                <a href = "#">
-                                    <img src = "images/google-play-badge.png" width="152" height="45">
-                                </a>
-                                <a href = "#">
-                                    <img src = "images/app-gallery-badge.png" width="152" height="45">
-                                </a>
+                            <div class="line"></div>
+                            <div class="our_awards">
+                                <h2 class="heading-action-medium">Награды и сертификаты</h2>
+                                <div class="award_item" style="margin-top: 35px;">
+                                    <div>
+                                        <img src="images/about_award1.png">
+                                        <div class="clear"></div>
+                                    </div>
+                                    <p>«Лучший онлайн ритейлер» 2014 Международной Выставки-Конференции Astex</p>
+                                </div>
+                                <div class="award_item" style="margin-top: 35px;">
+                                    <div>
+                                        <img src="images/about_award2.png">
+                                    </div>
+                                    <p>«Компания года 2014» национальной премии AWARD.kz</p>
+                                </div>
+                                <div class="award_item">
+                                    <div>
+                                        <img src="images/about_award3.png">
+                                    </div>
+                                    <p>Финалист премии «Ак Мерген» как лучший онлайн PR-проект</p>
+                                </div>
+                                <div class="award_item">
+                                    <div>
+                                        <img src="images/about_award4.png" class="about_lg">
+                                    </div>
+                                    <p>Сертифицированный партнер Amadeus</p>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="award_item">
+                                    <div>
+                                        <img src="images/about_award5.png" class="about_lg">
+                                    </div>
+                                    <p>Участник рейтинга ТОП-50 крупнейших интернет компаний Казахстана</p>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="award_item">
+                                    <div>
+                                        <img src="images/tourism-logo-big.png" class="about_lg" style="width: 60px;">
+                                    </div>
+                                    <p>Члены Международной Ассоциации Туризма Профессионалов (ITAP)</p>
+                                </div>
+                                <div class="clear"></div>
                             </div>
                         </div>
                     </div>
