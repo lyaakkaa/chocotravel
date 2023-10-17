@@ -1,92 +1,90 @@
 .visa-container_header,
 .visa-container_text {
-  text-align: center;
+    text-align: center;
 }
 
 .visa-slider {
-    max-height: 220px; 
+    max-height: 220px;
     overflow-x: auto;
     overflow-y: hidden;
-    white-space: nowrap; 
+    white-space: nowrap;
 }
 
-
 .visa-container_text {
-  font-size: 20px;
-  color: #212c5b;
-  line-height: 30px;
-  font-weight: 400;
+    font-size: 20px;
+    color: #212c5b;
+    line-height: 30px;
+    font-weight: 400;
 }
 
 .visa-container_header {
-  display: block;
-  font-size: 30px;
-  font-weight: 600;
+    display: block;
+    font-size: 30px;
+    font-weight: 600;
 }
 
 .visa-slider_country {
     outline: 0;
     margin-right: 5px;
-    width: 25%; 
+    width: 25%;
     height: 220px;
     overflow: hidden;
     cursor: pointer;
     position: relative;
     display: inline-block;
 }
+
 .visa-slider_img {
-  width: 100%;
-  height: 200px;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  outline: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+    width: 100%;
+    height: 200px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    outline: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .visa-slider_country-name {
-  color: #fff;
-  font-weight: bold;
-  font-size: 18px;
-  text-align: center;
-  z-index: 1;
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    z-index: 1;
 }
 
 .visa-slider_country-price {
-  z-index: 1;
-  color: #fff;
-  line-height: 30px;
+    z-index: 1;
+    color: #fff;
+    line-height: 30px;
 }
 
 .visa-slider_country-price-currency {
-  color: #b2b2b2;
+    color: #b2b2b2;
 }
 
 .visa-slider_country-backdrop {
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  position: absolute;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 0;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 0;
 }
 
 .visa-slider__start-btn {
-  z-index: 1;
-  transition: all 0.3s;
-  bottom: -50px;
-  position: absolute;
+    z-index: 1;
+    transition: all 0.3s;
+    bottom: -50px;
+    position: absolute;
 }
 
 .visa-slider_country:hover .visa-slider__start-btn {
-  bottom: 10px;
+    bottom: 10px;
 }
-
-
 
 @media screen and (max-width: 1000px) {
   .visa-country-info {
@@ -152,85 +150,85 @@
   }
 }
 
-
-.visa-form{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #387fbf;
-  color: white;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-  padding-left: 70px;
-  padding-right: 32px;
-  border-radius: 4px;
+.visa-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #387fbf;
+    color: white;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    padding-left: 70px;
+    padding-right: 32px;
+    border-radius: 4px;
 }
 
-.visa-form_header{
-  text-align: center;
-  margin-bottom: 0.75rem;
-  font-weight: 600;
+.visa-form_header {
+    text-align: center;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
 }
 
-.visa-form_text{
-  text-align: center;
-  margin-bottom: 0.75rem;
+.visa-form_text {
+    text-align: center;
+    margin-bottom: 0.75rem;
 }
 
-.form-label{
-  width: 85%;
-  justify-content: center;
-  padding-left: 450px;
+.form-label {
+    width: 85%;
+    justify-content: center;
+    padding-left: 450px;
 }
 
-.base-button{
-  width: 315px;
-  
+.base-button {
+    width: 315px;
 }
 
-.visa-form-span{
-  margin-bottom: 0.25rem;
-  display: block;
+.visa-form-span {
+    margin-bottom: 0.25rem;
+    display: block;
 }
 
-.visa-form-input, select{
-  width: 41.666667%;
-  box-sizing: border-box;
-  border-style: solid;
-  border-radius: 4px;
-  border-width: 1px;
-  border-color: #cfd1db;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  margin-bottom: 0.5rem;
-  font-size: .875rem;
-  height: 2.5rem;
+.visa-form-input,
+select {
+    width: 41.666667%;
+    box-sizing: border-box;
+    border-style: solid;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: #cfd1db;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    margin-bottom: 0.5rem;
+    font-size: .875rem;
+    height: 2.5rem;
 }
 
-visa-form-select{
-  width: 41.666667%;
-  box-sizing: border-box;
-  border-style: solid;
-  border-radius: 4px;
-  border-width: 1px;
-  border-color: #cfd1db;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  margin-bottom: 0.5rem;
-  font-size: .875rem;
+visa-form-select {
+    width: 41.666667%;
+    box-sizing: border-box;
+    border-style: solid;
+    border-radius: 4px;
+    border-width: 1px;
+    border-color: #cfd1db;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    margin-bottom: 0.5rem;
+    font-size: .875rem;
 }
 
-.base-button{
-  background-color: #ff8a00;
-  border: 1px solid rgba(255,138,0,1);
-  border-radius: 4px;
-  cursor: pointer;
-  padding: 0.75rem;
-  margin-top: 1rem;
-  font-weight: 700;
-  font-family: Open Sans,Arial,sans-serif;
-  font-size: .875rem;
-  color: #fff;
-  color: rgba(255,255,255,1);
+.base-button {
+    background-color: #ff8a00;
+    border: 1px solid rgba(255, 138, 0, 1);
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 0.75rem;
+    margin-top: 1rem;
+    font-weight: 700;
+    font-family: Open Sans, Arial, sans-serif;
+    font-size: .875rem;
+    color: #fff;
+    color: rgba(255, 255, 255, 1);
 }
+
