@@ -130,3 +130,14 @@
 .rental-cars__block_comfort, .rental-cars__block_feature, .rental-cars__block_extra{
     flex-wrap: nowrap;
 }
+
+
+
+@media screen and (max-width: 999px) {
+    .rental-cars__block_comfort , .rental-cars__block_extra{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
