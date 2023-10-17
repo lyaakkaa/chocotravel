@@ -1,8 +1,29 @@
+
 body {
-    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    font-family: 'Sirius', sans-serif;
+}
+
+.container {
+    text-align: center;
+    position: relative;
+    left: -250px;
+    top: -120px;
+}
+
+.tex {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#box2 {
+    width: 200px; /* или другая ширина, которую вы предпочитаете */
 }
 
 .container {
@@ -14,14 +35,22 @@ body {
     margin-top: 185px;
 }
 
-@font-face {
+/* @font-face {
     font-family: Stem Bold;
     src: url(Stem-Bold.ttf);
-}
+} */
 
 #box {
-    width:370px;
-    height:290px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 92px 92px 0px, rgba(0, 0, 0, 0.035) 0px 3px 38.435398px 0px, rgba(0, 0, 0, 0.06) 0px -3px 20.5494px 0px, rgba(0, 0, 0, 0.02) 0px 5.79369px 11.5198px 0px, rgba(0, 0, 0, 0.01) 0px 2.40368px 6.11809px 0px, rgba(0, 0, 0, 0.008) 0px 0.705169px 2.54588px 0px;
+    box-sizing: border-box;
+    flex-direction: column;
+    font-family: Sirius, system-ui, sans-serif;
+    height: 284px;
+    justify-content: center;
+    
+    width:430px;
+
+    height:310px;
     margin-left: 500px;
     margin-top: 12px;
     background-color:#ffffff; 
@@ -29,14 +58,21 @@ body {
     box-shadow: 1px 1px 20px 0 #000000;
     -webkit-border-radius: 28px;
     font-family: Stem Bold;
+    padding-bottom: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 24px;
     /* background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)); */
 }
 
 #tex {
+    display: block;
     margin-left: 20px;
     padding-top: 20px;
 }
-
+.info{
+font-family: Sirius, system-ui, sans-serif;
+}
 input {
     width: 100%;
     font-size: 20px;
