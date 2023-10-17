@@ -356,6 +356,8 @@ a:hover {
 .form-group {
     display: inline-block;
     margin-right: 10px; 
+    width: 10.5rem;
+    height: 3.375rem;
 }
 
 input, select {
@@ -363,10 +365,16 @@ input, select {
     padding: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    width: max-content;
+    width: 100%;
+
+}
+
+#date{
+    margin-right:80px;
 }
 
 .find {
+    margin-left: 35px;
     padding: 15px 20px;
     background-color: #ff8a00;
     color: #fff;
@@ -376,7 +384,7 @@ input, select {
 }
 
 .find:hover {
-    background-color: #0056b3;
+    background-color: #ce7004;
 }
 
 .blocks {
@@ -533,7 +541,6 @@ input, select {
 }
 
 
-
 @media screen and (max-width: 999px) {
     .wrapper {
         width: auto;
@@ -576,9 +583,9 @@ input, select {
     .install-app-container p{
         display: none
     }
-    .install-app img{
-        width: fit-content;
-    }
+
+    
+   
 }
 
 @media screen and (max-width: 800px) {
@@ -839,3 +846,22 @@ input, select {
         display: none;
     }
 }
+
+@media screen and (max-width: 999px) {
+    .find{
+        width: 10.5rem;
+        height: 3.375rem;
+        margin: 0;
+    }
+    .form-group{
+        display: block;
+        margin: 20px;
+        margin: 0;
+    }
+    .form-zakaz {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+}
+
