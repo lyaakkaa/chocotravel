@@ -87,3 +87,11 @@ h4.heading-action-medium {
     color: #42a7d4;
     font-size: 11px
 }
+
+
+@media screen and (max-width: 999px) {
+    #articles {
+        display: flex;
+        justify-content: center;
+    }
+}

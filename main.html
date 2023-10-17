@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Chocotravel</title>
     <link rel="stylesheet" href="main.css">
 </head>
+
 <body>
-    
+
     <div class="chocofamily-logos">
         <div id="choco-projects" class="choco-projects">
             <ul class="choco-projects__list">
@@ -64,7 +66,7 @@
         </div>
     </div>
 
-    
+
 
     <div class="header">
         <div class="main_logo">
@@ -74,9 +76,9 @@
         </div>
 
         <div class="menu_options">
-            <a classs="menu_option" id="aviaBilet" href="index.html">
+            <a classs="menu_option" id="aviaBilet" href="#l">
                 <img src="images/plane_active.svg">
-                <span>Авиабилеты</span>
+                <span class="active">Авиабилеты</span>
             </a>
             <a class="menu_option" id="zhdBilet" href="zhd.html">
                 <img src="images/jd_ticket.png">
@@ -119,17 +121,21 @@
                                     <option value="" disabled selected>Откуда</option>
                                     <option value="city1">Алматы</option>
                                     <option value="city2">Астана</option>
-                                    <option value="city3">Город 3</option>
-                        
+                                    <option value="city3">Шымкент</option>
+                                    <option value="city4">Актау</option>
+                                    <option value="city5">Атырау</option>
+                                    <option value="city6">Павлодар</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <select id="to" name="to" required>
                                     <option value="" disabled selected>Куда</option>
-                                    <option value="cityA">Город A</option>
-                                    <option value="cityB">Город B</option>
-                                    <option value="cityC">Город C</option>
-                                    
+                                    <option value="cityA">Астана</option>
+                                    <option value="cityB">Алматы</option>
+                                    <option value="cityC">Москва</option>
+                                    <option value="cityD">Стамбул</option>
+                                    <option value="cityE">Шымкент</option>
+                                    <option value="cityF">Актау</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -143,31 +149,28 @@
                             <div class="form-group">
                                 <input type="date" id="date" name="date" placeholder="14 окт" required>
                             </div>
-                            
-                            
+
+
                             <button class="find" type="submit">Найти</button>
-                            
+
                         </div>
                     </form>
 
                     <div class="div-text">
                         <h2>Подробнее о поиске авиабилетов на Chocotravel</h1>
-                        <p>Именно по этим причинам люди используют Chocotravel как бесплатный<br>
-                            сервис по поиску авиабилетов</p>
+                            <p>Именно по этим причинам люди используют Chocotravel как бесплатный<br> сервис по поиску авиабилетов</p>
                     </div>
 
                     <div class="blocks">
                         <div class="one-block">
                             <img src="images/mainpage-features-plane-2.svg">
                             <h3>1000 авиакомпаний</h3>
-                            <p>Chocotravel.com сравнивает предложения более 1000 авиакомпаний мира, чтобы найти для вас лучший
-                                вариант перелета</p>
+                            <p>Chocotravel.com сравнивает предложения более 1000 авиакомпаний мира, чтобы найти для вас лучший вариант перелета</p>
                         </div>
                         <div class="one-block">
                             <img src="images/mainpage-features-wallet-2.svg">
                             <h3>Авиабилеты по цене авиакомпаний</h3>
-                            <p>На Chocotravel.com вы приобретаете билеты по стоимости авиакомпании, без скрытых комиссий и
-                                сборов, а иногда даже дешевле</p>
+                            <p>На Chocotravel.com вы приобретаете билеты по стоимости авиакомпании, без скрытых комиссий и сборов, а иногда даже дешевле</p>
                         </div>
                         <div class="one-block">
                             <img src="images/mainpage-features-clock-2.svg">
@@ -192,9 +195,10 @@
                     </div>
 
 
-                    <div class = "aboutUs">
+                    <div class="aboutUs">
                         <p>
-                            Часто сталкиваетесь с необходимостью купить билеты на самолет? Думали ли Вы о том,как было бы здорово, если бы бронирование авиабилетов занимало всего 5 минут? Теперь это стало реально! Благодаря сервису Chocotravel.com купить авиабилеты онлайн в Казахстане можно в несколько кликов.
+                            Часто сталкиваетесь с необходимостью купить билеты на самолет? Думали ли Вы о том,как было бы здорово, если бы бронирование авиабилетов занимало всего 5 минут? Теперь это стало реально! Благодаря сервису Chocotravel.com купить авиабилеты онлайн в Казахстане
+                            можно в несколько кликов.
                         </p>
                         <p>
                             <strong>Покупка ЖД и авиабилетов онлайн:</strong>
@@ -203,7 +207,8 @@
                             1. Экономит Ваше время.
                         </p>
                         <p>
-                            Автоматизированная система поиска в режиме онлайн после ввода параметров находит лучшие варианты авиаперелета, предлагаемые всеми доступными авиакомпаниями. За считанные минуты перед Вами появится перечень выгодных предложений более чем от 1000 авиакомпаний. При этом Вам совершенноне нужно ехать в другой конец города и напрасно тратить время в длинных очередях в кассе!
+                            Автоматизированная система поиска в режиме онлайн после ввода параметров находит лучшие варианты авиаперелета, предлагаемые всеми доступными авиакомпаниями. За считанные минуты перед Вами появится перечень выгодных предложений более чем от 1000 авиакомпаний.
+                            При этом Вам совершенноне нужно ехать в другой конец города и напрасно тратить время в длинных очередях в кассе!
                         </p>
                         <p>
                             2. Экономит Ваши деньги.
@@ -229,76 +234,77 @@
                             <li>На сайте Вы можете найти, забронировать и купить авиабилеты онлайн на рейсы практически любой авиакомпании в мире.</li>
                             <li>Мы помогаем найти билет на любое направление по минимальной стоимости.</li>
                             <li>У нас Вы также можете приобрести железнодорожные билеты онлайн.</li>
-                            <li>При заполнении формы заказа Вам понадобится лишь один раз вписать информацию о себе. При последующих покупках система автоматически сохраняет данные, избавляя Вас от утомительной процедуры ввода данных. Возможность страхования по выбранной программе.</li>
+                            <li>При заполнении формы заказа Вам понадобится лишь один раз вписать информацию о себе. При последующих покупках система автоматически сохраняет данные, избавляя Вас от утомительной процедуры ввода данных. Возможность страхования
+                                по выбранной программе.</li>
                         </ul>
                     </div>
 
 
-                    <div class = "main_articles">
-                        <div class = "main_articles_title">
+                    <div class="main_articles">
+                        <div class="main_articles_title">
                             <p>СМИ о нас</p>
-                            <a href = "#">Посмотреть все статьи</a>
+                            <a href="#">Посмотреть все статьи</a>
                         </div>
-        
+
                         <div class="article-tab">
                             <a>
-                              <div>
-                                <img src = "images/tengri1.jpg">
-                              </div>  
+                                <div>
+                                    <img src="images/tengri1.jpg">
+                                </div>
                             </a>
                         </div>
-        
+
                         <div class="article-tab">
                             <a>
-                              <div>
-                                <img src = "images/forbes.png">
-                              </div>  
+                                <div>
+                                    <img src="images/forbes.png">
+                                </div>
                             </a>
                         </div>
-        
+
                         <div class="article-tab">
                             <a>
-                              <div>
-                                <img src = "images/forbes.png">
-                              </div>  
+                                <div>
+                                    <img src="images/forbes.png">
+                                </div>
                             </a>
                         </div>
-        
+
                         <div class="article-tab">
                             <a>
-                              <div>
-                                <img src = "images/kazinf.jpg">
-                              </div>  
+                                <div>
+                                    <img src="images/kazinf.jpg">
+                                </div>
                             </a>
                         </div>
-        
+
                         <div class="article-tab">
                             <a>
-                              <div>
-                                <img src = "images/tengri1.jpg">
-                              </div>  
+                                <div>
+                                    <img src="images/tengri1.jpg">
+                                </div>
                             </a>
                         </div>
                     </div>
 
                     <div class="clear"></div>
 
-                    <div class = "install-app">
+                    <div class="install-app">
                         <img src="images/download-app.png" width="424" height="404">
-                        <div class = "install-app-container">
-                            <div class = "install-app_text">
+                        <div class="install-app-container">
+                            <div class="install-app_text">
                                 <h3>УСТАНОВИ ПРИЛОЖЕНИЕ CHOCOTRAVEL!</h3>
                                 <p>Все билеты без наценок в твоем мобильном.</p>
                             </div>
-        
-                            <div class = "install-app_shops">
-                                <a href = "#">
+
+                            <div class="install-app_shops">
+                                <a href="#">
                                     <img src = "images/app-store-badge.svg" width="138" height="45">
                                 </a>
-                                <a href = "#">
+                                <a href="#">
                                     <img src = "images/google-play-badge.png" width="152" height="45">
                                 </a>
-                                <a href = "#">
+                                <a href="#">
                                     <img src = "images/app-gallery-badge.png" width="152" height="45">
                                 </a>
                             </div>
@@ -311,216 +317,216 @@
     </div>
 
     <div class="footer">
-        <div class = "footer-row">
-            <div class = "footer-col">
+        <div class="footer-row">
+            <div class="footer-col">
                 <ul>
-                    <li class = "footer-header">ПОПУЛЯРНЫЕ НАПРАВЛЕНИЯ</li>
+                    <li class="footer-header">ПОПУЛЯРНЫЕ НАПРАВЛЕНИЯ</li>
                     <li>
-                        <a href = "#">Алматы — Астана</a>
+                        <a href="#">Алматы — Астана</a>
                     </li>
                     <li>
-                        <a href = "#">Алматы — Дубай</a>
+                        <a href="#">Алматы — Дубай</a>
                     </li>
                     <li>
-                        <a href = "#">Алматы — Стамбул</a>
+                        <a href="#">Алматы — Стамбул</a>
                     </li>
                     <li>
-                        <a href = "#">Алматы — Бангкок</a>
+                        <a href="#">Алматы — Бангкок</a>
                     </li>
                     <li>
-                        <a href = "#">Алматы — Москва</a>
+                        <a href="#">Алматы — Москва</a>
                     </li>
                     <li>
-                        <a href = "#">Популярные направления</a>
+                        <a href="#">Популярные направления</a>
                     </li>
 
                 </ul>
             </div>
 
-            <div class = "footer-col">
+            <div class="footer-col">
                 <ul>
-                    <li class = "footer-header">АВИАКОМПАНИИ</li>
+                    <li class="footer-header">АВИАКОМПАНИИ</li>
                     <li>
-                        <a href = "#">Air Astana</a>
+                        <a href="#">Air Astana</a>
                     </li>
                     <li>
-                        <a href = "#">Qazaq Air</a>
+                        <a href="#">Qazaq Air</a>
                     </li>
                     <li>
-                        <a href = "#">Aeroflot</a>
+                        <a href="#">Aeroflot</a>
                     </li>
                     <li>
-                        <a href = "#">SCAT</a>
+                        <a href="#">SCAT</a>
                     </li>
                     <li>
-                        <a href = "#">Все авиакомпании</a>
+                        <a href="#">Все авиакомпании</a>
                     </li>
 
                 </ul>
             </div>
 
-            <div class = "footer-col">
+            <div class="footer-col">
                 <ul>
-                    <li class = "footer-header">ПОПУЛЯРНЫЕ СТРАНЫ</li>
+                    <li class="footer-header">ПОПУЛЯРНЫЕ СТРАНЫ</li>
                     <li>
-                        <a href = "#">Авиабилеты в Россию</a>
+                        <a href="#">Авиабилеты в Россию</a>
                     </li>
                     <li>
-                        <a href = "#">Авиабилеты в Таиланд</a>
+                        <a href="#">Авиабилеты в Таиланд</a>
                     </li>
                     <li>
-                        <a href = "#">Авиабилеты в Турцию</a>
+                        <a href="#">Авиабилеты в Турцию</a>
                     </li>
                     <li>
-                        <a href = "#">Авиабилеты в Германию</a>
+                        <a href="#">Авиабилеты в Германию</a>
                     </li>
                     <li>
-                        <a href = "#">Авиабилеты в Грузию</a>
+                        <a href="#">Авиабилеты в Грузию</a>
                     </li>
                     <li>
-                        <a href = "#">Все страны</a>
+                        <a href="#">Все страны</a>
                     </li>
                 </ul>
             </div>
 
-            <div class = "footer-col">
+            <div class="footer-col">
                 <ul>
-                    <li class = "footer-header">ПРОДУКТЫ</li>
+                    <li class="footer-header">ПРОДУКТЫ</li>
                     <li>
-                        <a href = "#">Авиабилеты</a>
+                        <a href="#">Авиабилеты</a>
                     </li>
                     <li>
-                        <a href = "#">ЖД билеты</a>
+                        <a href="#">ЖД билеты</a>
                     </li>
                     <li>
-                        <a href = "#">Визовая поддержка</a>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-
-        <div class = "footer-row">
-            <div class = "footer-col">
-                <ul>
-                    <li class = "footer-header">О НАС</li>
-                    <li>
-                        <a href = "1.html">О компании</a>
-                    </li>
-                    <li>
-                        <a href = "#">Блог</a>
-                    </li>
-                    <li>
-                        <a href = "#">Способы оплаты</a>
-                    </li>
-                    <li>
-                        <a href = "contacts.html">Контакты</a>
-                    </li>
-                    <li>
-                        <a href = "#">Публичная оферта</a>
-                    </li>
-                    <li>
-                        <a href = "#">Публичная оферта ЖД</a>
-                    </li>
-                    <li>
-                        <a href = "#">СМИ о нас</a>
-                    </li>
-                    
-                </ul>
-            </div>
-
-            <div class = "footer-col">
-                <ul>
-                    <li class = "footer-header">ПОЛЬЗОВАТЕЛЯМ</li>
-                    <li>
-                        <a href = "#">Вопросы-ответы</a>
-                    </li>
-                    <li>
-                        <a href = "#">Отзывы</a>
-                    </li>
-                    <li>
-                        <a href = "#">Лучшие цены</a>
-                    </li>
-                    <li>
-                        <a href = "reg.html">Регистрация на рейс</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class = "footer-col">
-                <ul>
-                    <li class = "footer-header">ПОЛЕЗНАЯ ИНФОРМАЦИЯ</li>
-                    <li>
-                        <a href = "#">Авиакомпании</a>
-                    </li>
-                    <li>
-                        <a href = "#">Аэропорты</a>
-                    </li>
-                    <li>
-                        <a href = "#">Страны</a>
-                    </li>
-                    <li>
-                        <a href = "#">Города</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class = "footer-col">
-                <ul>
-                    <li class = "footer-header">ПАРТНЕРАМ</li>
-                    <li>
-                        <a href = "#">Корпоративным клиентам</a>
-                    </li>
-                    <li>
-                        <a href = "#">Рекламодателям</a>
-                    </li>
-                    <li>
-                        <a href = "#">Сотрудничество</a>
-                    </li>
-                    <li>
-                        <a href = "#">Стать агентом</a>
+                        <a href="#">Визовая поддержка</a>
                     </li>
                 </ul>
             </div>
 
         </div>
 
-        <div class = "footer-row">
-            <div class = "footer-col_icons">
+        <div class="footer-row">
+            <div class="footer-col">
+                <ul>
+                    <li class="footer-header">О НАС</li>
+                    <li>
+                        <a href="1.html">О компании</a>
+                    </li>
+                    <li>
+                        <a href="#">Блог</a>
+                    </li>
+                    <li>
+                        <a href="#">Способы оплаты</a>
+                    </li>
+                    <li>
+                        <a href="contacts.html">Контакты</a>
+                    </li>
+                    <li>
+                        <a href="#">Публичная оферта</a>
+                    </li>
+                    <li>
+                        <a href="#">Публичная оферта ЖД</a>
+                    </li>
+                    <li>
+                        <a href="#">СМИ о нас</a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <ul>
+                    <li class="footer-header">ПОЛЬЗОВАТЕЛЯМ</li>
+                    <li>
+                        <a href="#">Вопросы-ответы</a>
+                    </li>
+                    <li>
+                        <a href="#">Отзывы</a>
+                    </li>
+                    <li>
+                        <a href="#">Лучшие цены</a>
+                    </li>
+                    <li>
+                        <a href="reg.html">Регистрация на рейс</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <ul>
+                    <li class="footer-header">ПОЛЕЗНАЯ ИНФОРМАЦИЯ</li>
+                    <li>
+                        <a href="#">Авиакомпании</a>
+                    </li>
+                    <li>
+                        <a href="#">Аэропорты</a>
+                    </li>
+                    <li>
+                        <a href="#">Страны</a>
+                    </li>
+                    <li>
+                        <a href="#">Города</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <ul>
+                    <li class="footer-header">ПАРТНЕРАМ</li>
+                    <li>
+                        <a href="#">Корпоративным клиентам</a>
+                    </li>
+                    <li>
+                        <a href="#">Рекламодателям</a>
+                    </li>
+                    <li>
+                        <a href="#">Сотрудничество</a>
+                    </li>
+                    <li>
+                        <a href="#">Стать агентом</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-row">
+            <div class="footer-col_icons">
                 <ul>
                     <li>
-                        <div class = "cards-logo">
-                            <div class = "item visa"></div>
-                            <div class = "item mastercard"></div>
-                            <div class = "item unionpay"></div>
+                        <div class="cards-logo">
+                            <div class="item visa"></div>
+                            <div class="item mastercard"></div>
+                            <div class="item unionpay"></div>
                         </div>
                     </li>
                 </ul>
             </div>
-            <div class = "footer-col_icons">
+            <div class="footer-col_icons">
                 <ul>
                     <li>
-                        <div class = "cards-logo">
-                            <a class = "item astanahub" href = "#"></a>
+                        <div class="cards-logo">
+                            <a class="item astanahub" href="#"></a>
                         </div>
                     </li>
                 </ul>
             </div>
-            <div class = "footer-col_icons">
+            <div class="footer-col_icons">
                 <ul>
                     <li>
-                        <div class = "cards-logo">
-                            <a class = "item socialInst" href = "#"></a>
-                            <a class = "item socialFacb" href = "#"></a>
+                        <div class="cards-logo">
+                            <a class="item socialInst" href="#"></a>
+                            <a class="item socialFacb" href="#"></a>
                         </div>
                     </li>
                 </ul>
             </div>
-            <div class = "footer-col_icons">
+            <div class="footer-col_icons">
                 <ul>
                     <li>
-                        <div class = "cards-logo">
-                            <div class = "item depositphotos"></div>
+                        <div class="cards-logo">
+                            <div class="item depositphotos"></div>
                         </div>
                     </li>
                 </ul>
@@ -532,4 +538,5 @@
 
 
 </body>
+
 </html>
