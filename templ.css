@@ -939,7 +939,7 @@ body.is-webview {
     z-index: 50
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width:1000px) {
     .wrapper .chocofamily-logos {
         margin: 0 -20px
     }
@@ -1035,7 +1035,7 @@ body.is-webview {
     color: #eb5757
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width:800px) {
     .nav__item--new span:after {
         top: -3px
     }
@@ -1146,13 +1146,13 @@ body.is-webview {
     position: absolute
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width:1200px) {
     .lang-switcher {
         position: static
     }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width:1000px) {
     .lang-switcher {
         order: -1;
         left: auto;
@@ -1373,7 +1373,7 @@ body.is-webview {
     background-image: url(/media/v3/media/images/social/social__inst--active.svg)
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width:800px) {
     .footer {
         display: none
     }
@@ -1456,7 +1456,7 @@ body.is-webview {
     padding-top: 12px
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width:800px) {
     .mobile-footer {
         display: block
     }
@@ -1539,7 +1539,7 @@ body.is-webview {
     display: none
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width:1000px) {
     .banner-slider__item {
         display: block
     }
@@ -2253,7 +2253,7 @@ body.is-webview {
     background: transparent
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width:1000px) {
     .railways_page .search-form__input input {
         width: 192px;
         padding: 2px 1px 1px 13px;
@@ -2264,7 +2264,7 @@ body.is-webview {
     }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width:1000px) {
     .railways_page .search-form__input input.\--error-input {
         border: 2px solid #e68080!important;
         border: 2px solid var(--color-pink-error)!important;
@@ -2502,7 +2502,7 @@ body.is-webview {
     box-shadow: 0 0 0 2px var(--color-red-focus)
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width:800px) {
     .search-history {
         flex-direction: column;
         align-items: center
@@ -9154,7 +9154,7 @@ body .ui-tooltip {
     color: red
 }
 
-@media screen and (max-width: 999px) {
+@media screen and (max-width:999px) {
     .main_desc .dest_city_from_local {
         max-height: none
     }
@@ -10454,7 +10454,7 @@ body .ui-tooltip {
     }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width:800px) {
     body {
         max-width: 100%
     }
@@ -10608,13 +10608,13 @@ body .ui-tooltip {
     }
 }
 
-@media screen and (max-width: 999px) {
+@media screen and (max-width:999px) {
     .content {
         padding-bottom: 10px
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width:500px) {
     .header__logo img {
         width: 100%
     }
@@ -10629,7 +10629,7 @@ body .ui-tooltip {
     }
 }
 
-@media (max-width: 450px) {
+@media (max-width:450px) {
     .personal_cabinet .top .bus {
         width: 25%
     }
@@ -10674,7 +10674,7 @@ body .ui-tooltip {
     }
 }
 
-@media screen and (max-width: 330px) {
+@media screen and (max-width:330px) {
     .hp1 {
         width: 120px
     }
@@ -10793,7 +10793,7 @@ body .ui-tooltip {
     background-image: url(/media/v3/media/images/icons/close.svg)
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width:350px) {
     .app-button {
         font-size: 12px;
         padding: 0
@@ -11257,7 +11257,7 @@ body .ui-tooltip {
     pointer-events: none
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width:500px) {
     .modal-dialog {
         min-height: calc(100% - 80px);
         margin: 20px auto
@@ -11318,7 +11318,7 @@ body .ui-tooltip {
     overflow: hidden
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width:1000px) {
     .promo-banners-slider {
         display: none
     }
@@ -11436,7 +11436,7 @@ body .ui-tooltip {
     background-color: #fff
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width:500px) {
     .std-modal {
         padding: 48px 20px
     }
@@ -11472,7 +11472,7 @@ body .ui-tooltip {
     cursor: pointer
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width:500px) {
     .std-modal__close-btn {
         right: 8px;
         top: 8px
@@ -11493,7 +11493,7 @@ body .ui-tooltip {
     font-size: 26px
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width:500px) {
     .std-modal__heading {
         font-size: 24px
     }
@@ -11505,7 +11505,7 @@ body .ui-tooltip {
     font-size: 14px
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width:500px) {
     .std-modal__body {
         margin-bottom: 24px
     }
@@ -11519,7 +11519,7 @@ body .ui-tooltip {
     width: 324px
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width:500px) {
     .std-modal__actions-container {
         width: 100%
     }
@@ -11547,7 +11547,7 @@ body .ui-tooltip {
     cursor: pointer
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width:500px) {
     .standard-modal-action {
         font-size: 12px
     }
@@ -11665,7 +11665,7 @@ body .ui-tooltip {
     border: 2px solid hsla(0, 0%, 100%, .5)
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width:800px) {
     .toast-container {
         top: 10px;
         right: 10px
@@ -11682,7 +11682,7 @@ body .ui-tooltip {
     }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width:800px) {
     .toast-container {
         left: 10px;
         right: 10px;
@@ -11705,7 +11705,7 @@ body .ui-tooltip {
     max-width: 100%
 }
 
-@media (min-width: 1000px) {
+@media (min-width:1000px) {
     .container {
         max-width: 1000px
     }
@@ -14268,7 +14268,7 @@ body .ui-tooltip {
     color: rgba(235, 87, 87, var(--text-opacity))!important
 }
 
-@media (min-width: 640px) {
+@media (min-width:640px) {
     .sm\:block {
         display: block
     }
@@ -14393,7 +14393,7 @@ body .ui-tooltip {
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width:768px) {
     .md\:flex-row {
         flex-direction: row
     }
@@ -14421,7 +14421,7 @@ body .ui-tooltip {
     }
 }
 
-@media (min-width: 1000px) {
+@media (min-width:1000px) {
     .lg\:space-y-0>:not(template)~:not(template) {
         --space-y-reverse: 0;
         margin-top: calc(0px * (1 - var(--space-y-reverse)));
@@ -14991,7 +14991,7 @@ body .ui-tooltip {
     top: -3px
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width:1000px) {
     .notifications[data-v-74daa545] {
         display: none
     }
@@ -15167,7 +15167,7 @@ body .ui-tooltip {
     width: 100%
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width:1000px) {
     .notification {
         width: 90%
     }
@@ -15176,7 +15176,7 @@ body .ui-tooltip {
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width:600px) {
     .notification-wrapper {
         bottom: 10px
     }
