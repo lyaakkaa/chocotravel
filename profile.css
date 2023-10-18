@@ -1,9 +1,21 @@
-*, :before, :after{
+html{
+    font-family: Open Sans,Arial,sans-serif;
+    line-height: 1.5
+}
+
+html,body,#app {
+    width: 100%;
+    min-height: 100vh;
+    height: 100%
+}
+
+*,:before,:after{
     box-sizing: border-box;
     border-width: 0;
     border-style: solid;
     border-color: #f0f1f4;
 }
+
 
 ol, ul {
     list-style: none;
@@ -12,8 +24,6 @@ ol, ul {
 }
 
 ul {
-    display: block;
-    list-style-type: disc;
     margin-block-start: 1em;
     margin-block-end: 1em;
     margin-inline-start: 0px;
@@ -91,6 +101,11 @@ div {
     flex-grow: 1;
 }
 
+.text-blue-550 {
+    color: #3d8ac2;
+    color: rgba(61,138,194,1);
+}
+
 .bg-gray-200 {
     background-color: #f5f6f8;
     background-color: rgba(245,246,248,1);
@@ -118,8 +133,20 @@ div {
     margin-left: 0.25rem;
 }
 
+.ml-8 {
+    margin-left: 2rem;
+}
+
+.ml-3 {
+    margin-left: 0.75rem;
+}
+
 .mt-1 {
     margin-top: 0.25rem;
+}
+
+.mr-17 {
+    margin-right: 4.25rem;
 }
 
 .p-1 {
@@ -142,6 +169,10 @@ div {
 
 .justify-evenly {
     justify-content: space-evenly;
+}
+
+.justify-end {
+    justify-content: flex-end;
 }
 
 .items-center {
@@ -174,6 +205,11 @@ div {
 .bg-blue-500 {
     background-color: #387fbf;
     background-color: rgba(56,127,191,1);
+}
+
+.bg-blue-550 {
+    background-color: #3d8ac2;
+    background-color: rgba(61,138,194,1);
 }
 
 .w-fit {
@@ -246,6 +282,15 @@ div {
     border-width: 0;
 }
 
+.border-2 {
+    border-width: 2px;
+}
+
+.border-blue-550 {
+    border-color: #3d8ac2;
+    border-color: rgba(61,138,194,1);
+}
+
 .border-solid {
     border-style: solid;
 }
@@ -310,6 +355,11 @@ div {
     color: rgba(255,255,255,1);
 }
 
+.text-black-primary {
+    color: #383838;
+    color: rgba(56,56,56,1);
+}
+
 .text-xs {
     font-size: .75rem;
 }
@@ -324,4 +374,28 @@ div {
 
 .z-0 {
     z-index: 0;
+}
+
+.locales-block-position[data-v-befade40] {
+    position: absolute;
+    right: 0;
+    z-index: 10;
+    top: 5px;
+}
+
+.base-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+    transition-property: all;
+    transition-duration: .2s;
+    transition-timing-function: linear;
+    cursor: pointer
+}
+
+.base-button:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(66,153,225,.5)
 }
