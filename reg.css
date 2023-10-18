@@ -1,0 +1,282 @@
+body {
+    font-family: "Open Sans", Arial, sans-serif;
+    font-size: 14px;
+    margin: 0;
+    color: #212c5b;
+    background: #ecfbff;
+}
+
+a {
+    color: #212c5b;
+    text-decoration: none;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    padding: 18px 0;
+}
+
+.main_logo {
+    display: flex;
+}
+
+.chocotravel-logo {
+    width: 226.156px;
+}
+
+.menu_main_options {
+    display: flex;
+    width: 800px;
+    justify-content: space-between;
+    margin: 5px 0 0 20px;
+}
+
+.menu_main_options a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    text-decoration: none;
+    padding: 0 3px;
+    line-height: 29px;
+    border-bottom: 2px solid #9ea3b7;
+}
+
+.menu_main_option img {
+    width: 13px;
+}
+
+.menu_main_option span {
+    padding-left: 10px;
+}
+
+#aviaBilet img {
+    width: 13px;
+}
+
+#aviaBilet span {
+    padding-left: 10px;
+}
+
+#aviaBilet {
+    color: #fe9922;
+    padding: 0 3px;
+    border-bottom: 2px solid #fe9922;
+    line-height: 29px;
+}
+
+.divAviaTextKaz {
+    display: inline;
+}
+
+.divAviaTextKaz h1 {
+    text-align: center;
+    width: 100%;
+    height: 27px;
+    margin: 20px 0 40px 0;
+    font-size: 20px;
+}
+
+#texx {
+    margin-left: 195px;
+    margin-top: -20px;
+}
+
+#box {
+    width: 70%;
+    padding: 25px;
+    margin-left: 195px;
+    margin-right: 15%;
+    background: white;
+    margin-bottom: 150px;
+}
+
+.disp {
+    width: 74%;
+    background-color: hsla(0,0%,100%,.6);
+    margin-top: 30px;
+    margin-left: 195px;
+}
+
+.logos a {
+    color: #42a7d4;
+    font-size: 11px;
+    
+}
+
+.logos {
+    text-align: center;
+}
+
+.link {
+    text-decoration: underline;
+    cursor: pointer;
+    margin-left: 60pх;
+}
+
+td {
+    display: table-cell;
+}
+
+#bek {
+    margin-top: -25px;
+}
+
+#qazaq {
+    margin-top: -13px;
+}
+
+#air2 {
+    margin-top: -50px;
+}
+
+#scan {
+    margin-top: -20px
+}
+
+#rusl {
+    margin-top: -30px;
+}
+
+.dispp {
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(0,13,67,.87);
+    margin-left: 195px;
+}
+
+.textt {
+    font-size: 13px;
+    text-align: justify;
+    color: rgba(0,13,67,.87);
+    margin-left: 195px;
+    margin-right: 170px;
+}
+
+.texttt {
+    font-size: 13px;
+    text-align: justify;
+    color: rgba(0,13,67,.87);
+    margin-left: 195px;
+    margin-right: 170px;
+    margin-bottom: 40px;
+}
+
+.footer {
+    width: 100%;
+    margin: auto;
+    background-color: #387fbf;
+    border-top: 4px solid #fe9922;
+}
+
+.footerRow{
+    max-width: 1000px;
+    display: flex;
+    justify-content: flex-start;
+    margin: auto;
+    padding: 20px 20px 0px;
+}
+.footerCol{
+    width: 25%;
+    color: #fff;
+}
+.footerRow a{
+    text-decoration: none;
+    color: #fff;
+    font-size: 12px;
+}
+.footerCol ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.footerCol .footerHeaderList{
+    font-size: 14px;
+    text-transform: uppercase;
+    padding-bottom: 15px;
+}
+.footerCol li{
+    padding-bottom: 1px;
+}
+
+.footerRow:last-child{
+    border-top: 1px solid hsla(0,0%,100%,.5);
+    margin-top: 15px;
+    padding-bottom: 15px;
+    padding-top: 20px;
+}
+.footerColIcons{
+    width: 25%;
+    color: #fff;
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+}
+.cardsLogo{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.footerColIcons ul{
+    list-style: none;
+}
+.item{
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    margin: 6px;
+}
+.item:first-child{
+    margin-left: 0px;
+}
+.visa{
+    background-image: url(img/visa-pay-logo.svg);
+    width: 46px;
+    height: 16px;
+}
+.mastercard{
+    background-image: url(img/master-card.svg);
+    height: 17px;
+    width: 28px;
+}
+.unionpay{
+    background-image: url(img/union-pay.svg);
+    width: 32px;
+}
+.item:last-child{
+    margin-right: 0px;
+}
+.astanahub{
+    background-image: url(img/astana-hub.png);
+    width: 100px;
+    height: 30px;
+}
+.socialInst{
+    width: 25px;
+    height: 25px;
+    background-size: 25px 25px;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    display: inline-block;
+    opacity: .5;
+    margin-right: 18px;
+    background-image: url(img/social__inst.svg);
+}
+.socialFacb{
+    width: 25px;
+    height: 25px;
+    background-size: 25px 25px;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    display: inline-block;
+    opacity: .5;
+    margin-right: 18px;
+    background-image: url(img/social__fb.svg);
+}
+.depositphotos{
+    background-image: url(img/depositphotos.svg);
+    width: 105px;
+    height: 17px;
+}
