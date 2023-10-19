@@ -29,6 +29,11 @@ a:hover {
     text-decoration: none;
 }
 
+.voiti{
+    color: white;
+    text-decoration: none;
+}
+
 /* chocofamily start ----------------------------------------------------------*/
 
 .chocofamily-logos {
@@ -170,6 +175,10 @@ a:hover {
     border-radius: 8px;
     color: white;
     cursor: pointer;
+}
+
+.login__button{
+    text-decoration: none;
 }
 
 .hidden {
