@@ -440,8 +440,12 @@
     background-color: #387fbf;
     color: white;
     padding: 20px;
+    height: 150px;
     margin: 50px;
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .title1{
@@ -456,10 +460,11 @@
 
 
 .dropdown-btn{
+    margin-left: 50px;
     padding: 10px;
     color: #f1f1f1;
     background-color: #387fbf;
-    width: 250px;
+    width: 200px;
     border-color: white;
 }
 
@@ -550,6 +555,7 @@
   .range-slider{
     margin-bottom: 125px;
     margin-left: 180px;
+    margin-right: 70px;
   }
 
   .range-slider-text{
