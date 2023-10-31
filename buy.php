@@ -308,12 +308,13 @@
 
                             $resultOutbound = pg_query($conn, $queryOutbound);
                             $resultReturn = pg_query($conn, $queryReturn);
+                            $foundPairs = false;
 
 //                            echo "Result Outbound: " . pg_num_rows($resultOutbound) . "<br>";
 //                            echo "Result Return: " . pg_num_rows($resultReturn) . "<br>";
                             if ($resultOutbound && $resultReturn && pg_num_rows($resultReturn) > 0 && pg_num_rows($resultOutbound) > 0) {
                                 while ($rowOutbound = pg_fetch_assoc($resultOutbound)) {
-                                    $rowReturn = pg_fetch_assoc($resultReturn);
+                                    while ($rowReturn = pg_fetch_assoc($resultReturn)){
                                     echo '<div class="variant relative flex flex-wrap p-4 pt-6 bg-white rounded-lg shadow">';
 
                                     // Вывод информации о прямом рейсе в одну сторону
@@ -376,6 +377,9 @@
 
                                     echo '</div>';
                                     echo '</div>';
+                                    $foundPairs = true;
+                                    }
+                                    pg_result_seek($resultReturn, 0);
                                 }
                             } else {
                                 echo "There are no flights with such dates";
