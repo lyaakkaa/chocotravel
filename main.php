@@ -48,7 +48,7 @@
                         <a href="https://b2b.chocotravel.com/" class="login__link">
                             Бизнес аккаунт
                         </a>
-                        <a id="login-button" type="button" class="login__button" href="voiti.html"> Войти
+                        <a id="login-button" type="button" class="login__button" href="voiti.php"> Войти
                         </a>
                     </div>
                     <div id="post-auth-links" class="relative flex items-center hidden">
@@ -156,7 +156,7 @@
                     </form>
 
                     <div class="div-text">
-                        <h2>Подробнее о поиске авиабилетов на Chocotravel</h1>
+                        <h2>Подробнее о поиске авиабилетов на Chocotravel</h2>
                             <p>Именно по этим причинам люди используют Chocotravel как бесплатный<br> сервис по поиску авиабилетов</p>
                     </div>
 
