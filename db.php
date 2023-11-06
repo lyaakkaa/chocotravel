@@ -1,13 +1,12 @@
 <?php
-$host = "localhost";
-$dbname = "chocotravel";
-$username = "postgres";
-$password = "dimash7628";
+$dbhost = "localhost";
+$dbname = 'chocotravel';
+$dbuser = "postgres";
+$dbpass = "dimash7628";
 
-try {
-    $db = new PDO("pgsql:host=$host;dbname=$dbname", $username, $password);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Ошибка подключения к базе данных: " . $e->getMessage());
+$conn = pg_connect("host=$dbhost dbname=$dbname user=$dbuser password=$dbpass");
+
+if (!$conn) {
+    die("Error connecting to the database");
 }
 ?>
