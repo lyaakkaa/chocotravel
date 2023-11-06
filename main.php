@@ -56,7 +56,7 @@
                                 Личный кабинет
                             </a>
 
-                            <a href="/avia/auth/logout" class="login__button" style="font-size: 12px; font-weight: 600; text-decoration: none;">
+                            <a href="logout.php" class="login__button" style="font-size: 12px; font-weight: 600; text-decoration: none;">
                                 Выход
                             </a>
                         <?php else: ?>
