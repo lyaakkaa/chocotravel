@@ -380,7 +380,7 @@
                     </div>
                     <div class="py-10 px-24 flex justify-between items-center text-x1 bg-blue-500 rounded-2x1">
                         <h3 class="text-white font-bold">Забронируйте отель заранее</h3>
-                        <a href="https://sp.booking.com/index.php?aid=860418" target="_blank" class="flex px-6 py-4 font-semibold text-black no-underline bg-white" style="height: 25px; border-radius: 100px; ">Перейти на Booking.com</a>
+                        <a href="https://sp.booking.com/main.php?aid=860418" target="_blank" class="flex px-6 py-4 font-semibold text-black no-underline bg-white" style="height: 25px; border-radius: 100px; ">Перейти на Booking.com</a>
                     </div>
                     <img src="images/tourist_2.webp" role="presentation" width="373" height="664" class="absolute" style="bottom: 45px; left: -70px;">
                 </section>

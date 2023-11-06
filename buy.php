@@ -115,587 +115,68 @@
         <div class="center">
             <div class="content">
                 <div class="content-center">
-                    <form class="form-zakaz">
+                    <?php
+                    include('db.php'); // Подключение к базе данных
+                    if (!isset($conn)) {
+                        die("Error: Database connection not established.");
+                    }
+
+                    // Запрос для получения списка городов из таблицы "cities"
+                    $query = "SELECT city_name, city_id FROM cities";
+                    $querySeat = "SELECT seat_class, seat_id FROM seats";
+                    $result = pg_query($conn, $query);
+                    $resultSeat = pg_query($conn, $querySeat);
+                    $seatData = pg_fetch_all($resultSeat);
+                    $cityData = pg_fetch_all($result);
+                    ?>
+
+                    <form class="form-zakaz" action="buy.php" method="post">
                         <div class="labels">
                             <div class="form-group">
                                 <select id="from" name="from" required>
                                     <option value="" disabled selected>Откуда</option>
-                                    <option value="city1">Алматы</option>
-                                    <option value="city2">Астана</option>
-                                    <option value="city3">Шымкент</option>
-                                    <option value="city4">Актау</option>
-                                    <option value="city5">Атырау</option>
-                                    <option value="city6">Павлодар</option>
+                                    <?php foreach ($cityData as $city): ?>
+                                        <option value="<?php echo $city['city_id']; ?>"
+                                            <?php if (isset($_POST['from']) && $_POST['from'] == $city['city_id']) echo 'selected'; ?>>
+                                            <?php echo $city['city_name']; ?>
+                                        </option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <select id="to" name="to" required>
                                     <option value="" disabled selected>Куда</option>
-                                    <option value="cityA">Астана</option>
-                                    <option value="cityB">Алматы</option>
-                                    <option value="cityC">Москва</option>
-                                    <option value="cityD">Стамбул</option>
-                                    <option value="cityE">Шымкент</option>
-                                    <option value="cityF">Актау</option>
+                                    <?php foreach ($cityData as $city): ?>
+                                        <option value="<?php echo $city['city_id']; ?>"
+                                            <?php if (isset($_POST['to']) && $_POST['to'] == $city['city_id']) echo 'selected'; ?>>
+                                            <?php echo $city['city_name']; ?>
+                                        </option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <select id="ticket-type" name="ticket-type" required>
-                                    <option value="economy">Эконом</option>
-                                    <option value="business">Бизнес</option>
-                                    <option value="first-class">Первый класс</option>
+                                    <option value="" disabled selected>Выберите класс места</option>
+                                    <?php foreach ($seatData as $seat): ?>
+                                        <option value="<?php echo $seat['seat_id']; ?>"
+                                            <?php if (isset($_POST['ticket-type']) && $_POST['ticket-type'] == $seat['seat_id']) echo 'selected'; ?>>
+                                            <?php echo $seat['seat_class']; ?>
+                                        </option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
-
                             <div class="form-group">
-                                <input type="date" id="date" name="date" placeholder="14 окт" required>
+                                <input type="date" id="date" name="date" placeholder="14 окт" required
+                                       value="<?php echo isset($_POST['date']) ? $_POST['date'] : ''; ?>">
                             </div>
-
-
-                            <button class="find" type="submit">Найти</button>
-
+                            <button type="submit" class="find">Найти</button>
                         </div>
                     </form>
 
 
-                    
-
-                    <!-- <div class="container-filter">
-                        <div class="flex py-3 px-4 items-center justify-between text-white">
-                            <div class="flex items-center justify-between w-3/4">
-                                <p class="my-0 text-white text-xs text-opacity-50">
-                                    Соответствует 
-                                    <span class="font-semibold">48</span> из 
-                                    <span class="font-semibold">48 вариантов</span>
-                                </p> 
-                                <button type="button" class="
-                                    flex items-center
-                                    p-0 text-white bg-transparent
-                                    border-none outline-none cursor-pointer
-                                ">
-                                    Сбросить все
-                                    <img src="images/close.svg" alt="" class="w-4 ml-3">
-                                </button>
-                            </div> 
-                            <button 
-                                class="flex items-center
-                                p-0 text-white bg-transparent 
-                                border-none outline-none cursor-pointer"
-                            >
-                            <img src="images/filters-icon--white.svg" alt="" class="w-4 mr-3"> 
-                                <span class="mr-3 uppercase">Свернуть фильтры</span> <img src="images/arrow-toggle--white.svg" alt="" class="w-3 transition duration-200 rotate-1/2">
-                            </button>
-                        </div>
-
-                        <div style="position: static; visibility: visible; height: auto;">
-                            <div class="
-                                p-5 border-solid border-0 border-t
-                                border-opacity-50 border-white">
-                                <div class="flex items-center justify-between mb-4">
-                                    <h4 class="my-0 text-lg text-white font-semibold">
-                                        Общие параметры
-                                    </h4> 
-                                    <button type="button" class="
-                                        flex items-center
-                                        p-0 text-white bg-transparent
-                                        border-none outline-none cursor-pointer duration-300">
-                                        Сбросить
-                                        <img src="images/close.svg" alt="" class="w-4 ml-3">
-                                    </button>
-                                </div>
-                                <div class="flex items-start">
-                                    <div class="
-                                        flex justify-center 
-                                        w-48 mt-5 py-2 px-4 
-                                        border border-solid border-white rounded
-                                    ">
-                                        <div tabindex="0" class="dropdown">
-                                            <div class="dropdown__header text-white">
-                                                Авиакомпании
-                                                <span class="dropdown__icon"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <div class="w-64 mx-12">
-                                    <p class="mt-0 mb-2 text-xs text-white text-opacity-50">
-                                        Цена билета
-                                    </p>
-                                    <div class="range">
-                                        <div class="range__title range__title--space-between">
-                                            <span>от 41 829 ₸</span> <span>до 2 609 803 ₸</span>
-                                        </div>
-                                        <div class="vue-slider-component vue-slider-horizontal" style="width: 225px; padding: 5.5px;">
-                                            <div aria-hidden="true" class="vue-slider" style="height: 3px; background-color: rgba(255, 255, 255, 0.3);">
-                                                <div class="vue-slider-false vue-slider-dot" style="width: 11px; height: 11px; top: -4px; transition-duration: 0s; transform: translateX(-5px);">
-                                                    <div class="vue-slider-dot-handle" style="background-color: rgb(157, 222, 242); box-shadow: none;">
-                                                    </div>
-                                                    <div class="vue-slider-tooltip-top vue-slider-tooltip-wrap" style="visibility: inherit;">
-                                                        <span class="vue-slider-tooltip">41829</span>
-                                                    </div>
-                                                </div>
-                                                <div class="vue-slider-false vue-slider-dot" style="width: 11px; height: 11px; top: -4px; transition-duration: 0s; transform: translateX(209px);">
-                                                    <div class="vue-slider-dot-handle" style="background-color: rgb(157, 222, 242); box-shadow: none;">
-                                                    </div>
-                                                    <div class="vue-slider-tooltip-top vue-slider-tooltip-wrap" style="visibility: inherit;">
-                                                        <span class="vue-slider-tooltip">2609803</span>
-                                                    </div>
-                                                </div>
-                                                <ul class="vue-slider-piecewise"></ul>
-                                                <div class="vue-slider-process" style="background-color: rgb(157, 222, 242); box-shadow: none; transition-duration: 0s; width: 214px; left: 0px;">
-                                                <div class="vue-merged-tooltip vue-slider-tooltip-top vue-slider-tooltip-wrap" style="top: -13px; left: 50%; visibility: hidden;">
-                                                    <span class="vue-slider-tooltip">
-                                                    41829 - 2609803
-                                                    </span>
-                                                </div>
-          
-                                            </div>
-                
-                                        </div>
-                                    </div>
-                                </div>
-                </div>
-        
-        </div>
-    </div>
-    <div class="
-                              pt-5 pb-8 px-5 border-dashed border-0 border-t
-                              border-opacity-50 border-white
-                            ">
-        <div class="flex items-center justify-between mb-4">
-            <h4 class="flex items-center my-0 text-lg text-white font-semibold"><img src="/media/v3/media/images/icons/airplane.svg" alt="" class="w-5 mr-2"> Алматы - Астана
-            </h4> <button type="button" class="
-                  flex items-center
-                  p-0 text-white bg-transparent
-                  border-none outline-none cursor-pointer duration-300
-                ">
-                Сбросить
-                <img src="/media/v3/media/images/icons/close.svg" alt="" class="w-4 ml-3"></button></div>
-        <div class="flex">
-            <div class="w-48">
-                <p class="mt-0 mb-2 text-xs text-white text-opacity-50">
-                    Пересадки
-                </p>
-                <div class="space-y-2">
-                    <div class="filters__checkbox-wrapper">
-                        <div class="filters__checkbox-replacer-title">
-                            <div class="filters__checkbox-replacer filters__checkbox-replacer--active"></div>
-                            <div class="filters__checkbox-title">Все</div>
-                        </div>
-                 
-                        <div class="filters__checkbox-extra" style="display: none;">
-                            Только
-                        </div>
-                    </div>
-                    <div class="filters__checkbox-wrapper">
-                        <div class="filters__checkbox-replacer-title">
-                            <div class="filters__checkbox-replacer filters__checkbox-replacer--active"></div>
-                            <div class="filters__checkbox-title">Прямой</div>
-                        </div>
-     
-                        <div class="filters__checkbox-extra" style="display: none;">
-                            Только
-                        </div>
-                    </div>
-                    <div class="filters__checkbox-wrapper">
-                        <div class="filters__checkbox-replacer-title">
-                            <div class="filters__checkbox-replacer filters__checkbox-replacer--active"></div>
-                            <div class="filters__checkbox-title">1 пересадка</div>
-                        </div>
-          
-                        <div class="filters__checkbox-extra" style="display: none;">
-                            Только
-                        </div>
-                    </div>
-                    <div class="filters__checkbox-wrapper">
-                        <div class="filters__checkbox-replacer-title">
-                            <div class="filters__checkbox-replacer filters__checkbox-replacer--active"></div>
-                            <div class="filters__checkbox-title">2 пересадки и более</div>
-                        </div>
-   
-                        <div class="filters__checkbox-extra" style="display: none;">
-                            Только
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="w-48">
-                <p class="mt-0 mb-2 text-xs text-white text-opacity-50">
-                    Вылет
-                </p>
-                <div class="range">
-                    <div tabindex="0" class="dropdown">
-                        <div class="dropdown__header">
-                            00:00 — 24:00
-                            <span class="dropdown__icon"></span></div>
-                        <div class="dropdown__container" style="display: none;">
-                
-                            <div class="dropdown__items">
-                                <div class="filters__checkbox-wrapper filters__checkbox-wrapper--indropdown filters__checkbox-wrapper--radio">
-                                    <div class="filters__checkbox-replacer-title">
-                                     
-                                        <div class="filters__checkbox-title">Любое</div>
-                                    </div>
-                 
-                                    <div class="filters__checkbox-extra" style="display: none;">
-                                        Только
-                                    </div>
-                                </div>
-                                <div class="filters__checkbox-wrapper filters__checkbox-wrapper--indropdown filters__checkbox-wrapper--radio">
-                                    <div class="filters__checkbox-replacer-title">
-                      
-                                        <div class="filters__checkbox-title">Ночь</div>
-                                    </div>
-                                    <div class="filters__checkbox-extra">00:00-06:00</div>
-                                    <div class="filters__checkbox-extra" style="display: none;">
-                                        Только
-                                    </div>
-                                </div>
-                                <div class="filters__checkbox-wrapper filters__checkbox-wrapper--indropdown filters__checkbox-wrapper--radio">
-                                    <div class="filters__checkbox-replacer-title">
-                            
-                                        <div class="filters__checkbox-title">Утро</div>
-                                    </div>
-                                    <div class="filters__checkbox-extra">06:00-12:00</div>
-                                    <div class="filters__checkbox-extra" style="display: none;">
-                                        Только
-                                    </div>
-                                </div>
-                                <div class="filters__checkbox-wrapper filters__checkbox-wrapper--indropdown filters__checkbox-wrapper--radio">
-                                    <div class="filters__checkbox-replacer-title">
-                                
-                                        <div class="filters__checkbox-title">День</div>
-                                    </div>
-                                    <div class="filters__checkbox-extra">12:00-18:00</div>
-                                    <div class="filters__checkbox-extra" style="display: none;">
-                                        Только
-                                    </div>
-                                </div>
-                                <div class="filters__checkbox-wrapper filters__checkbox-wrapper--indropdown filters__checkbox-wrapper--radio">
-                                    <div class="filters__checkbox-replacer-title">
-                            
-                                        <div class="filters__checkbox-title">Вечер</div>
-                                    </div>
-                                    <div class="filters__checkbox-extra">18:00-00:00</div>
-                                    <div class="filters__checkbox-extra" style="display: none;">
-                                        Только
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="vue-slider-component vue-slider-horizontal" style="width: 140px; padding: 5.5px;">
-                        <div aria-hidden="true" class="vue-slider" style="height: 3px; background-color: rgba(255, 255, 255, 0.3);">
-                            <div class="vue-slider-false vue-slider-dot" style="width: 11px; height: 11px; top: -4px; transition-duration: 0s; transform: translateX(-5px);">
-                                <div class="vue-slider-dot-handle" style="background-color: rgb(157, 222, 242); box-shadow: none;"></div>
-                                <div class="vue-slider-tooltip-top vue-slider-tooltip-wrap" style="visibility: inherit;"><span class="vue-slider-tooltip">0</span></div>
-                            </div>
-                            <div class="vue-slider-false vue-slider-dot" style="width: 11px; height: 11px; top: -4px; transition-duration: 0s; transform: translateX(124px);">
-                                <div class="vue-slider-dot-handle" style="background-color: rgb(157, 222, 242); box-shadow: none;"></div>
-                                <div class="vue-slider-tooltip-top vue-slider-tooltip-wrap" style="visibility: inherit;"><span class="vue-slider-tooltip">1440</span></div>
-                            </div>
-                            <ul class="vue-slider-piecewise"></ul>
-                            <div class="vue-slider-process" style="background-color: rgb(157, 222, 242); box-shadow: none; transition-duration: 0s; width: 129px; left: 0px;">
-                                <div class="vue-merged-tooltip vue-slider-tooltip-top vue-slider-tooltip-wrap" style="top: -13px; left: 50%; visibility: hidden;"><span class="vue-slider-tooltip">
-                          0 - 1440
-                        </span></div>
-                            </div>
-                   
-                        </div>
-                    </div>
-                </div>
-                <p class="my-2 text-xs text-white">
-                    Аэропорт вылета
-                </p>
-                <div class="space-y-2">
-                    <div class="filters__checkbox-wrapper filters__checkbox-wrapper--disabled">
-                        <div class="filters__checkbox-replacer-title">
-                            <div class="filters__checkbox-replacer filters__checkbox-replacer--active"></div>
-                            <div class="filters__checkbox-title">Алматы</div>
-                        </div>
-                 
-                        <div class="filters__checkbox-extra" style="display: none;">
-                            Только
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="w-48">
-                <p class="mt-0 mb-2 text-xs text-white text-opacity-50">
-                    Прилет
-                </p>
-                <div class="range">
-                    <div tabindex="0" class="dropdown">
-                        <div class="dropdown__header">
-                            00:00 — 24:00
-                            <span class="dropdown__icon"></span></div>
-                        <div class="dropdown__container" style="display: none;">
-                          
-                            <div class="dropdown__items">
-                                <div class="filters__checkbox-wrapper filters__checkbox-wrapper--indropdown filters__checkbox-wrapper--radio">
-                                    <div class="filters__checkbox-replacer-title">
-                       
-                                        <div class="filters__checkbox-title">Любое</div>
-                                    </div>
-                            
-                                    <div class="filters__checkbox-extra" style="display: none;">
-                                        Только
-                                    </div>
-                                </div>
-                                <div class="filters__checkbox-wrapper filters__checkbox-wrapper--indropdown filters__checkbox-wrapper--radio">
-                                    <div class="filters__checkbox-replacer-title">
-                          
-                                        <div class="filters__checkbox-title">Ночь</div>
-                                    </div>
-                                    <div class="filters__checkbox-extra">00:00-06:00</div>
-                                    <div class="filters__checkbox-extra" style="display: none;">
-                                        Только
-                                    </div>
-                                </div>
-                                <div class="filters__checkbox-wrapper filters__checkbox-wrapper--indropdown filters__checkbox-wrapper--radio">
-                                    <div class="filters__checkbox-replacer-title">
-                             
-                                        <div class="filters__checkbox-title">Утро</div>
-                                    </div>
-                                    <div class="filters__checkbox-extra">06:00-12:00</div>
-                                    <div class="filters__checkbox-extra" style="display: none;">
-                                        Только
-                                    </div>
-                                </div>
-                                <div class="filters__checkbox-wrapper filters__checkbox-wrapper--indropdown filters__checkbox-wrapper--radio">
-                                    <div class="filters__checkbox-replacer-title">
-                            
-                                        <div class="filters__checkbox-title">День</div>
-                                    </div>
-                                    <div class="filters__checkbox-extra">12:00-18:00</div>
-                                    <div class="filters__checkbox-extra" style="display: none;">
-                                        Только
-                                    </div>
-                                </div>
-                                <div class="filters__checkbox-wrapper filters__checkbox-wrapper--indropdown filters__checkbox-wrapper--radio">
-                                    <div class="filters__checkbox-replacer-title">
-                         
-                                        <div class="filters__checkbox-title">Вечер</div>
-                                    </div>
-                                    <div class="filters__checkbox-extra">18:00-00:00</div>
-                                    <div class="filters__checkbox-extra" style="display: none;">
-                                        Только
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="vue-slider-component vue-slider-horizontal" style="width: 140px; padding: 5.5px;">
-                        <div aria-hidden="true" class="vue-slider" style="height: 3px; background-color: rgba(255, 255, 255, 0.3);">
-                            <div class="vue-slider-false vue-slider-dot" style="width: 11px; height: 11px; top: -4px; transition-duration: 0s; transform: translateX(-5px);">
-                                <div class="vue-slider-dot-handle" style="background-color: rgb(157, 222, 242); box-shadow: none;"></div>
-                                <div class="vue-slider-tooltip-top vue-slider-tooltip-wrap" style="visibility: inherit;"><span class="vue-slider-tooltip">0</span></div>
-                            </div>
-                            <div class="vue-slider-false vue-slider-dot" style="width: 11px; height: 11px; top: -4px; transition-duration: 0s; transform: translateX(124px);">
-                                <div class="vue-slider-dot-handle" style="background-color: rgb(157, 222, 242); box-shadow: none;"></div>
-                                <div class="vue-slider-tooltip-top vue-slider-tooltip-wrap" style="visibility: inherit;"><span class="vue-slider-tooltip">1440</span></div>
-                            </div>
-                            <ul class="vue-slider-piecewise"></ul>
-                            <div class="vue-slider-process" style="background-color: rgb(157, 222, 242); box-shadow: none; transition-duration: 0s; width: 129px; left: 0px;">
-                                <div class="vue-merged-tooltip vue-slider-tooltip-top vue-slider-tooltip-wrap" style="top: -13px; left: 50%; visibility: hidden;"><span class="vue-slider-tooltip">
-                          0 - 1440
-                        </span></div>
-                            </div>
-              
-                        </div>
-                    </div>
-                </div>
-                <p class="my-2 text-xs text-white">
-                    Аэропорт прилета
-                </p>
-                <div class="space-y-2">
-                    <div class="filters__checkbox-wrapper filters__checkbox-wrapper--disabled">
-                        <div class="filters__checkbox-replacer-title">
-                            <div class="filters__checkbox-replacer filters__checkbox-replacer--active"></div>
-                            <div class="filters__checkbox-title">Нурсултан Назарбаев</div>
-                        </div>
-    
-                        <div class="filters__checkbox-extra" style="display: none;">
-                            Только
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="w-48">
-                <p class="mt-0 mb-2 text-xs text-white text-opacity-50">
-                    Время в пути
-                </p>
-                <div class="range">
-                    <div class="range__title"> 1 ч 30 м — 1 д 21 ч 40 м</div>
-                    <div class="vue-slider-component vue-slider-horizontal" style="width: 140px; padding: 5.5px;">
-                        <div aria-hidden="true" class="vue-slider" style="height: 3px; background-color: rgba(255, 255, 255, 0.3);">
-                            <div class="vue-slider-false vue-slider-dot" style="width: 11px; height: 11px; top: -4px; transition-duration: 0s; transform: translateX(-5px);">
-                                <div class="vue-slider-dot-handle" style="background-color: rgb(157, 222, 242); box-shadow: none;"></div>
-                                <div class="vue-slider-tooltip-top vue-slider-tooltip-wrap" style="visibility: inherit;"><span class="vue-slider-tooltip">90</span></div>
-                            </div>
-                            <div class="vue-slider-false vue-slider-dot" style="width: 11px; height: 11px; top: -4px; transition-duration: 0s; transform: translateX(124px);">
-                                <div class="vue-slider-dot-handle" style="background-color: rgb(157, 222, 242); box-shadow: none;"></div>
-                                <div class="vue-slider-tooltip-top vue-slider-tooltip-wrap" style="visibility: inherit;"><span class="vue-slider-tooltip">2740</span></div>
-                            </div>
-                            <ul class="vue-slider-piecewise"></ul>
-                            <div class="vue-slider-process" style="background-color: rgb(157, 222, 242); box-shadow: none; transition-duration: 0s; width: 129px; left: 0px;">
-                                <div class="vue-merged-tooltip vue-slider-tooltip-top vue-slider-tooltip-wrap" style="top: -13px; left: 50%; visibility: hidden;"><span class="vue-slider-tooltip">
-                          90 - 2740
-                        </span></div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div tabindex="0" class="dropdown">
-                    <div class="dropdown__header">
-                        Город пересадки
-                        <span class="dropdown__icon"></span></div>
-                    <div class="dropdown__container dropdown__container--center" style="display: none;">
-                        <div class="dropdown__search-wrapper"><input type="search" placeholder="Поиск" class="dropdown__search"></div>
-                        <div class="dropdown__items">
-                            <div class="filters__checkbox-wrapper filters__checkbox-wrapper--indropdown">
-                                <div class="filters__checkbox-replacer-title">
-                                    <div class="filters__checkbox-replacer filters__checkbox-replacer--active filters__checkbox-replacer--indropdown"></div>
-                                    <div class="filters__checkbox-title">Усть-Каменогорск</div>
-                                </div>
-                     
-                                <div class="filters__checkbox-extra" style="display: none;">
-                                    Только
-                                </div>
-                            </div>
-                            <div class="filters__checkbox-wrapper filters__checkbox-wrapper--indropdown">
-                                <div class="filters__checkbox-replacer-title">
-                                    <div class="filters__checkbox-replacer filters__checkbox-replacer--active filters__checkbox-replacer--indropdown"></div>
-                                    <div class="filters__checkbox-title">Шымкент</div>
-                                </div>
-                        
-                                <div class="filters__checkbox-extra" style="display: none;">
-                                    Только
-                                </div>
-                            </div>
-                            <div class="filters__checkbox-wrapper filters__checkbox-wrapper--indropdown">
-                                <div class="filters__checkbox-replacer-title">
-                                    <div class="filters__checkbox-replacer filters__checkbox-replacer--active filters__checkbox-replacer--indropdown"></div>
-                                    <div class="filters__checkbox-title">Актау</div>
-                                </div>
-              
-                                <div class="filters__checkbox-extra" style="display: none;">
-                                    Только
-                                </div>
-                            </div>
-                            <div class="filters__checkbox-wrapper filters__checkbox-wrapper--indropdown">
-                                <div class="filters__checkbox-replacer-title">
-                                    <div class="filters__checkbox-replacer filters__checkbox-replacer--active filters__checkbox-replacer--indropdown"></div>
-                                    <div class="filters__checkbox-title">Уральск</div>
-                                </div>
-                        
-                                <div class="filters__checkbox-extra" style="display: none;">
-                                    Только
-                                </div>
-                            </div>
-                            <div class="filters__checkbox-wrapper filters__checkbox-wrapper--indropdown">
-                                <div class="filters__checkbox-replacer-title">
-                                    <div class="filters__checkbox-replacer filters__checkbox-replacer--active filters__checkbox-replacer--indropdown"></div>
-                                    <div class="filters__checkbox-title">Атырау</div>
-                                </div>
-                         
-                                <div class="filters__checkbox-extra" style="display: none;">
-                                    Только
-                                </div>
-                            </div>
-                            <div class="filters__checkbox-wrapper filters__checkbox-wrapper--indropdown">
-                                <div class="filters__checkbox-replacer-title">
-                                    <div class="filters__checkbox-replacer filters__checkbox-replacer--active filters__checkbox-replacer--indropdown"></div>
-                                    <div class="filters__checkbox-title">Душанбе</div>
-                                </div>
-                     
-                                <div class="filters__checkbox-extra" style="display: none;">
-                                    Только
-                                </div>
-                            </div>
-                            <div class="filters__checkbox-wrapper filters__checkbox-wrapper--indropdown">
-                                <div class="filters__checkbox-replacer-title">
-                                    <div class="filters__checkbox-replacer filters__checkbox-replacer--active filters__checkbox-replacer--indropdown"></div>
-                                    <div class="filters__checkbox-title">Урумчи</div>
-                                </div>
-                   
-                                <div class="filters__checkbox-extra" style="display: none;">
-                                    Только
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="w-48">
-                <p class="mt-0 mb-2 text-xs text-white text-opacity-50">
-                    Длительность пересадки
-                </p>
-                <div class="range">
-                    <div class="range__title"> 1 ч 20 м — 23 ч 55 м</div>
-                    <div class="vue-slider-component vue-slider-horizontal" style="width: 140px; padding: 5.5px;">
-                        <div aria-hidden="true" class="vue-slider" style="height: 3px; background-color: rgba(255, 255, 255, 0.3);">
-                            <div class="vue-slider-false vue-slider-dot" style="width: 11px; height: 11px; top: -4px; transition-duration: 0s; transform: translateX(-5px);">
-                                <div class="vue-slider-dot-handle" style="background-color: rgb(157, 222, 242); box-shadow: none;"></div>
-                                <div class="vue-slider-tooltip-top vue-slider-tooltip-wrap" style="visibility: inherit;"><span class="vue-slider-tooltip">80</span></div>
-                            </div>
-                            <div class="vue-slider-false vue-slider-dot" style="width: 11px; height: 11px; top: -4px; transition-duration: 0s; transform: translateX(124px);">
-                                <div class="vue-slider-dot-handle" style="background-color: rgb(157, 222, 242); box-shadow: none;"></div>
-                                <div class="vue-slider-tooltip-top vue-slider-tooltip-wrap" style="visibility: inherit;"><span class="vue-slider-tooltip">1435</span></div>
-                            </div>
-                            <ul class="vue-slider-piecewise"></ul>
-                            <div class="vue-slider-process" style="background-color: rgb(157, 222, 242); box-shadow: none; transition-duration: 0s; width: 129px; left: 0px;">
-                                <div class="vue-merged-tooltip vue-slider-tooltip-top vue-slider-tooltip-wrap" style="top: -13px; left: 50%; visibility: hidden;"><span class="vue-slider-tooltip">
-                          80 - 1435
-                        </span></div>
-                            </div>
-               
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-                    </div>
-     <div class="filters__checkbox-wrapper filters__checkbox-wrapper--indropdown">
-                                <div class="filters__checkbox-replacer-title">
-                                    <div class="filters__checkbox-replacer filters__checkbox-replacer--active filters__checkbox-replacer--indropdown"></div>
-                                    <div class="filters__checkbox-title">Все</div>
-                                </div>
-                 
-                                <div class="filters__checkbox-extra" style="display: none;">
-                                    Только
-                                </div>
-                            </div> -->
-                       
-
-                    <!-- <div class="filters">
-                        <h2>Фильтры</h2>
-                        <div class="filter">
-                          <label for="airline">Авиакомпания</label>
-                          <select name="airline" id="airline">
-                            <option value="Air Astana">Air Astana</option>
-                            <option value="Qazaq Air">Qazaq Air</option>
-                            <option value="SCAT Airlines">SCAT Airlines</option>
-                          </select>
-                        </div>
-                        <div class="filter">
-                          <label for="price">Цена</label>
-                          <input type="range" name="price" id="price" min="41829" max="2609803" step="1000">
-                        </div>
-                        <div class="filter">
-                          <label for="transfers">Пересадки</label>
-                          <select name="transfers" id="transfers">
-                            <option value="0">Прямой</option>
-                            <option value="1">1 пересадка</option>
-                            <option value="2">2 пересадки и более</option>
-                          </select>
-                        </div>
-                      </div> -->
 
 
-                     <div class="container-filters">
+                    <div class="container-filters">
                         <div class="filter-1">
                             <div class="dropdown">
                                 <button class="dropdown-btn">Авиакомпания</button>
@@ -723,6 +204,84 @@
 
                     
                     <div class="absolute top-0 left-0 mt-1"></div>
+
+                    <?php
+                    // Include the database connection code
+                    include('db.php');
+
+
+                    // Check if form data is submitted
+                    if (isset($_POST['from']) && isset($_POST['to']) && isset($_POST['date'])) {
+                        // Get user input from the form
+                        $fromCityName = $_POST['from'];
+                        $toCityName = $_POST['to'];
+//                        echo $fromCityName;
+//                        echo $toCityName;
+                        $date = $_POST['date'];
+//                        echo $date;
+
+
+
+                        if ($fromCityName && $toCityName) {
+                            // Construct the SQL query to fetch flights
+                            $query = "SELECT * FROM flights WHERE departure_city_id = $fromCityName AND arrival_city_id = $toCityName AND arrival_time >= '$date'";
+                            $result = pg_query($conn, $query);
+
+                            if ($result) {
+                                // Loop through the result set and display flight information
+                                while ($row = pg_fetch_assoc($result)) {
+                                    echo '<div class="variant relative flex flex-wrap p-4 pt-6 bg-white rounded-lg shadow">';
+
+                                    // Вывод информации о рейсе из базы данных
+                                    echo '<div class="w-40 pr-3">';
+                                    echo '<div class="flex flex-col"><img src="images/' . $row['airline_id'] . '.png" alt="' . $row['airline_id'] . '" class="mb-1 w-24 max-w-full"></div>';
+                                    echo '</div>';
+
+                                    echo '<div class="flex flex-row w-40 text-xs">';
+                                    echo 'Прямой';
+                                    echo '</div>';
+
+                                    echo '<div class="flex flex-col items-baseline w-40 mt-0 pl-4">';
+                                    echo '<div class="space-y-1">';
+                                    // Форматируем дату отправления
+                                    $departure_time = date('d/m H:i', strtotime($row['departure_time']));
+                                    $arrival_time = date('d/m H:i', strtotime($row['arrival_time']));
+                                    echo '<div><span class="font-bold">' . $departure_time . '</span> <span class="text-xs">- ' . $arrival_time . '</span></div>';
+
+                                    echo '</div>';
+                                    echo '</div>';
+
+                                    echo '<div class="w-40 mt-0 text-xs">';
+                                    echo '<div class="flex flex-col space-y-1"><span>' . $row['flight_duration'] . '</span></div>';
+                                    echo '</div>';
+
+                                    echo '<div class="flex flex-row items-start justify-end w-auto ml-auto mt-0">';
+                                    echo '<div class="flex relative flex-row space-x-1">';
+                                    echo '<div hide-on-click="false" placement="bottom" trigger="mouseenter focus manual" arrow="">';
+                                    echo '<div tabindex="0"><img src="images/baggage.svg" alt="Иконка" class="w-6 cursor-pointer"></div>';
+                                    echo '</div>';
+                                    echo '</div>';
+
+                                    echo '<div class="flex flex-col items-center w-48">';
+                                    echo '<button type="button" class="base-button relative w-full mb-2 p-2 text-sm font-bold">Купить за ' . $row['price'] . ' ₸</button>';
+                                    echo '</div>';
+
+                                    echo '</div>';
+                                    echo '</div>';
+                                }
+                            } else {
+                                echo "No flights found.";
+                            }
+                        } else {
+                            echo "City names not found in the database.";
+                        }
+                    } else {
+                        echo "Please provide valid search criteria.";
+                    }
+                    ?>
+
+
+
                     <div class="variant relative flex flex-wrap p-4 pt-6 bg-white rounded-lg shadow">
                         <div class="absolute top-0 left-0 mt-1"></div>
                         <div class="w-40 pr-3">
@@ -758,80 +317,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="variant relative flex flex-wrap p-4 pt-6 bg-white rounded-lg shadow">
-                        <div class="w-40 pr-3">
-                            <div class="flex flex-col"><img src="images/DV.png" alt="DV" class="mb-1 w-24 max-w-full"></div>
-                        </div>
-                        <div class="flex flex-row w-40 text-xs">
-                            Прямой
-                        </div>
-                        <div class="flex flex-col items-baseline w-40 mt-0 pl-4">
-                            <div class="space-y-1">
-                                <div><span class="font-bold">16:55</span> <span class="text-xs">- 18:30</span></div>
-                            </div>
-                        </div>
-                        <div class="w-40 mt-0 text-xs">
-                            <div class="flex flex-col space-y-1"><span>
-                            1 ч 35 м
-                        </span></div>
-                        </div>
-                        <div class="flex flex-row items-start justify-end w-auto ml-auto mt-0">
-                            <div class="flex relative flex-row space-x-1">
-                                <div hide-on-click="false" placement="bottom" trigger="mouseenter focus manual" arrow="">
-                                    <div tabindex="0"><img src="images/baggage.svg" alt="Иконка" class="w-6 cursor-pointer"></div>
-                                </div>
-                            </div>
-                            <div class="flex flex-col items-center w-48">
-                                <p class="mt-0 mb-4 text-xs"><span class="mr-1 p-1 bg-orange-300 rounded">
-                                    17 427 ₸
-                                    </span> x 3 месяца
-                                </p> 
-                                <button type="button" class="base-button relative w-full mb-2 p-2 text-sm font-bold">
-                                    Купить за 47 567 ₸
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="variant relative flex flex-wrap p-4 pt-6 bg-white rounded-lg shadow">
-                        <div class="w-40 pr-3">
-                            <div class="flex flex-col"><img src="images/DV.png" alt="DV" class="mb-1 w-24 max-w-full"></div>
-                        </div>
-                        <div class="flex flex-row w-40 text-xs">
-                            Прямой
-                        </div>
-                        <div class="flex flex-col items-baseline w-40 mt-0 pl-4">
-                            <div class="space-y-1">
-                                <div><span class="font-bold">16:55</span> <span class="text-xs">- 18:30</span></div>
-                            </div>
-                        </div>
-                        <div class="w-40 mt-0 text-xs">
-                            <div class="flex flex-col space-y-1"><span>
-                            1 ч 35 м
-                        </span></div>
-                        </div>
-                        <div class="flex flex-row items-start justify-end w-auto ml-auto mt-0">
-                            <div class="flex relative flex-row space-x-1">
-                                <div hide-on-click="false" placement="bottom" trigger="mouseenter focus manual" arrow="">
-                                    <div tabindex="0"><img src="images/baggage.svg" alt="Иконка" class="w-6 cursor-pointer"></div>
-                                </div>
-                            </div>
-                            <div class="flex flex-col items-center w-48">
-                                <p class="mt-0 mb-4 text-xs"><span class="mr-1 p-1 bg-orange-300 rounded">
-                                    17 427 ₸
-                                    </span> x 3 месяца
-                                </p> 
-                                <button type="button" class="base-button relative w-full mb-2 p-2 text-sm font-bold">
-                                    Купить за 47 567 ₸
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+
                 
-
-                    
-
-                    
-
 
                 </div>
             </div>

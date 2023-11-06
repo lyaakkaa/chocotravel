@@ -77,7 +77,7 @@
         </div>
 
         <div class="menu_options">
-            <a classs="menu_option" id="aviaBilet" href="index.php">
+            <a classs="menu_option" id="aviaBilet" href="main.php">
                 <img src="images/plane_active.svg">
                 <span>Авиабилеты</span>
             </a>

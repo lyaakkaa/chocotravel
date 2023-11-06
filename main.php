@@ -117,47 +117,55 @@
                     <div class="div-text">
                         <h1>Авиабилеты в Казахстане</h1>
                     </div>
-                    <form class="form-zakaz">
+                    <?php
+                    include('db.php'); // Подключение к базе данных
+                    if (!isset($conn)) {
+                        die("Error: Database connection not established.");
+                    }
+
+                    // Запрос для получения списка городов из таблицы "cities"
+                    $query = "SELECT city_name, city_id FROM cities";
+                    $querySeat = "SELECT seat_class, seat_id FROM seats";
+                    $result = pg_query($conn, $query);
+                    $resultSeat = pg_query($conn, $querySeat);
+                    $seatData = pg_fetch_all($resultSeat);
+                    $cityData = pg_fetch_all($result);
+                    ?>
+
+                    <form class="form-zakaz" action="buy.php" method="post">
                         <div class="labels">
                             <div class="form-group">
                                 <select id="from" name="from" required>
                                     <option value="" disabled selected>Откуда</option>
-                                    <option value="city1">Алматы</option>
-                                    <option value="city2">Астана</option>
-                                    <option value="city3">Шымкент</option>
-                                    <option value="city4">Актау</option>
-                                    <option value="city5">Атырау</option>
-                                    <option value="city6">Павлодар</option>
+                                    <?php foreach ($cityData as $city): ?>
+                                        <option value="<?php echo $city['city_id']; ?>"><?php echo $city['city_name']; ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <select id="to" name="to" required>
                                     <option value="" disabled selected>Куда</option>
-                                    <option value="cityA">Астана</option>
-                                    <option value="cityB">Алматы</option>
-                                    <option value="cityC">Москва</option>
-                                    <option value="cityD">Стамбул</option>
-                                    <option value="cityE">Шымкент</option>
-                                    <option value="cityF">Актау</option>
+                                    <?php foreach ($cityData as $city): ?>
+                                        <option value="<?php echo $city['city_id']; ?>"><?php echo $city['city_name']; ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <select id="ticket-type" name="ticket-type" required>
-                                    <option value="economy">Эконом</option>
-                                    <option value="business">Бизнес</option>
-                                    <option value="first-class">Первый класс</option>
+                                    <option value="" disabled selected>Выберите класс места</option>
+                                    <?php foreach ($seatData as $seat): ?>
+                                        <option value="<?php echo $seat['seat_id']; ?>"><?php echo $seat['seat_class']; ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
-
                             <div class="form-group">
                                 <input type="date" id="date" name="date" placeholder="14 окт" required>
                             </div>
-
-
-                            <a class="find" href="buy.php">Найти</a>
-
+                            <button type="submit" class="find">Найти</button>
                         </div>
                     </form>
+
+
 
                     <div class="div-text">
                         <h2>Подробнее о поиске авиабилетов на Chocotravel</h2>
