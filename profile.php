@@ -186,7 +186,7 @@
                     <ul>
                         <li class="footer-header">О НАС</li>
                         <li>
-                            <a href="about.html">О компании</a>
+                            <a href="about.php">О компании</a>
                         </li>
                         <li>
                             <a href="#">Блог</a>
@@ -204,7 +204,7 @@
                             <a href="#">Публичная оферта ЖД</a>
                         </li>
                         <li>
-                            <a href="smi.html">СМИ о нас</a>
+                            <a href="smi.php">СМИ о нас</a>
                         </li>
 
                     </ul>
@@ -223,7 +223,7 @@
                             <a href="#">Лучшие цены</a>
                         </li>
                         <li>
-                            <a href="reg.html">Регистрация на рейс</a>
+                            <a href="reg.php">Регистрация на рейс</a>
                         </li>
                     </ul>
                 </div>
@@ -259,7 +259,7 @@
                             <a href="#">Сотрудничество</a>
                         </li>
                         <li>
-                            <a href="agents.html">Стать агентом</a>
+                            <a href="agents.php">Стать агентом</a>
                         </li>
                     </ul>
                 </div>

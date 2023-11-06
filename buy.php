@@ -50,17 +50,20 @@
                         <a href="https://b2b.chocotravel.com/" class="login__link">
                             Бизнес аккаунт
                         </a>
-                        <a id="login-button" type="button" class="login__button" href="voiti.php"> Войти
-                        </a>
-                    </div>
-                    <div id="post-auth-links" class="relative flex items-center hidden">
-                        <a id="cab_link" href="/cabinet" title="" class="login__link">
-                            Личный кабинет
-                        </a>
+                        <?php
+                        if ($_COOKIE['user'] == 'Yes'):
+//                            echo 'Current user cookie value: ' . $_COOKIE['user'];
+                            ?>
+                            <a id="cab_link" href="/cabinet" title="" class="login__link">
+                                Личный кабинет
+                            </a>
 
-                        <a href="/avia/auth/logout" class="login__button" style="font-size: 12px; font-weight: 600; text-decoration: none;">
-                            Выход
-                        </a>
+                            <a href="logout.php" class="login__button" style="font-size: 12px; font-weight: 600; text-decoration: none;">
+                                Выход
+                            </a>
+                        <?php else: ?>
+                            <a id="login-button" type="button" class="login__button" href="voiti.php"> Войти</a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -81,7 +84,7 @@
                 <img src="images/plane_active.svg">
                 <span class="active">Авиабилеты</span>
             </a>
-            <a class="menu_option" id="zhdBilet" href="zhd.html">
+            <a class="menu_option" id="zhdBilet" href="zhd.php">
                 <img src="images/jd_ticket.png">
                 <span>ЖД билеты</span>
             </a>
@@ -89,11 +92,11 @@
                 <img src="images/hotel.svg">
                 <span>Гостиницы</span>
             </a>
-            <a class="menu_option" id="Cars" href="rentalcars.html">
+            <a class="menu_option" id="Cars" href="rentalcars.php">
                 <img src="images/rentalcars.svg">
                 <span>Авто</span>
             </a>
-            <a class="menu_option" id="Visa" href="visa.html">
+            <a class="menu_option" id="Visa" href="visa.php">
                 <img src="images/visa.svg">
                 <span>Визы</span>
             </a>
@@ -101,7 +104,7 @@
                 <img src="images/msb.svg">
                 <span>Корпоративным клиентам</span>
             </a>
-            <a class="menu_option" id="Tours" href="tours.html">
+            <a class="menu_option" id="Tours" href="tours.php">
                 <img src="images/tours.svg">
                 <span>Туры</span>
             </a>
@@ -930,7 +933,7 @@
                 <ul>
                     <li class="footer-header">О НАС</li>
                     <li>
-                        <a href="about.html">О компании</a>
+                        <a href="about.php">О компании</a>
                     </li>
                     <li>
                         <a href="#">Блог</a>
@@ -948,7 +951,7 @@
                         <a href="#">Публичная оферта ЖД</a>
                     </li>
                     <li>
-                        <a href="smi.html">СМИ о нас</a>
+                        <a href="smi.php">СМИ о нас</a>
                     </li>
 
                 </ul>
@@ -967,7 +970,7 @@
                         <a href="#">Лучшие цены</a>
                     </li>
                     <li>
-                        <a href="reg.html">Регистрация на рейс</a>
+                        <a href="reg.php">Регистрация на рейс</a>
                     </li>
                 </ul>
             </div>
@@ -1003,7 +1006,7 @@
                         <a href="#">Сотрудничество</a>
                     </li>
                     <li>
-                        <a href="agents.html">Стать агентом</a>
+                        <a href="agents.php">Стать агентом</a>
                     </li>
                 </ul>
             </div>

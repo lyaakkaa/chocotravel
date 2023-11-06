@@ -47,17 +47,20 @@
                         <a href="https://b2b.chocotravel.com/" class="login__link">
                             Бизнес аккаунт
                         </a>
-                        <a id="login-button" type="button" class="login__button" href="voiti.php"> Войти
-                        </a>
-                    </div>
-                    <div id="post-auth-links" class="relative flex items-center hidden">
-                        <a id="cab_link" href="/cabinet" title="" class="login__link">
-                            Личный кабинет
-                        </a>
+                        <?php
+                        if ($_COOKIE['user'] == 'Yes'):
+//                            echo 'Current user cookie value: ' . $_COOKIE['user'];
+                            ?>
+                            <a id="cab_link" href="/cabinet" title="" class="login__link">
+                                Личный кабинет
+                            </a>
 
-                        <a href="/avia/auth/logout" class="login__button" style="font-size: 12px; font-weight: 600; text-decoration: none;">
-                            Выход
-                        </a>
+                            <a href="logout.php" class="login__button" style="font-size: 12px; font-weight: 600; text-decoration: none;">
+                                Выход
+                            </a>
+                        <?php else: ?>
+                            <a id="login-button" type="button" class="login__button" href="voiti.php"> Войти</a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -74,11 +77,11 @@
         </div>
 
         <div class="menu_options">
-            <a classs="menu_option" id="aviaBilet" href="index.html">
+            <a classs="menu_option" id="aviaBilet" href="index.php">
                 <img src="images/plane_active.svg">
                 <span>Авиабилеты</span>
             </a>
-            <a class="menu_option" id="zhdBilet" href="zhd.html">
+            <a class="menu_option" id="zhdBilet" href="zhd.php">
                 <img src="images/jd_ticket.png">
                 <span>ЖД билеты</span>
             </a>
@@ -86,11 +89,11 @@
                 <img src="images/hotel.svg">
                 <span>Гостиницы</span>
             </a>
-            <a class="menu_option" id="Cars" href="rentalcars.html">
+            <a class="menu_option" id="Cars" href="rentalcars.php">
                 <img src="images/rentalcars.svg">
                 <span>Авто</span>
             </a>
-            <a class="menu_option" id="Visa" href="visa.html">
+            <a class="menu_option" id="Visa" href="visa.php">
                 <img src="images/visa.svg">
                 <span>Визы</span>
             </a>
@@ -98,7 +101,7 @@
                 <img src="images/msb.svg">
                 <span>Корпоративным клиентам</span>
             </a>
-            <a class="menu_option" id="Tours" href="tours.html">
+            <a class="menu_option" id="Tours" href="tours.php">
                 <img src="images/tours.svg">
                 <span>Туры</span>
             </a>
@@ -213,12 +216,12 @@
                                 <div class="article_heading_tab">
                                     <p class="heading-action-small">Замены внешнего туризма локальным после девальвации не произошло – Chocotravel</p>
                                 </div>
-                                <a class="nofollowlink" data-link="https://vlast.kz/novosti/18635-zameny-vnesnego-turizma-lokalnym-posle-devalvacii-ne-proizoslo-chocotravel.html">
+                                <a class="nofollowlink" data-link="https://vlast.kz/novosti/18635-zameny-vnesnego-turizma-lokalnym-posle-devalvacii-ne-proizoslo-chocotravel.php">
                                     <div class="short_desc_container">
                                         Экономический кризис не способствовал развитию локального туризма, тем не менее, ситуация на рынке авиабилетов может стабилизироваться к ...</div>
                                 </a>
                                 <div class="article_txt_tab">
-                                    <p class="txt-action-small" style="margin-top: 10px;">Источник: <a class="nofollowlink" data-link="https://vlast.kz/novosti/18635-zameny-vnesnego-turizma-lokalnym-posle-devalvacii-ne-proizoslo-chocotravel.html" style="font-size: 12px!important;">vlast.kz</a></p>
+                                    <p class="txt-action-small" style="margin-top: 10px;">Источник: <a class="nofollowlink" data-link="https://vlast.kz/novosti/18635-zameny-vnesnego-turizma-lokalnym-posle-devalvacii-ne-proizoslo-chocotravel.php" style="font-size: 12px!important;">vlast.kz</a></p>
                                 </div>
                                 <div class="article_txt_tab">
                                     <p class="txt-action-small">Опубликовано: 03 августа 2016 г.</p>
@@ -285,12 +288,12 @@
                                 <div class="article_heading_tab">
                                     <p class="heading-action-small">Сколько стоит отдохнуть этим летом?</p>
                                 </div>
-                                <a class="nofollowlink" data-link="https://kapital.kz/economic/50365/skolko-stoit-otdohnut-etim-letom.html">
+                                <a class="nofollowlink" data-link="https://kapital.kz/economic/50365/skolko-stoit-otdohnut-etim-letom.php">
                                     <div class="short_desc_container">
                                         Из-за кризиса кошельки путешественников заметно похудели. Это связано и с ростом цен внутри страны, и с тем, что за границей все продаетс...</div>
                                 </a>
                                 <div class="article_txt_tab">
-                                    <p class="txt-action-small" style="margin-top: 10px;">Источник: <a class="nofollowlink" data-link="https://kapital.kz/economic/50365/skolko-stoit-otdohnut-etim-letom.html" style="font-size: 12px!important;">kapital.kz</a></p>
+                                    <p class="txt-action-small" style="margin-top: 10px;">Источник: <a class="nofollowlink" data-link="https://kapital.kz/economic/50365/skolko-stoit-otdohnut-etim-letom.php" style="font-size: 12px!important;">kapital.kz</a></p>
                                 </div>
                                 <div class="article_txt_tab">
                                     <p class="txt-action-small">Опубликовано: 18 мая 2016 г.</p>
@@ -303,12 +306,12 @@
                                 <div class="article_heading_tab">
                                     <p class="heading-action-small">К конкуренции относимся серьезно, но коленки не дрожат</p>
                                 </div>
-                                <a class="nofollowlink" data-link="https://kapital.kz/experts/50036/k-konkurencii-otnosimsya-serezno-no-kolenki-ne-drozhat.html">
+                                <a class="nofollowlink" data-link="https://kapital.kz/experts/50036/k-konkurencii-otnosimsya-serezno-no-kolenki-ne-drozhat.php">
                                     <div class="short_desc_container">
                                         Онлайн-продажа авиабилетов считается одним из самых быстроразвивающихся сегментов электронной коммерции. Многие пользователи уже не прост...</div>
                                 </a>
                                 <div class="article_txt_tab">
-                                    <p class="txt-action-small" style="margin-top: 10px;">Источник: <a class="nofollowlink" data-link="https://kapital.kz/experts/50036/k-konkurencii-otnosimsya-serezno-no-kolenki-ne-drozhat.html" style="font-size: 12px!important;">kapital.kz</a></p>
+                                    <p class="txt-action-small" style="margin-top: 10px;">Источник: <a class="nofollowlink" data-link="https://kapital.kz/experts/50036/k-konkurencii-otnosimsya-serezno-no-kolenki-ne-drozhat.php" style="font-size: 12px!important;">kapital.kz</a></p>
                                 </div>
                                 <div class="article_txt_tab">
                                     <p class="txt-action-small">Опубликовано: 05 мая 2016 г.</p>
@@ -708,7 +711,7 @@
                 <ul>
                     <li class = "footer-header">О НАС</li>
                     <li>
-                        <a href = "about.html">О компании</a>
+                        <a href = "about.php">О компании</a>
                     </li>
                     <li>
                         <a href = "#">Блог</a>
@@ -717,7 +720,7 @@
                         <a href = "#">Способы оплаты</a>
                     </li>
                     <li>
-                        <a href = "contacts.html">Контакты</a>
+                        <a href = "contacts.php">Контакты</a>
                     </li>
                     <li>
                         <a href = "#">Публичная оферта</a>
@@ -726,7 +729,7 @@
                         <a href = "#">Публичная оферта ЖД</a>
                     </li>
                     <li>
-                        <a href = "smi.html">СМИ о нас</a>
+                        <a href = "smi.php">СМИ о нас</a>
                     </li>
                     
                 </ul>
@@ -745,7 +748,7 @@
                         <a href = "#">Лучшие цены</a>
                     </li>
                     <li>
-                        <a href = "reg.html">Регистрация на рейс</a>
+                        <a href = "reg.php">Регистрация на рейс</a>
                     </li>
                 </ul>
             </div>
@@ -781,7 +784,7 @@
                         <a href = "#">Сотрудничество</a>
                     </li>
                     <li>
-                        <a href = "agents.html">Стать агентом</a>
+                        <a href = "agents.php">Стать агентом</a>
                     </li>
                 </ul>
             </div>
