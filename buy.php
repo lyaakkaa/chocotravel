@@ -174,35 +174,43 @@
                     </form>
 
 
+                    <?php
+                    include('db.php');
+                    if (!$conn) {
+                        die("Error: Database connection not established.");
+                    }
+
+                    $query = "SELECT airline_id, airline_name FROM airlines";
+                    $result = pg_query($conn, $query);
+                    ?>
+
+                    <form id="ticketFilter" action="buy.php" method="post">
+                        <label for="airline">Выберите авиакомпанию:</label>
+                        <select id="airline" name="airline">
+                            <option value="">Авиакомпания</option>
+                            <?php
+                            if ($result) {
+                                while ($row = pg_fetch_assoc($result)) {
+                                    $selected = (isset($_POST['airline']) && $_POST['airline'] == $row['airline_id']) ? 'selected' : '';
+                                    echo '<option value="' . $row['airline_id'] . '" ' . $selected . '>' . $row['airline_name'] . '</option>';
+                                }
+                            } else {
+                                echo '<option value="">Нет доступных авиакомпаний</option>';
+                            }
+                            pg_close($conn);
+                            ?>
+                        </select>
+
+                        <label for="returnDate">Выберите дату возврата:</label>
+                        <input type="date" id="returnDate" name="returnDate" value="<?php echo isset($_POST['returnDate']) ? $_POST['returnDate'] : ''; ?>">
+                    </form>
 
 
-                    <div class="container-filters">
-                        <div class="filter-1">
-                            <div class="dropdown">
-                                <button class="dropdown-btn">Авиакомпания</button>
-                                <div class="dropdown-content">
-                                    <a href="#">Опция 1</a>
-                                    <a href="#">Опция 2</a>
-                                    <a href="#">Опция 3</a>
-                                </div>
-                            </div>
 
-                
 
-                            <div class="range-slider">
-                                <p class="range-slider-text">Цена билета</p>
-                                <div class="prices">
-                                    <p>127 081 тг</p>
-                                    <p>2 155 704 тг</p>
-                                </div>
-                                <input type="range" class="min-price" value="100" min="10" max="500" step="10">
-                                <input type="range" class="max-price" value="250" min="10" max="500" step="10">
-                            </div>
-                        </div>
-                    </div>
-                                        
 
-                    
+
+
                     <div class="absolute top-0 left-0 mt-1"></div>
 
                     <?php
@@ -215,16 +223,32 @@
                         // Get user input from the form
                         $fromCityName = $_POST['from'];
                         $toCityName = $_POST['to'];
-//                        echo $fromCityName;
-//                        echo $toCityName;
                         $date = $_POST['date'];
-//                        echo $date;
+
+                        if(($_POST["airline"])){
+//                            echo $_POST["airline"];
+                            $airline = $_POST["airline"];
+                        }
+                        if($_POST["returnDate"]){
+                            $returnDate = $_POST["returnDate"];
+                        }
 
 
 
                         if ($fromCityName && $toCityName) {
                             // Construct the SQL query to fetch flights
-                            $query = "SELECT * FROM flights WHERE departure_city_id = $fromCityName AND arrival_city_id = $toCityName AND arrival_time >= '$date'";
+                            $query = "SELECT * FROM flights WHERE departure_city_id = $fromCityName AND arrival_city_id = $toCityName";
+                            if ($date) {
+                                $query .= " AND departure_time >= '$date'";
+                            }
+                            if ($airline) {
+                                $query .= " AND airline_id = $airline";
+                            }
+
+                            if($returnDate){
+                                $query .= " AND arrival_time <= '$returnDate'";
+                            }
+
                             $result = pg_query($conn, $query);
 
                             if ($result) {

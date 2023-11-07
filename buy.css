@@ -576,4 +576,41 @@
     font-size: 10px;
     font-weight: lighter;
   }
-  
+
+
+
+
+#ticketFilter {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 15px;
+    background-color: #50a6f3;
+    border-radius: 5px;
+    display: flex;
+}
+
+label {
+    display: block;
+    margin: 10px;
+}
+
+select, input[type="number"], input[type="date"] {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+select {
+    height: 30px;
+}
+
+input[type="range"] {
+    height: 10px;
+}
+
+output {
+    display: block;
+    margin-top: 5px;
+}
