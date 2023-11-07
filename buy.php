@@ -172,27 +172,28 @@
 
 
                             <div class="form-group">
-                                <label for="airline">Выберите авиакомпанию:</label>
-                                <select id="airline" name="airline">
-                                    <option value="">Авиакомпания</option>
-                                    <?php
-                                    $query = "SELECT airline_id, airline_name FROM airlines";
-                                    $result = pg_query($conn, $query);
-                                    if ($result) {
-                                        while ($row = pg_fetch_assoc($result)) {
-                                            $selected = (isset($_POST['airline']) && $_POST['airline'] == $row['airline_id']) ? 'selected' : '';
-                                            echo '<option value="' . $row['airline_id'] . '" ' . $selected . '>' . $row['airline_name'] . '</option>';
-                                        }
-                                    } else {
-                                        echo '<option value="">Нет доступных авиакомпаний</option>';
+                                <label for="airline">Выберите авиакомпании:</label>
+                                <div style="display: flex">
+                                <?php
+                                $query = "SELECT airline_id, airline_name FROM airlines";
+                                $result = pg_query($conn, $query);
+                                if ($result) {
+                                    while ($row = pg_fetch_assoc($result)) {
+                                        $checked = (isset($_POST['airline']) && in_array($row['airline_id'], $_POST['airline'])) ? 'checked' : '';
+                                        echo '<label style="margin-right: 10px;"><input type="checkbox" name="airline[]" value="' . $row['airline_id'] . '" ' . $checked . '>' . $row['airline_name'] . '</label>';
                                     }
-                                    pg_close($conn);
-                                    ?>
-                                </select>
-
-<!--                                <label for="returnDate">Выберите дату возврата:</label>-->
-<!--                                <input type="date" id="returnDate" name="returnDate" value="--><?php //echo isset($_POST['returnDate']) ? $_POST['returnDate'] : ''; ?><!--">-->
+                                } else {
+                                    echo '<p>Нет доступных авиакомпаний</p>';
+                                }
+                                pg_close($conn);
+                                ?>
+                                 </div>
+                                <label for="returnDate">Выберите дату возврата:</label>
+                                <input type="date" id="returnDate" name="returnDate" value="<?php echo isset($_POST['returnDate']) ? $_POST['returnDate'] : ''; ?>">
                             </div>
+
+
+
 
 
 
@@ -202,91 +203,54 @@
                     </form>
 
 
-<!--                    --><?php
-//                    include('db.php');
-//                    if (!$conn) {
-//                        die("Error: Database connection not established.");
-//                    }
-//
-//                    $query = "SELECT airline_id, airline_name FROM airlines";
-//                    $result = pg_query($conn, $query);
-//                    ?>
-<!---->
-<!--                    <form id="ticketFilter" action="buy.php" method="post">-->
-<!--                        <label for="airline">Выберите авиакомпанию:</label>-->
-<!--                        <select id="airline" name="airline">-->
-<!--                            <option value="">Авиакомпания</option>-->
-<!--                            --><?php
-//                            if ($result) {
-//                                while ($row = pg_fetch_assoc($result)) {
-//                                    $selected = (isset($_POST['airline']) && $_POST['airline'] == $row['airline_id']) ? 'selected' : '';
-//                                    echo '<option value="' . $row['airline_id'] . '" ' . $selected . '>' . $row['airline_name'] . '</option>';
-//                                }
-//                            } else {
-//                                echo '<option value="">Нет доступных авиакомпаний</option>';
-//                            }
-//                            pg_close($conn);
-//                            ?>
-<!---->
-<!--                        </select>-->
-<!---->
-<!--                        <label for="returnDate">Выберите дату возврата:</label>-->
-<!--                        <input type="date" id="returnDate" name="returnDate" value="--><?php //echo isset($_POST['returnDate']) ? $_POST['returnDate'] : ''; ?><!--">-->
-<!--                    </form>-->
-
-
-
-
 
 
 
                     <div class="absolute top-0 left-0 mt-1"></div>
 
                     <?php
-                    // Include the database connection code
                     include('db.php');
 
 
-                    // Check if form data is submitted
                     if (isset($_POST['from']) && isset($_POST['to'])) {
-                        // Get user input from the form
                         $fromCityName = $_POST['from'];
                         $toCityName = $_POST['to'];
+                        $returnDate = null;
 
                         if(isset($_POST['date'])){
                             $date = $_POST['date'];
                         }
 
                         if(isset($_POST["airline"])){
-//                            echo $_POST["airline"];
-                            $airline = $_POST["airline"];
+                            $airlines = $_POST["airline"];
+                        }
+                        if(isset($_POST["returnDate"])){
+                            $returnDate = $_POST["returnDate"];
                         }
 
 
 
 
-                        if ($fromCityName && $toCityName) {
+
+                        if ($fromCityName && $toCityName && $returnDate == null) {
                             // Construct the SQL query to fetch flights
                             $query = "SELECT * FROM flights WHERE departure_city_id = $fromCityName AND arrival_city_id = $toCityName";
                             if ($date) {
-                                $query .= " AND arrival_time >= '$date'";
-                            }
-                            if ($airline) {
-                                $query .= " AND airline_id = $airline";
-                            }
+                                $query .= " AND date_trunc('day', arrival_time) = date_trunc('day', '$date'::date)";
 
-//                            if($returnDate){
-//                                $query .= " AND arrival_time <= '$returnDate'";
-//                            }
+                            }
+                            if (!empty($airlines)) {
+                                $airline_conditions = implode(',', $airlines);
+                                $query .= " AND airline_id IN ($airline_conditions)";
+                            }
 
                             $result = pg_query($conn, $query);
 
                             if ($result) {
-                                // Loop through the result set and display flight information
                                 while ($row = pg_fetch_assoc($result)) {
                                     echo '<div class="variant relative flex flex-wrap p-4 pt-6 bg-white rounded-lg shadow">';
 
-                                    // Вывод информации о рейсе из базы данных
+
                                     echo '<div class="w-40 pr-3">';
                                     echo '<div class="flex flex-col"><img src="images/' . $row['airline_id'] . '.png" alt="' . $row['airline_id'] . '" class="mb-1 w-24 max-w-full"></div>';
                                     echo '</div>';
@@ -328,53 +292,103 @@
                             } else {
                                 echo "No flights found.";
                             }
-                        } else {
-                            echo "City names not found in the database.";
                         }
+
+                        else if ($returnDate !== null) {
+//                            echo $returnDate;
+                            $queryOutbound = "SELECT * FROM flights WHERE departure_city_id = $fromCityName AND arrival_city_id = $toCityName  AND date_trunc('day', arrival_time) = date_trunc('day', '$date'::date)";
+                            $queryReturn = "SELECT * FROM flights WHERE departure_city_id = $toCityName AND arrival_city_id = $fromCityName AND date_trunc('day', arrival_time) = date_trunc('day', '$returnDate'::date)";
+//                            echo "Query Outbound: $queryOutbound<br>";
+//                            echo "Query Return: $queryReturn<br>";
+                            if (!empty($airlines)) {
+                                $airline_conditions = implode(',', $airlines);
+                                $queryOutbound .= " AND airline_id IN ($airline_conditions)";
+                                $queryReturn .= " AND airline_id IN ($airline_conditions)";
+                            }
+
+                            $resultOutbound = pg_query($conn, $queryOutbound);
+                            $resultReturn = pg_query($conn, $queryReturn);
+
+//                            echo "Result Outbound: " . pg_num_rows($resultOutbound) . "<br>";
+//                            echo "Result Return: " . pg_num_rows($resultReturn) . "<br>";
+                            if ($resultOutbound && $resultReturn && pg_num_rows($resultReturn) > 0 && pg_num_rows($resultOutbound) > 0) {
+                                while ($rowOutbound = pg_fetch_assoc($resultOutbound)) {
+                                    $rowReturn = pg_fetch_assoc($resultReturn);
+                                    echo '<div class="variant relative flex flex-wrap p-4 pt-6 bg-white rounded-lg shadow">';
+
+                                    // Вывод информации о прямом рейсе в одну сторону
+                                    echo '<div class="w-40 pr-3">';
+                                    echo '<div class="flex flex-col"><img src="images/' . $rowOutbound['airline_id'] . '.png" alt="' . $rowOutbound['airline_id'] . '" class="mb-1 w-24 max-w-full"></div>';
+                                    echo '</div>';
+
+                                    echo '<div class="flex flex-row w-40 text-xs">';
+                                    echo 'Прямой';
+                                    echo '</div>';
+
+                                    echo '<div class="flex flex-col items-baseline w-40 mt-0 pl-4">';
+                                    echo '<div class="space-y-1">';
+                                    // Форматируем дату отправления
+                                    $departureTimeOutbound = date('d/m H:i', strtotime($rowOutbound['departure_time']));
+                                    $arrivalTimeOutbound = date('d/m H:i', strtotime($rowOutbound['arrival_time']));
+                                    echo '<div><span class="font-bold">' . $departureTimeOutbound . '</span> <span class="text-xs">- ' . $arrivalTimeOutbound . '</span></div>';
+
+                                    echo '</div>';
+                                    echo '</div>';
+
+                                    echo '<div class="w-40 mt-0 text-xs">';
+                                    echo '<div class "flex flex-col space-y-1"><span>' . $rowOutbound['flight_duration'] . '</span></div>';
+                                    echo '</div>';
+
+                                    echo '<div class="flex flex-row items-start justify-end w-auto ml-auto mt-0">';
+                                    echo '<div class="flex relative flex-row space-x-1">';
+                                    echo '<div hide-on-click="false" placement="bottom" trigger="mouseenter focus manual" arrow="">';
+                                    echo '<div tabindex="0"><img src="images/baggage.svg" alt="Иконка" class="w-6 cursor-pointer"></div>';
+                                    echo '</div>';
+                                    echo '</div>';
+
+                                    echo '<div class="flex flex-col items-center w-48">';
+                                    echo '<a class="button-link" href="flight_details.php?flight_id=' . $rowOutbound['flight_id'] . '">Купить за ' . ($rowOutbound['price'] + $rowReturn['price']) . ' ₸</a>';
+                                    echo '</div>';
+
+                                    echo '</div>';
+
+                                    // Вывод информации о обратном рейсе
+                                    echo '<div class="w-40 pr-3">';
+                                    echo '<div class="flex flex-col"><img src="images/' . $rowReturn['airline_id'] . '.png" alt="' . $rowReturn['airline_id'] . '" class="mb-1 w-24 max-w-full"></div>';
+                                    echo '</div>';
+
+                                    echo '<div class="flex flex-row w-40 text-xs">';
+                                    echo 'Прямой';
+                                    echo '</div>';
+
+                                    echo '<div class="flex flex-col items-baseline w-40 mt-0 pl-4">';
+                                    echo '<div class="space-y-1">';
+                                    // Форматируем дату отправления
+                                    $departureTimeReturn = date('d/m H:i', strtotime($rowReturn['departure_time']));
+                                    $arrivalTimeReturn = date('d/m H:i', strtotime($rowReturn['arrival_time']));
+                                    echo '<div><span class="font-bold">' . $departureTimeReturn . '</span> <span class="text-xs">- ' . $arrivalTimeReturn . '</span></div>';
+                                    echo '</div>';
+                                    echo '</div>';
+
+                                    echo '<div class="w-40 mt-0 text-xs">';
+                                    echo '<div class="flex flex-col space-y-1"><span>' . $rowReturn['flight_duration'] . '</span></div>';
+                                    echo '</div>';
+
+                                    echo '</div>';
+                                    echo '</div>';
+                                }
+                            } else {
+                                echo "There are no flights with such dates";
+                            }
+                        }
+
+
                     } else {
                         echo "Please provide valid search criteria.";
                     }
                     ?>
 
 
-
-                    <div class="variant relative flex flex-wrap p-4 pt-6 bg-white rounded-lg shadow">
-                        <div class="absolute top-0 left-0 mt-1"></div>
-                        <div class="w-40 pr-3">
-                            <div class="flex flex-col"><img src="images/DV.png" alt="DV" class="mb-1 w-24 max-w-full"></div>
-                        </div>
-                        <div class="flex flex-row w-40 text-xs">
-                            Прямой
-                        </div>
-                        <div class="flex flex-col items-baseline w-40 mt-0 pl-4">
-                            <div class="space-y-1">
-                                <div><span class="font-bold">16:55</span> <span class="text-xs">- 18:30</span></div>
-                            </div>
-                        </div>
-                        <div class="w-40 mt-0 text-xs">
-                            <div class="flex flex-col space-y-1"><span>
-                            1 ч 35 м
-                        </span></div>
-                        </div>
-                        <div class="flex flex-row items-start justify-end w-auto ml-auto mt-0">
-                            <div class="flex relative flex-row space-x-1">
-                                <div hide-on-click="false" placement="bottom" trigger="mouseenter focus manual" arrow="">
-                                    <div tabindex="0"><img src="images/baggage.svg" alt="Иконка" class="w-6 cursor-pointer"></div>
-                                </div>
-                            </div>
-                            <div class="flex flex-col items-center w-48">
-                                <p class="mt-0 mb-4 text-xs"><span class="mr-1 p-1 bg-orange-300 rounded">
-                                    17 427 ₸
-                                    </span> x 3 месяца
-                                </p> 
-                                <button type="button" class="base-button relative w-full mb-2 p-2 text-sm font-bold">
-                                    Купить за 47 567 ₸
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                
 
                 </div>
             </div>
@@ -600,20 +614,17 @@
     </div>
 
 
-<!--    <script>-->
-<!--        document.querySelector(".form-zakaz").addEventListener("submit", function (event) {-->
-<!--            const departureDate = new Date(document.querySelector("#date").value);-->
-<!--            const returnDate = new Date(document.querySelector("#returnDate").value);-->
-<!---->
-<!--            if (departureDate > returnDate) {-->
-<!--                event.preventDefault(); // Остановить отправку формы-->
-<!--                alert("Дата возврата не может быть раньше даты отправки.");-->
-<!--            } else if (returnDate > departureDate) {-->
-<!--                event.preventDefault(); // Остановить отправку формы-->
-<!--                alert("Дата отправки не может быть позже даты возврата.");-->
-<!--            }-->
-<!--        });-->
-<!--    </script>-->
+    <script>
+        document.querySelector(".form-zakaz").addEventListener("submit", function (event) {
+            const departureDate = new Date(document.querySelector("#date").value);
+            const returnDate = new Date(document.querySelector("#returnDate").value);
+
+            if (departureDate > returnDate) {
+                event.preventDefault(); // Остановить отправку формы
+                alert("Дата возврата не может быть раньше даты отправки.");
+            }
+        });
+    </script>
 
 
 
