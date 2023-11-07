@@ -169,6 +169,38 @@
                                 <input type="date" id="date" name="date" placeholder="14 окт" required
                                        value="<?php echo isset($_POST['date']) ? $_POST['date'] : ''; ?>">
                             </div>
+
+
+
+
+
+
+                            <div class="form-group">
+                                <label for="airline">Выберите авиакомпанию:</label>
+                                <select id="airline" name="airline">
+                                    <option value="">Авиакомпания</option>
+                                    <?php
+                                    $query = "SELECT airline_id, airline_name FROM airlines";
+                                    $result = pg_query($conn, $query);
+                                    if ($result) {
+                                        while ($row = pg_fetch_assoc($result)) {
+                                            $selected = (isset($_POST['airline']) && $_POST['airline'] == $row['airline_id']) ? 'selected' : '';
+                                            echo '<option value="' . $row['airline_id'] . '" ' . $selected . '>' . $row['airline_name'] . '</option>';
+                                        }
+                                    } else {
+                                        echo '<option value="">Нет доступных авиакомпаний</option>';
+                                    }
+                                    pg_close($conn);
+                                    ?>
+                                </select>
+
+                                <label for="returnDate">Выберите дату возврата:</label>
+                                <input type="date" id="returnDate" name="returnDate" value="<?php echo isset($_POST['returnDate']) ? $_POST['returnDate'] : ''; ?>">
+                            </div>
+
+
+
+
                             <button type="submit" class="find">Найти</button>
                         </div>
                     </form>
@@ -199,6 +231,7 @@
                             }
                             pg_close($conn);
                             ?>
+
                         </select>
 
                         <label for="returnDate">Выберите дату возврата:</label>
@@ -568,6 +601,21 @@
     </div>
 
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Найти форму и элементы фильтрации
+            var ticketFilterForm = document.getElementById('ticketFilter');
+            var filterElements = ticketFilterForm.querySelectorAll('select, input');
+
+            // Добавить обработчик события для элементов фильтрации
+            filterElements.forEach(function (element) {
+                element.addEventListener('change', function () {
+                    // Отправить форму автоматически после изменения значения
+                    ticketFilterForm.submit();
+                });
+            });
+        });
+    </script>
 
     
 </body>
