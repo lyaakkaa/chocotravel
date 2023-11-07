@@ -614,3 +614,17 @@ output {
     display: block;
     margin-top: 5px;
 }
+
+.button-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff8a00; /* Цвет фона */
+    color: #fff; /* Цвет текста */
+    text-decoration: none;
+    border-radius: 5px; /* Закругленные углы */
+    font-weight: bold;
+}
+
+.button-link:hover {
+    background-color: #bd6600; /* Цвет фона при наведении курсора */
+}

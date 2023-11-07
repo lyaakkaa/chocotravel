@@ -155,7 +155,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <select id="ticket-type" name="ticket-type" required>
+                                <select id="ticket-type" name="ticket-type">
                                     <option value="" disabled selected>Выберите класс места</option>
                                     <?php foreach ($seatData as $seat): ?>
                                         <option value="<?php echo $seat['seat_id']; ?>"
@@ -166,13 +166,9 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <input type="date" id="date" name="date" placeholder="14 окт" required
+                                <input type="date" id="date" name="date" placeholder="14 окт"
                                        value="<?php echo isset($_POST['date']) ? $_POST['date'] : ''; ?>">
                             </div>
-
-
-
-
 
 
                             <div class="form-group">
@@ -194,8 +190,8 @@
                                     ?>
                                 </select>
 
-                                <label for="returnDate">Выберите дату возврата:</label>
-                                <input type="date" id="returnDate" name="returnDate" value="<?php echo isset($_POST['returnDate']) ? $_POST['returnDate'] : ''; ?>">
+<!--                                <label for="returnDate">Выберите дату возврата:</label>-->
+<!--                                <input type="date" id="returnDate" name="returnDate" value="--><?php //echo isset($_POST['returnDate']) ? $_POST['returnDate'] : ''; ?><!--">-->
                             </div>
 
 
@@ -206,37 +202,37 @@
                     </form>
 
 
-                    <?php
-                    include('db.php');
-                    if (!$conn) {
-                        die("Error: Database connection not established.");
-                    }
-
-                    $query = "SELECT airline_id, airline_name FROM airlines";
-                    $result = pg_query($conn, $query);
-                    ?>
-
-                    <form id="ticketFilter" action="buy.php" method="post">
-                        <label for="airline">Выберите авиакомпанию:</label>
-                        <select id="airline" name="airline">
-                            <option value="">Авиакомпания</option>
-                            <?php
-                            if ($result) {
-                                while ($row = pg_fetch_assoc($result)) {
-                                    $selected = (isset($_POST['airline']) && $_POST['airline'] == $row['airline_id']) ? 'selected' : '';
-                                    echo '<option value="' . $row['airline_id'] . '" ' . $selected . '>' . $row['airline_name'] . '</option>';
-                                }
-                            } else {
-                                echo '<option value="">Нет доступных авиакомпаний</option>';
-                            }
-                            pg_close($conn);
-                            ?>
-
-                        </select>
-
-                        <label for="returnDate">Выберите дату возврата:</label>
-                        <input type="date" id="returnDate" name="returnDate" value="<?php echo isset($_POST['returnDate']) ? $_POST['returnDate'] : ''; ?>">
-                    </form>
+<!--                    --><?php
+//                    include('db.php');
+//                    if (!$conn) {
+//                        die("Error: Database connection not established.");
+//                    }
+//
+//                    $query = "SELECT airline_id, airline_name FROM airlines";
+//                    $result = pg_query($conn, $query);
+//                    ?>
+<!---->
+<!--                    <form id="ticketFilter" action="buy.php" method="post">-->
+<!--                        <label for="airline">Выберите авиакомпанию:</label>-->
+<!--                        <select id="airline" name="airline">-->
+<!--                            <option value="">Авиакомпания</option>-->
+<!--                            --><?php
+//                            if ($result) {
+//                                while ($row = pg_fetch_assoc($result)) {
+//                                    $selected = (isset($_POST['airline']) && $_POST['airline'] == $row['airline_id']) ? 'selected' : '';
+//                                    echo '<option value="' . $row['airline_id'] . '" ' . $selected . '>' . $row['airline_name'] . '</option>';
+//                                }
+//                            } else {
+//                                echo '<option value="">Нет доступных авиакомпаний</option>';
+//                            }
+//                            pg_close($conn);
+//                            ?>
+<!---->
+<!--                        </select>-->
+<!---->
+<!--                        <label for="returnDate">Выберите дату возврата:</label>-->
+<!--                        <input type="date" id="returnDate" name="returnDate" value="--><?php //echo isset($_POST['returnDate']) ? $_POST['returnDate'] : ''; ?><!--">-->
+<!--                    </form>-->
 
 
 
@@ -252,19 +248,20 @@
 
 
                     // Check if form data is submitted
-                    if (isset($_POST['from']) && isset($_POST['to']) && isset($_POST['date'])) {
+                    if (isset($_POST['from']) && isset($_POST['to'])) {
                         // Get user input from the form
                         $fromCityName = $_POST['from'];
                         $toCityName = $_POST['to'];
-                        $date = $_POST['date'];
 
-                        if(($_POST["airline"])){
+                        if(isset($_POST['date'])){
+                            $date = $_POST['date'];
+                        }
+
+                        if(isset($_POST["airline"])){
 //                            echo $_POST["airline"];
                             $airline = $_POST["airline"];
                         }
-                        if($_POST["returnDate"]){
-                            $returnDate = $_POST["returnDate"];
-                        }
+
 
 
 
@@ -272,15 +269,15 @@
                             // Construct the SQL query to fetch flights
                             $query = "SELECT * FROM flights WHERE departure_city_id = $fromCityName AND arrival_city_id = $toCityName";
                             if ($date) {
-                                $query .= " AND departure_time >= '$date'";
+                                $query .= " AND arrival_time >= '$date'";
                             }
                             if ($airline) {
                                 $query .= " AND airline_id = $airline";
                             }
 
-                            if($returnDate){
-                                $query .= " AND arrival_time <= '$returnDate'";
-                            }
+//                            if($returnDate){
+//                                $query .= " AND arrival_time <= '$returnDate'";
+//                            }
 
                             $result = pg_query($conn, $query);
 
@@ -320,7 +317,9 @@
                                     echo '</div>';
 
                                     echo '<div class="flex flex-col items-center w-48">';
-                                    echo '<button type="button" class="base-button relative w-full mb-2 p-2 text-sm font-bold">Купить за ' . $row['price'] . ' ₸</button>';
+
+                                    echo '<a class="button-link" href="flight_details.php?flight_id=' . $row['flight_id'] . '">Купить за ' . $row['price'] . ' ₸</a>';
+
                                     echo '</div>';
 
                                     echo '</div>';
@@ -601,23 +600,24 @@
     </div>
 
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Найти форму и элементы фильтрации
-            var ticketFilterForm = document.getElementById('ticketFilter');
-            var filterElements = ticketFilterForm.querySelectorAll('select, input');
+<!--    <script>-->
+<!--        document.querySelector(".form-zakaz").addEventListener("submit", function (event) {-->
+<!--            const departureDate = new Date(document.querySelector("#date").value);-->
+<!--            const returnDate = new Date(document.querySelector("#returnDate").value);-->
+<!---->
+<!--            if (departureDate > returnDate) {-->
+<!--                event.preventDefault(); // Остановить отправку формы-->
+<!--                alert("Дата возврата не может быть раньше даты отправки.");-->
+<!--            } else if (returnDate > departureDate) {-->
+<!--                event.preventDefault(); // Остановить отправку формы-->
+<!--                alert("Дата отправки не может быть позже даты возврата.");-->
+<!--            }-->
+<!--        });-->
+<!--    </script>-->
 
-            // Добавить обработчик события для элементов фильтрации
-            filterElements.forEach(function (element) {
-                element.addEventListener('change', function () {
-                    // Отправить форму автоматически после изменения значения
-                    ticketFilterForm.submit();
-                });
-            });
-        });
-    </script>
 
-    
+
+
 </body>
 
 </html>
