@@ -284,8 +284,6 @@
                             $resultReturn = pg_query($conn, $queryReturn);
                             $foundPairs = false;
 
-                            // ... (ваш предыдущий код)
-
                             if ($resultOutbound && $resultReturn && pg_num_rows($resultReturn) > 0 && pg_num_rows($resultOutbound) > 0) {
                                 while ($rowOutbound = pg_fetch_assoc($resultOutbound)) {
                                     while ($rowReturn = pg_fetch_assoc($resultReturn)) {

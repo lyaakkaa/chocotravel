@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chocotravel</title>
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="flight_details.css">
 </head>
 
 <body>
@@ -69,8 +73,6 @@
     </div>
 </div>
 
-
-
 <div class="header">
     <div class="main_logo">
         <a href="main.php">
@@ -113,44 +115,67 @@
 <div class="wrapper">
     <div class="center">
         <div class="content">
-            <div class="content-center">
-                <?php
-                // Подключение к базе данных
-                include('db.php');
+            <?php
 
-                // Получите параметр flight_id из URL
-                $flight_id = $_GET['flight_id'];
+            session_start();
+            include('db.php');
 
-                // Проверка, что параметр был передан и является числом
-                if (is_numeric($flight_id)) {
-                    // Используйте этот идентификатор для выборки данных о рейсе из базы данных
-                    $query = "SELECT * FROM flights WHERE flight_id = $flight_id";
-                    $result = pg_query($conn, $query);
+            $flight_id = $_GET['flight_id'];
 
-                    if ($result) {
-                        $row = pg_fetch_assoc($result);
-
-                        // Отобразите информацию о рейсе
-                        echo '<h2>Информация о рейсе</h2>';
-                        echo '<p>Авиакомпания: ' . $row['airline_id'] . '</p>';
-                        echo '<p>Дата отправления: ' . date('d/m H:i', strtotime($row['departure_time'])) . '</p>';
-                        echo '<p>Дата прибытия: ' . date('d/m H:i', strtotime($row['arrival_time'])) . '</p>';
-                        echo '<p>Продолжительность полета: ' . $row['flight_duration'] . '</p>';
-                        echo '<p>Цена: ' . $row['price'] . ' ₸</p>';
-                    } else {
-                        echo "Ошибка при получении данных о рейсе.";
-                    }
-                } else {
-                    echo "Неверный параметр flight_id.";
+            if (is_numeric($flight_id)) {
+                $query = "SELECT * FROM flights WHERE flight_id = $flight_id";
+                if (!isset($conn)) {
+                    die("Error: Database connection not established.");
                 }
-                ?>
+                $result = pg_query($conn, $query);
+                if ($result) {
+                    $row = pg_fetch_assoc($result);
 
-                <a href="index.php">Вернуться на главную страницу</a>
+                    echo '<h2>Информация о рейсе</h2>';
+                    echo '<p>Авиакомпания: ' . $row['airline_id'] . '</p>';
+                    echo '<p>Дата отправления: ' . date('d/m H:i', strtotime($row['departure_time'])) . '</p>';
+                    echo '<p>Дата прибытия: ' . date('d/m H:i', strtotime($row['arrival_time'])) . '</p>';
+                    echo '<p>Цена: ' . $row['price'] . ' ₸</p>';
 
-            </div>
+
+//                    echo '<pre>';
+//                    print_r($_SESSION);
+//                    echo "bal vlalfasd";
+//                    echo '</pre>';
+
+                    echo '<form action="process_form.php" method="post">';
+                    echo '<label class="form-label" for="firstName">Имя:</label>';
+                    echo '<input class="form-input" type="text" name="firstName" required value="' . (isset($_SESSION['user']['name']) ? htmlspecialchars($_SESSION['user']['name']) : '') . '"><br>';
+                    echo '<label class="form-label" for="lastName">Фамилия:</label>';
+                    echo '<input class="form-input" type="text" name="lastName" required value="' . (isset($_SESSION['user']['surname']) ? htmlspecialchars($_SESSION['user']['surname']) : '') . '"><br>';
+                    echo '<label class="form-label" for="birthdate">Дата рождения:</label>';
+                    echo '<input class="form-input" type="date" name="birthdate" required><br>';
+                    echo '<label class="form-label" for="citizenship">Гражданство:</label>';
+                    echo '<input class="form-input" type="text" name="citizenship" required><br>';
+                    echo '<label class="form-label" for="documentNumber">Номер документа:</label>';
+                    echo '<input class="form-input" type="text" name="documentNumber" required><br>';
+                    echo '<label class="form-label" for="expiryDate">Срок действия документа:</label>';
+                    echo '<input class="form-input" type="date" name="expiryDate" required><br>';
+                    echo '<label class="form-label" for="iin">ИИН:</label>';
+                    echo '<input class="form-input" type="text" name="iin" required><br>';
+                    echo '<label class="form-label" for="phoneNumber">Номер телефона:</label>';
+                    echo '<input class="form-input" type="tel" name="phoneNumber" required><br>';
+                    echo '<label class="form-label" for="email">Электронная почта:</label>';
+                    echo '<input class="form-input" type="email" name="email" required value="' . (isset($_SESSION['user']['email']) ? htmlspecialchars($_SESSION['user']['email']) : '') . '"><br>';
+                    echo '<button type="submit" class="form-button">Отправить</button>';
+                    echo '</form>';
+                } else {
+                    echo "Ошибка при получении данных о рейсе.";
+                }
+            } else {
+                echo "Неверный параметр flight_id.";
+            }
+            ?>
+            <a href="main.php">Вернуться на главную страницу</a>
         </div>
     </div>
 </div>
+
 
 <div class="footer">
     <div class="footer-row">

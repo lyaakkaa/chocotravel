@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -10,23 +13,29 @@
     <h1>Login</h1>
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        require('db.php'); // Подключение файла для соединения с базой данных
+        require('db.php');
         if (!isset($conn)) {
             die("Error: Database connection not established.");
         }
         $email = $_POST["email"];
-        $password = $_POST["password"]; // Не хешируйте пароль, так как вам нужно сравнивать его с хранимым хэшем
-
+        $password = $_POST["password"];
         $query = "SELECT * FROM users WHERE email = $1";
         $result = pg_query_params($conn, $query, array($email));
 
         if ($result) {
             $row = pg_fetch_assoc($result);
             if (password_verify($password, $row["password"])) {
-                session_start();
-                $_SESSION['user_id'] = $row['id'];
+                $_SESSION['user'] = [
+                    'name' => $row['name'],
+                    'surname' => $row['surname'],
+                    'email' => $row['email'],
+                ];
+//                echo '<pre>';
+//                print_r($_SESSION);
+//                echo '</pre>';
                 setcookie('user', 'Yes', time() + 3600, '/');
                 header('Location: main.php');
+                exit();
             } else {
                 echo "Неверные учетные данные. Попробуйте снова.";
             }
