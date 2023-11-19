@@ -629,3 +629,14 @@ output {
     background-color: #bd6600; /* Цвет фона при наведении курсора */
 }
 
+.form-zakaz {
+    display: flex;
+    background-color: white;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    margin: 50px;
+    border-radius: 10px;
+    height: 250px;
+}
+

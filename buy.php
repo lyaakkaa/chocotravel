@@ -70,8 +70,6 @@
         </div>
     </div>
 
-
-
     <div class="header">
         <div class="main_logo">
             <a href="main.php">
@@ -170,6 +168,11 @@
                                        value="<?php echo isset($_POST['date']) ? $_POST['date'] : ''; ?>">
                             </div>
 
+                            <div class="form-group">
+                                <label for="oneway">One way:</label>
+                                <input type="checkbox" id="oneway" name="oneway" onclick="toggleReturnDate()" <?php echo isset($_POST['oneway']) && $_POST['oneway'] ? 'checked' : ''; ?>>
+
+                            </div>
 
                             <div class="form-group">
                                 <label for="airline">Выберите авиакомпании:</label>
@@ -188,29 +191,20 @@
                                 pg_close($conn);
                                 ?>
                                  </div>
-                                <label for="returnDate">Выберите дату возврата:</label>
-                                <input type="date" id="returnDate" name="returnDate" value="<?php echo isset($_POST['returnDate']) ? $_POST['returnDate'] : ''; ?>">
+
+                                <label for="returnDate" style="<?php echo isset($_POST['oneway']) && $_POST['oneway'] ? 'display: none;' : ''; ?>">Выберите дату возврата:</label>
+                                <input type="date" id="returnDate" name="returnDate" value="<?php echo isset($_POST['returnDate']) ? $_POST['returnDate'] : ''; ?>" style="<?php echo isset($_POST['oneway']) && $_POST['oneway'] ? 'display: none;' : ''; ?>">
+
+
                             </div>
-
-
-
-
-
-
-
-                            <button type="submit" class="find">Найти</button>
                         </div>
+                        <button type="submit" class="find">Найти</button>
                     </form>
 
 
-
-
-
                     <div class="absolute top-0 left-0 mt-1"></div>
-
                     <?php
                     include('db.php');
-
 
                     if (isset($_POST['from']) && isset($_POST['to'])) {
                         $fromCityName = $_POST['from'];
@@ -228,12 +222,7 @@
                             $returnDate = $_POST["returnDate"];
                         }
 
-
-
-
-
                         if ($fromCityName && $toCityName && $returnDate == null) {
-                            // Construct the SQL query to fetch flights
                             $query = "SELECT * FROM flights WHERE departure_city_id = $fromCityName AND arrival_city_id = $toCityName";
                             if ($date) {
                                 $query .= " AND date_trunc('day', arrival_time) = date_trunc('day', '$date'::date)";
@@ -249,43 +238,31 @@
                             if ($result) {
                                 while ($row = pg_fetch_assoc($result)) {
                                     echo '<div class="variant relative flex flex-wrap p-4 pt-6 bg-white rounded-lg shadow">';
-
-
                                     echo '<div class="w-40 pr-3">';
                                     echo '<div class="flex flex-col"><img src="images/' . $row['airline_id'] . '.png" alt="' . $row['airline_id'] . '" class="mb-1 w-24 max-w-full"></div>';
                                     echo '</div>';
-
                                     echo '<div class="flex flex-row w-40 text-xs">';
                                     echo 'Прямой';
                                     echo '</div>';
-
                                     echo '<div class="flex flex-col items-baseline w-40 mt-0 pl-4">';
                                     echo '<div class="space-y-1">';
-                                    // Форматируем дату отправления
                                     $departure_time = date('d/m H:i', strtotime($row['departure_time']));
                                     $arrival_time = date('d/m H:i', strtotime($row['arrival_time']));
                                     echo '<div><span class="font-bold">' . $departure_time . '</span> <span class="text-xs">- ' . $arrival_time . '</span></div>';
-
                                     echo '</div>';
                                     echo '</div>';
-
                                     echo '<div class="w-40 mt-0 text-xs">';
                                     echo '<div class="flex flex-col space-y-1"><span>' . $row['flight_duration'] . '</span></div>';
                                     echo '</div>';
-
                                     echo '<div class="flex flex-row items-start justify-end w-auto ml-auto mt-0">';
                                     echo '<div class="flex relative flex-row space-x-1">';
                                     echo '<div hide-on-click="false" placement="bottom" trigger="mouseenter focus manual" arrow="">';
                                     echo '<div tabindex="0"><img src="images/baggage.svg" alt="Иконка" class="w-6 cursor-pointer"></div>';
                                     echo '</div>';
                                     echo '</div>';
-
                                     echo '<div class="flex flex-col items-center w-48">';
-
                                     echo '<a class="button-link" href="flight_details.php?flight_id=' . $row['flight_id'] . '">Купить за ' . $row['price'] . ' ₸</a>';
-
                                     echo '</div>';
-
                                     echo '</div>';
                                     echo '</div>';
                                 }
@@ -295,11 +272,8 @@
                         }
 
                         else if ($returnDate !== null) {
-//                            echo $returnDate;
                             $queryOutbound = "SELECT * FROM flights WHERE departure_city_id = $fromCityName AND arrival_city_id = $toCityName  AND date_trunc('day', arrival_time) = date_trunc('day', '$date'::date)";
                             $queryReturn = "SELECT * FROM flights WHERE departure_city_id = $toCityName AND arrival_city_id = $fromCityName AND date_trunc('day', arrival_time) = date_trunc('day', '$returnDate'::date)";
-//                            echo "Query Outbound: $queryOutbound<br>";
-//                            echo "Query Return: $queryReturn<br>";
                             if (!empty($airlines)) {
                                 $airline_conditions = implode(',', $airlines);
                                 $queryOutbound .= " AND airline_id IN ($airline_conditions)";
@@ -310,80 +284,82 @@
                             $resultReturn = pg_query($conn, $queryReturn);
                             $foundPairs = false;
 
-//                            echo "Result Outbound: " . pg_num_rows($resultOutbound) . "<br>";
-//                            echo "Result Return: " . pg_num_rows($resultReturn) . "<br>";
+                            // ... (ваш предыдущий код)
+
                             if ($resultOutbound && $resultReturn && pg_num_rows($resultReturn) > 0 && pg_num_rows($resultOutbound) > 0) {
                                 while ($rowOutbound = pg_fetch_assoc($resultOutbound)) {
-                                    while ($rowReturn = pg_fetch_assoc($resultReturn)){
-                                    echo '<div class="variant relative flex flex-wrap p-4 pt-6 bg-white rounded-lg shadow">';
+                                    while ($rowReturn = pg_fetch_assoc($resultReturn)) {
+                                        echo '<div class="center">';
+                                        echo '<div class="variant relative flex flex-wrap p-4 pt-6 bg-white rounded-lg shadow">';
 
-                                    // Вывод информации о прямом рейсе в одну сторону
-                                    echo '<div class="w-40 pr-3">';
-                                    echo '<div class="flex flex-col"><img src="images/' . $rowOutbound['airline_id'] . '.png" alt="' . $rowOutbound['airline_id'] . '" class="mb-1 w-24 max-w-full"></div>';
-                                    echo '</div>';
+                                        // Вывод информации о вылете
+                                        echo '<div class="w-40 pr-3">';
+                                        echo '<div class="flex flex-col"><img src="images/' . $rowOutbound['airline_id'] . '.png" alt="' . $rowOutbound['airline_id'] . '" class="mb-1 w-24 max-w-full"></div>';
+                                        echo '</div>';
 
-                                    echo '<div class="flex flex-row w-40 text-xs">';
-                                    echo 'Прямой';
-                                    echo '</div>';
+                                        echo '<div class="flex flex-row w-40 text-xs">';
+                                        echo 'Прямой';
+                                        echo '</div>';
 
-                                    echo '<div class="flex flex-col items-baseline w-40 mt-0 pl-4">';
-                                    echo '<div class="space-y-1">';
-                                    // Форматируем дату отправления
-                                    $departureTimeOutbound = date('d/m H:i', strtotime($rowOutbound['departure_time']));
-                                    $arrivalTimeOutbound = date('d/m H:i', strtotime($rowOutbound['arrival_time']));
-                                    echo '<div><span class="font-bold">' . $departureTimeOutbound . '</span> <span class="text-xs">- ' . $arrivalTimeOutbound . '</span></div>';
+                                        echo '<div class="flex flex-col items-baseline w-40 mt-0 pl-4">';
+                                        echo '<div class="space-y-1">';
+                                        $departureTimeOutbound = date('d/m H:i', strtotime($rowOutbound['departure_time']));
+                                        $arrivalTimeOutbound = date('d/m H:i', strtotime($rowOutbound['arrival_time']));
+                                        echo '<div><span class="font-bold">' . $departureTimeOutbound . '</span> <span class="text-xs">- ' . $arrivalTimeOutbound . '</span></div>';
+                                        echo '</div>';
+                                        echo '</div>';
 
-                                    echo '</div>';
-                                    echo '</div>';
+                                        echo '<div class="w-40 mt-0 text-xs">';
+                                        echo '<div class="flex flex-col space-y-1"><span>' . $rowOutbound['flight_duration'] . '</span></div>';
+                                        echo '</div>';
 
-                                    echo '<div class="w-40 mt-0 text-xs">';
-                                    echo '<div class "flex flex-col space-y-1"><span>' . $rowOutbound['flight_duration'] . '</span></div>';
-                                    echo '</div>';
+                                        echo '<div class="flex flex-row items-start justify-end w-auto ml-auto mt-0">';
+                                        echo '<div class="flex relative flex-row space-x-1">';
+                                        echo '<div hide-on-click="false" placement="bottom" trigger="mouseenter focus manual" arrow="">';
+                                        echo '<div tabindex="0"><img src="images/baggage.svg" alt="Иконка" class="w-6 cursor-pointer"></div>';
+                                        echo '</div>';
+                                        echo '</div>';
 
-                                    echo '<div class="flex flex-row items-start justify-end w-auto ml-auto mt-0">';
-                                    echo '<div class="flex relative flex-row space-x-1">';
-                                    echo '<div hide-on-click="false" placement="bottom" trigger="mouseenter focus manual" arrow="">';
-                                    echo '<div tabindex="0"><img src="images/baggage.svg" alt="Иконка" class="w-6 cursor-pointer"></div>';
-                                    echo '</div>';
-                                    echo '</div>';
+                                        echo '<div class="flex flex-col items-center w-48">';
+                                        echo '<a class="button-link" href="flight_details.php?flight_id=' . $rowOutbound['flight_id'] . '">Купить за ' . ($rowOutbound['price'] + $rowReturn['price']) . ' ₸</a>';
+                                        echo '</div>';
 
-                                    echo '<div class="flex flex-col items-center w-48">';
-                                    echo '<a class="button-link" href="flight_details.php?flight_id=' . $rowOutbound['flight_id'] . '">Купить за ' . ($rowOutbound['price'] + $rowReturn['price']) . ' ₸</a>';
-                                    echo '</div>';
+                                        echo '</div>'; // Конец вывода информации о вылете
 
-                                    echo '</div>';
+                                        // Вывод информации о возврате
+                                        echo '<div class="w-40 pr-3">';
+                                        echo '<div class="flex flex-col"><img src="images/' . $rowReturn['airline_id'] . '.png" alt="' . $rowReturn['airline_id'] . '" class="mb-1 w-24 max-w-full"></div>';
+                                        echo '</div>';
 
-                                    // Вывод информации о обратном рейсе
-                                    echo '<div class="w-40 pr-3">';
-                                    echo '<div class="flex flex-col"><img src="images/' . $rowReturn['airline_id'] . '.png" alt="' . $rowReturn['airline_id'] . '" class="mb-1 w-24 max-w-full"></div>';
-                                    echo '</div>';
+                                        echo '<div class="flex flex-row w-40 text-xs">';
+                                        echo 'Прямой';
+                                        echo '</div>';
 
-                                    echo '<div class="flex flex-row w-40 text-xs">';
-                                    echo 'Прямой';
-                                    echo '</div>';
+                                        echo '<div class="flex flex-col items-baseline w-40 mt-0 pl-4">';
+                                        echo '<div class="space-y-1">';
+                                        $departureTimeReturn = date('d/m H:i', strtotime($rowReturn['departure_time']));
+                                        $arrivalTimeReturn = date('d/m H:i', strtotime($rowReturn['arrival_time']));
+                                        echo '<div><span class="font-bold">' . $departureTimeReturn . '</span> <span class="text-xs">- ' . $arrivalTimeReturn . '</span></div>';
+                                        echo '</div>';
+                                        echo '</div>';
 
-                                    echo '<div class="flex flex-col items-baseline w-40 mt-0 pl-4">';
-                                    echo '<div class="space-y-1">';
-                                    // Форматируем дату отправления
-                                    $departureTimeReturn = date('d/m H:i', strtotime($rowReturn['departure_time']));
-                                    $arrivalTimeReturn = date('d/m H:i', strtotime($rowReturn['arrival_time']));
-                                    echo '<div><span class="font-bold">' . $departureTimeReturn . '</span> <span class="text-xs">- ' . $arrivalTimeReturn . '</span></div>';
-                                    echo '</div>';
-                                    echo '</div>';
+                                        echo '<div class="w-40 mt-0 text-xs">';
+                                        echo '<div class="flex flex-col space-y-1"><span>' . $rowReturn['flight_duration'] . '</span></div>';
+                                        echo '</div>';
 
-                                    echo '<div class="w-40 mt-0 text-xs">';
-                                    echo '<div class="flex flex-col space-y-1"><span>' . $rowReturn['flight_duration'] . '</span></div>';
-                                    echo '</div>';
+                                        echo '</div>'; // Конец вывода информации о возврате
 
-                                    echo '</div>';
-                                    echo '</div>';
-                                    $foundPairs = true;
+                                        echo '</div>'; // Конец внешнего контейнера для рейсов
+                                        echo '</div>';
+                                        $foundPairs = true;
+
                                     }
                                     pg_result_seek($resultReturn, 0);
                                 }
                             } else {
                                 echo "There are no flights with such dates";
                             }
+
                         }
 
 
@@ -391,9 +367,6 @@
                         echo "Please provide valid search criteria.";
                     }
                     ?>
-
-
-
                 </div>
             </div>
         </div>
@@ -629,6 +602,27 @@
             }
         });
     </script>
+
+    <script>
+        function toggleReturnDate() {
+            var returnDateLabel = document.querySelector('label[for="returnDate"]');
+            var returnDateInput = document.getElementById('returnDate');
+
+            if (oneway.checked) {
+                returnDateLabel.style.display = 'none';
+                returnDateInput.style.display = 'none';
+            } else {
+                returnDateLabel.style.display = 'block';
+                returnDateInput.style.display = 'block';
+            }
+        }
+
+        // Вызовите функцию при загрузке страницы, чтобы установить начальную видимость
+        document.addEventListener('DOMContentLoaded', function () {
+            toggleReturnDate();
+        });
+    </script>
+
 
 
 
