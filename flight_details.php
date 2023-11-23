@@ -116,38 +116,46 @@ session_start();
     <div class="center">
         <div class="content">
             <?php
-
-            session_start();
             include('db.php');
+            if (!isset($conn)) {
+                die("Error: Database connection not established.");
+            }
+
 
             $flight_id = $_GET['flight_id'];
+            $_SESSION['flight_id'] = $flight_id;
 
-            if (is_numeric($flight_id)) {
-                $query = "SELECT flights.*, airlines.airline_name 
+//                            echo '<pre>';
+//                            print_r($_SESSION);
+//                            echo '</pre>';
+
+            if ($_COOKIE['user'] == 'Yes') {
+                if (is_numeric($flight_id)) {
+                    $query = "SELECT flights.*, airlines.airline_name 
                           FROM flights 
                           JOIN airlines ON flights.airline_id = airlines.airline_id 
                           WHERE flights.flight_id = $flight_id";
 
-                if (!isset($conn)) {
-                    die("Error: Database connection not established.");
-                }
-                $result = pg_query($conn, $query);
-                if ($result) {
-                    $row = pg_fetch_assoc($result);
+                    if (!isset($conn)) {
+                        die("Error: Database connection not established.");
+                    }
+                    $result = pg_query($conn, $query);
+                    if ($result) {
+                        $row = pg_fetch_assoc($result);
 
-                    echo '<h2>Информация о рейсе</h2>';
-                    echo '<table>';
-                    echo '<tr><td>Авиакомпания:</td><td>' . $row['airline_name'] . '</td></tr>';
-                    echo '<tr><td>Дата отправления:</td><td>' . date('d/m H:i', strtotime($row['departure_time'])) . '</td></tr>';
-                    echo '<tr><td>Дата прибытия:</td><td>' . date('d/m H:i', strtotime($row['arrival_time'])) . '</td></tr>';
-                    echo '<tr><td>Цена:</td><td>' . $row['price'] . ' ₸</td></tr>';
-                    echo '</table>';
+                        echo '<h2>Информация о рейсе</h2>';
+                        echo '<table>';
+                        echo '<tr><td>Авиакомпания:</td><td>' . $row['airline_name'] . '</td></tr>';
+                        echo '<tr><td>Дата отправления:</td><td>' . date('d/m H:i', strtotime($row['departure_time'])) . '</td></tr>';
+                        echo '<tr><td>Дата прибытия:</td><td>' . date('d/m H:i', strtotime($row['arrival_time'])) . '</td></tr>';
+                        echo '<tr><td>Цена:</td><td>' . $row['price'] . ' ₸</td></tr>';
+                        echo '</table>';
 
-                    echo '<style>';
-                    echo 'table { border-collapse: collapse; width: 100%; }';
-                    echo 'td, th { border: 1px solid #dddddd; text-align: left; padding: 8px; background-color: #ffffff; }';
-                    echo 'th { background-color: #f2f2f2; }';
-                    echo '</style>';
+                        echo '<style>';
+                        echo 'table { border-collapse: collapse; width: 100%; }';
+                        echo 'td, th { border: 1px solid #dddddd; text-align: left; padding: 8px; background-color: #ffffff; }';
+                        echo 'th { background-color: #f2f2f2; }';
+                        echo '</style>';
 
 
 
@@ -158,36 +166,88 @@ session_start();
 //                    echo '</pre>';
 
 
-                    echo '<form class="container1" style="margin-top: 100px; margin-bottom: 100px" action="card.php" method="post" >';
-                    echo '  <div class="left">';
-                    echo '    <div class="form">';
-                    echo '      <label class="form-label" for="firstName">Имя:</label>';
-                    echo '      <input class="form-input" type="text" name="firstName" required value="' . (isset($_SESSION['user']['name']) ? htmlspecialchars($_SESSION['user']['name']) : '') . '"><br>';
-                    echo '      <label class="form-label" for="lastName">Фамилия:</label>';
-                    echo '      <input class="form-input" type="text" name="lastName" required value="' . (isset($_SESSION['user']['surname']) ? htmlspecialchars($_SESSION['user']['surname']) : '') . '"><br>';
-                    echo '      <label class="form-label" for="birthdate">Дата рождения:</label>';
-                    echo '      <input class="form-input" type="date" name="birthdate" required><br>';
-                    echo '      <label class="form-label" for="documentNumber">Номер документа:</label>';
-                    echo '      <input class="form-input" type="text" name="documentNumber" required><br>';
-                    echo '      <label class="form-label" for="expiryDate">Срок действия документа:</label>';
-                    echo '      <input class="form-input" type="date" name="expiryDate" required><br>';
-                    echo '      <label class="form-label" for="iin">ИИН:</label>';
-                    echo '      <input class="form-input" type="text" name="iin" required><br>';
-                    echo '      <label class="form-label" for="phoneNumber">Номер телефона:</label>';
-                    echo '      <input class="form-input" type="tel" name="phoneNumber" required><br>';
-                    echo '      <label class="form-label" for="email">Электронная почта:</label>';
-                    echo '      <input class="form-input" type="email" name="email" required value="' . (isset($_SESSION['user']['email']) ? htmlspecialchars($_SESSION['user']['email']) : '') . '"><br>';
-                    echo '      <button type="submit" class="form-button">Отправить</button>';
-                    echo '    </div>';
-                    echo '  </div>';
-                    echo '  <div class="right"></div>';
+                        echo '<form class="container1" style="margin-top: 100px; margin-bottom: 100px" method="post" >';
+                        echo '  <div class="left">';
+                        echo '    <div class="form">';
+                        echo '      <label class="form-label" for="firstName">Имя:</label>';
+                        echo '      <input class="form-input" type="text" name="firstName" required value="' . (isset($_SESSION['user']['name']) ? htmlspecialchars($_SESSION['user']['name']) : '') . '"><br>';
+                        echo '      <label class="form-label" for="lastName">Фамилия:</label>';
+                        echo '      <input class="form-input" type="text" name="lastName" required value="' . (isset($_SESSION['user']['surname']) ? htmlspecialchars($_SESSION['user']['surname']) : '') . '"><br>';
+                        echo '      <label class="form-label" for="birthdate">Дата рождения:</label>';
+                        echo '      <input class="form-input" type="date" name="birthdate" required><br>';
+                        echo '      <label class="form-label" for="documentNumber">Номер документа:</label>';
+                        echo '      <input class="form-input" type="text" name="documentNumber" required><br>';
+                        echo '      <label class="form-label" for="expiryDate">Срок действия документа:</label>';
+                        echo '      <input class="form-input" type="date" name="expiryDate" required><br>';
+                        echo '      <label class="form-label" for="iin">ИИН:</label>';
+                        echo '      <input class="form-input" type="text" name="iin" required><br>';
+                        echo '      <label class="form-label" for="phoneNumber">Номер телефона:</label>';
+                        echo '      <input class="form-input" type="tel" name="phoneNumber" required><br>';
+                        echo '      <label class="form-label" for="email">Электронная почта:</label>';
+                        echo '      <input class="form-input" type="email" name="email" required value="' . (isset($_SESSION['user']['email']) ? htmlspecialchars($_SESSION['user']['email']) : '') . '"><br>';
+                        echo '      <button type="submit" class="form-button">Отправить</button>';
+                        echo '    </div>';
+                        echo '  </div>';
+                        echo '  <div class="right"></div>';
 
-                    echo '</form>';
+                        echo '</form>';
+
+                        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                            $user_id = $_SESSION['user']['user_id'];
+                            $first_name = $_POST['firstName'];
+                            $last_name = $_POST['lastName'];
+                            $birthdate = $_POST['birthdate'];
+                            $document_number = $_POST['documentNumber'];
+                            $expiry_date = $_POST['expiryDate'];
+                            $iin = $_POST['iin'];
+                            $phone_number = $_POST['phoneNumber'];
+                            $email = $_POST['email'];
+                            $isPayed = 'f';  // 'f' представляет собой ложь в контексте boolean в PostgreSQL
+
+//                            echo $user_id;
+
+
+                            $query = "INSERT INTO tickets 
+                              (flight_id, user_id, first_name, last_name, birthdate, document_number, expiry_date, iin, phone_number, email, isPayed) 
+                              VALUES 
+                              ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)";
+
+                            $result = pg_query_params($conn, $query, array(
+                                $flight_id,
+                                $user_id,
+                                $first_name,
+                                $last_name,
+                                $birthdate,
+                                $document_number,
+                                $expiry_date,
+                                $iin,
+                                $phone_number,
+                                $email,
+                                $isPayed
+                            ));
+
+                            if (!$result) {
+                                echo "Ошибка: " . pg_last_error($conn);
+                            }
+
+
+                            if ($result) {
+//                                echo "Данные успешно добавлены в базу данных.";
+                                header("Location: card.php");
+                            } else {
+                                echo "Ошибка при добавлении данных в базу данных: " . pg_last_error($conn);
+                            }
+                        }
+                    } else {
+                        echo "Ошибка при получении данных о рейсе.";
+                    }
                 } else {
-                    echo "Ошибка при получении данных о рейсе.";
+                    echo "Неверный параметр flight_id.";
                 }
+                exit();
             } else {
-                echo "Неверный параметр flight_id.";
+                header("Location: login.php");
+                exit();
             }
             ?>
             <a href="main.php">Вернуться на главную страницу</a>
@@ -414,7 +474,4 @@ session_start();
     </div>
 </div>
 </body>
-
-
-
 </html>

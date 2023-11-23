@@ -26,16 +26,20 @@ session_start();
             $row = pg_fetch_assoc($result);
             if (password_verify($password, $row["password"])) {
                 $_SESSION['user'] = [
+                    'user_id' => $row['user_id'],
                     'name' => $row['name'],
                     'surname' => $row['surname'],
                     'email' => $row['email'],
                 ];
-//                echo '<pre>';
-//                print_r($_SESSION);
-//                echo '</pre>';
                 setcookie('user', 'Yes', time() + 3600, '/');
-                header('Location: main.php');
-                exit();
+                if (isset($_SESSION['flight_id'])) {
+                    $flight_id = $_SESSION['flight_id'];
+                    header("Location: flight_details.php?flight_id=$flight_id");
+                    exit();
+                } else {
+                    header("Location: main.php");
+                    exit();
+                }
             } else {
                 echo "Неверные учетные данные. Попробуйте снова.";
             }

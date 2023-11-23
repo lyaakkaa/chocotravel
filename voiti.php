@@ -24,19 +24,27 @@ session_start();
         $password = password_hash($_POST["password"], PASSWORD_BCRYPT); // Hash the password securely
         $created_at = date('Y-m-d H:i:s');
 
-        $query = "INSERT INTO users (name, surname, email, password, created_at) VALUES ($1, $2, $3, $4, NOW())";
+        $query = "INSERT INTO users (name, surname, email, password, created_at) VALUES ($1, $2, $3, $4, NOW()) RETURNING user_id";
         $result = pg_query_params($conn, $query, array($name, $surname, $email, $password));
 
         if ($result) {
+            $row = pg_fetch_assoc($result);
             $_SESSION['user'] = [
+                'user_id' => $row['user_id'], // Сохраняем user_id
                 'name' => $name,
                 'surname' => $surname,
                 'email' => $email,
             ];
             echo "Registration successful!";
             setcookie('user', 'Yes', time() + 3600, '/');
-            header('Location: main.php');
-            exit();
+            if (isset($_SESSION['flight_id'])) {
+                $flight_id = $_SESSION['flight_id'];
+                header("Location: flight_details.php?flight_id=$flight_id");
+                exit();
+            } else {
+                header("Location: main.php");
+                exit();
+            }
         }
 
         pg_close($conn);
