@@ -166,7 +166,7 @@ session_start();
 //                    echo '</pre>';
 
 
-                        echo '<form class="container1" style="margin-top: 100px; margin-bottom: 100px" method="post" >';
+                        echo '<form class="container1" style="margin-top: 100px; margin-bottom: 100px" method="post" action="card.php">';
                         echo '  <div class="left">';
                         echo '    <div class="form">';
                         echo '      <label class="form-label" for="firstName">Имя:</label>';
@@ -192,52 +192,6 @@ session_start();
 
                         echo '</form>';
 
-                        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                            $user_id = $_SESSION['user']['user_id'];
-                            $first_name = $_POST['firstName'];
-                            $last_name = $_POST['lastName'];
-                            $birthdate = $_POST['birthdate'];
-                            $document_number = $_POST['documentNumber'];
-                            $expiry_date = $_POST['expiryDate'];
-                            $iin = $_POST['iin'];
-                            $phone_number = $_POST['phoneNumber'];
-                            $email = $_POST['email'];
-                            $isPayed = 'f';  // 'f' представляет собой ложь в контексте boolean в PostgreSQL
-
-//                            echo $user_id;
-
-
-                            $query = "INSERT INTO tickets 
-                              (flight_id, user_id, first_name, last_name, birthdate, document_number, expiry_date, iin, phone_number, email, isPayed) 
-                              VALUES 
-                              ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)";
-
-                            $result = pg_query_params($conn, $query, array(
-                                $flight_id,
-                                $user_id,
-                                $first_name,
-                                $last_name,
-                                $birthdate,
-                                $document_number,
-                                $expiry_date,
-                                $iin,
-                                $phone_number,
-                                $email,
-                                $isPayed
-                            ));
-
-                            if (!$result) {
-                                echo "Ошибка: " . pg_last_error($conn);
-                            }
-
-
-                            if ($result) {
-//                                echo "Данные успешно добавлены в базу данных.";
-                                header("Location: card.php");
-                            } else {
-                                echo "Ошибка при добавлении данных в базу данных: " . pg_last_error($conn);
-                            }
-                        }
                     } else {
                         echo "Ошибка при получении данных о рейсе.";
                     }
