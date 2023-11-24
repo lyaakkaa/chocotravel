@@ -3,7 +3,6 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +10,6 @@ session_start();
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="card.css">
 </head>
-
 <body>
 
 <div class="chocofamily-logos">
@@ -120,79 +118,79 @@ session_start();
             if (!isset($conn)) {
                 die("Error: Database connection not established.");
             }
-            $flight_id = $_SESSION['flight_id'];
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $user_id = $_SESSION['user']['user_id'];
-                $first_name = $_POST['firstName'];
-                $last_name = $_POST['lastName'];
-                $birthdate = $_POST['birthdate'];
-                $document_number = $_POST['documentNumber'];
-                $expiry_date = $_POST['expiryDate'];
-                $iin = $_POST['iin'];
-                $phone_number = $_POST['phoneNumber'];
-                $email = $_POST['email'];
-                $isPayed = 'f';
+            function luhnCheck($number) {
+                $number = str_replace(' ', '', $number);
+                $number = strrev(preg_replace('/[^\d]/', '', $number));
+                $sum = 0;
 
+                for ($i = 0, $j = strlen($number); $i < $j; $i++) {
+                    $digit = (int)$number[$i];
+                    if ($i % 2 === 1) {
+                        $digit *= 2;
+                        if ($digit > 9) {
+                            $digit -= 9;
+                        }
+                    }
 
-                $query = "INSERT INTO tickets 
-                              (flight_id, user_id, first_name, last_name, birthdate, document_number, expiry_date, iin, phone_number, email, isPayed) 
-                              VALUES 
-                              ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)";
-
-                $result = pg_query_params($conn, $query, array(
-                    $flight_id,
-                    $user_id,
-                    $first_name,
-                    $last_name,
-                    $birthdate,
-                    $document_number,
-                    $expiry_date,
-                    $iin,
-                    $phone_number,
-                    $email,
-                    $isPayed
-                ));
-
-                if (!$result) {
-                    echo "Ошибка: " . pg_last_error($conn);
+                    $sum += $digit;
                 }
 
+                return $sum % 10 === 0;
+            }
 
-                if ($result) {
-//                                echo "Данные успешно добавлены в базу данных.";
-                    header("Location: card.php");
-                    exit();
-                } else {
-                    echo "Ошибка при добавлении данных в базу данных: " . pg_last_error($conn);
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                if (isset($_POST['card-number']) && isset($_POST['name-text']) && isset($_POST['valid-thru-text']) && isset($_POST['cvv-text'])) {
+                    $cardNumber = $_POST['card-number'];
+                    $cardHolder = $_POST['name-text'];
+                    $validThru = $_POST['valid-thru-text'];
+                    $cvv = $_POST['cvv-text'];
+
+
+                    if ($cardNumber) {
+                        $ticketID = $_GET['ticket_id'];
+
+
+                        $updateQuery = "UPDATE tickets SET isPayed = true WHERE ticket_id = $ticketID";
+
+                        $result = pg_query($conn, $updateQuery);
+
+                        if ($result) {
+                            echo "Payment successful. Ticket is now paid.";
+                        } else {
+                            echo "Error updating payment status: " . pg_last_error($conn);
+                        }
+                    } else {
+                        echo "Invalid card data. Please check and try again.";
+                    }
                 }
             }
             ?>
-            <form class="container">
+            <div class="container">
                 <section class="ui">
                     <div class="container-left">
-                        <form id="credit-card">
+                        <form id="credit-card" method="post">
                             <div class="number-container">
-                                <label>Card Number</label>
+                                <label class="llabel">Card Number</label>
                                 <input type="text" name="card-number" id="card-number" maxlength="19" placeholder="1234 5678 9101 1121"
                                        required
                                        onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                             </div>
                             <div class="name-container">
-                                <label>Holder</label>
+                                <label class="llabel">Holder</label>
                                 <input type="text" name="name-text" id="name-text" maxlength="30" placeholder="NOAH JACOB"
                                        required
                                        onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || event.key == ' '">
                             </div>
                             <div class="infos-container">
                                 <div class="expiration-container">
-                                    <label>Valid-thru</label>
+                                    <label class="llabel">Valid-thru</label>
                                     <input type="text" name="valid-thru-text" id="valid-thru-text" maxlength="5" placeholder="02/40"
                                            required
 
                                            onkeypress="return event.charCode >=48 && event.charCode <= 57">
                                 </div>
                                 <div class="cvv-container">
-                                    <label>CVV</label>
+                                    <label class="llabel">CVV</label>
                                     <input type="text" name="cvv-text" id="cvv-text" maxlength="4" placeholder="1234"
                                            required
                                            onkeypress="return event.charCode >=48 && event.charCode <= 57">
@@ -201,6 +199,8 @@ session_start();
                             <button type="submit" class="form-button">Оплатить</button>
                         </form>
                     </div>
+
+
                     <div class="container-right">
                         <div class="card">
                             <div class="intern">
@@ -227,12 +227,11 @@ session_start();
                         </div>
                     </div>
                 </section>
-            </form>
+            </div>
             <a href="main.php">Вернуться на главную страницу</a>
         </div>
     </div>
 </div>
-
 
 <div class="footer">
     <div class="footer-row">
@@ -453,7 +452,4 @@ session_start();
 </div>
 <script src="card.js"></script>
 </body>
-
-
-
 </html>

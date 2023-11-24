@@ -124,6 +124,55 @@ session_start();
 
             $flight_id = $_GET['flight_id'];
             $_SESSION['flight_id'] = $flight_id;
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $user_id = $_SESSION['user']['user_id'];
+                $first_name = $_POST['firstName'];
+                $last_name = $_POST['lastName'];
+                $birthdate = $_POST['birthdate'];
+                $document_number = $_POST['documentNumber'];
+                $expiry_date = $_POST['expiryDate'];
+                $iin = $_POST['iin'];
+                $phone_number = $_POST['phoneNumber'];
+                $email = $_POST['email'];
+                $isPayed = 'f';
+
+
+                $query = "INSERT INTO tickets 
+                  (flight_id, user_id, first_name, last_name, birthdate, document_number, expiry_date, iin, phone_number, email, isPayed) 
+                  VALUES 
+                  ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+                  RETURNING ticket_id";
+
+
+                $result = pg_query_params($conn, $query, array(
+                    $flight_id,
+                    $user_id,
+                    $first_name,
+                    $last_name,
+                    $birthdate,
+                    $document_number,
+                    $expiry_date,
+                    $iin,
+                    $phone_number,
+                    $email,
+                    $isPayed
+                ));
+
+                if (!$result) {
+                    echo "Ошибка: " . pg_last_error($conn);
+                }
+
+
+                if ($result) {
+//                                echo "Данные успешно добавлены в базу данных.";
+                    $row = pg_fetch_assoc($result);
+                    $ticket_id = $row['ticket_id'];
+                    echo '<script>window.location.href = "card.php?ticket_id=' . $ticket_id . '";</script>';
+                    exit();
+                } else {
+                    echo "Ошибка при добавлении данных в базу данных: " . pg_last_error($conn);
+                }
+            }
 
 //                            echo '<pre>';
 //                            print_r($_SESSION);
@@ -166,7 +215,7 @@ session_start();
 //                    echo '</pre>';
 
 
-                        echo '<form class="container1" style="margin-top: 100px; margin-bottom: 100px" method="post" action="card.php">';
+                        echo '<form class="container1" style="margin-top: 100px; margin-bottom: 100px" method="post">';
                         echo '  <div class="left">';
                         echo '    <div class="form">';
                         echo '      <label class="form-label" for="firstName">Имя:</label>';

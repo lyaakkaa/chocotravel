@@ -40,15 +40,6 @@ CREATE TABLE flights (
 );
 
 
-CREATE TABLE tickets (
-    ticket_id serial PRIMARY KEY,
-    user_id INT REFERENCES users(user_id),
-    flight_id INT REFERENCES flights(flight_id),
-    ticket_status VARCHAR(20) NOT NULL,
-    purchase_date TIMESTAMP NOT NULL,
-    seat_id INT REFERENCES seats(seat_id),
-    passenger_status VARCHAR(20)
-);
 
 CREATE TABLE passengers (
     passenger_id serial PRIMARY KEY,
