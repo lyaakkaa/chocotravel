@@ -118,6 +118,36 @@ session_start();
             if (!isset($conn)) {
                 die("Error: Database connection not established.");
             }
+            // Получаем цену билета
+            $ticketID = $_GET['ticket_id'];
+            $return_ticket_id = isset($_GET['return_ticket_id']) ? $_GET['return_ticket_id'] : null;
+
+            $ticketPrice = 0;
+            $returnTicketPrice = 0;
+
+            if ($ticketID) {
+                $query = "SELECT t.flight_id, f.price FROM tickets t
+                  JOIN flights f ON t.flight_id = f.flight_id
+                  WHERE t.ticket_id = $ticketID";
+                $result1 = pg_query($conn, $query);
+                $row = pg_fetch_assoc($result1);
+                $ticketPrice = $row['price'];
+            }
+
+            // Получаем цену обратного билета (если есть)
+            if (!is_null($return_ticket_id)) {
+                $query = "SELECT t.flight_id, f.price FROM tickets t
+                  JOIN flights f ON t.flight_id = f.flight_id
+                  WHERE t.ticket_id = $return_ticket_id";
+                $result2 = pg_query($conn, $query);
+                $row = pg_fetch_assoc($result2);
+                $returnTicketPrice = $row['price'];
+            }
+
+            // Вычисляем общую цену
+            $totalPrice = $ticketPrice + $returnTicketPrice;
+
+
             function luhnCheck($number) {
                 $number = str_replace(' ', '', $number);
                 $number = strrev(preg_replace('/[^\d]/', '', $number));
@@ -147,18 +177,28 @@ session_start();
 
 
                     if ($cardNumber) {
-                        $ticketID = $_GET['ticket_id'];
+                        if (!is_null($return_ticket_id)) {
 
+                            $updateQueryReturn = "UPDATE tickets SET isPayed = true WHERE ticket_id = $return_ticket_id";
+                            $resultReturn = pg_query($conn, $updateQueryReturn);
+
+                            if ($resultReturn) {
+                                echo "Payment successful. Ticket is now paid.";
+                            } else {
+                                echo "Error updating payment status: " . pg_last_error($conn);
+                            }
+                        }
 
                         $updateQuery = "UPDATE tickets SET isPayed = true WHERE ticket_id = $ticketID";
-
                         $result = pg_query($conn, $updateQuery);
 
                         if ($result) {
-                            echo "Payment successful. Ticket is now paid.";
+                            echo '<script>window.location = "main.php";</script>';
+                            exit();
                         } else {
                             echo "Error updating payment status: " . pg_last_error($conn);
                         }
+
                     } else {
                         echo "Invalid card data. Please check and try again.";
                     }
@@ -196,7 +236,8 @@ session_start();
                                            onkeypress="return event.charCode >=48 && event.charCode <= 57">
                                 </div>
                             </div>
-                            <button type="submit" class="form-button">Оплатить</button>
+                            <button type="submit" class="form-button">Оплатить <?php echo $totalPrice; ?></button>
+
                         </form>
                     </div>
 

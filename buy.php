@@ -319,10 +319,11 @@
                                         echo '</div>';
 
                                         echo '<div class="flex flex-col items-center w-48">';
-                                        echo '<a class="button-link" href="flight_details.php?flight_id=' . $rowOutbound['flight_id'] . '">Купить за ' . ($rowOutbound['price'] + $rowReturn['price']) . ' ₸</a>';
+                                        echo '<a class="button-link" href="flight_details.php?flight_id=' . $rowOutbound['flight_id'] . '&return_flight_id=' . $rowReturn['flight_id'] . '">Купить за ' . ($rowOutbound['price'] + $rowReturn['price']) . ' ₸</a>';
+
                                         echo '</div>';
 
-                                        echo '</div>'; // Конец вывода информации о вылете
+                                        echo '</div>';
 
                                         // Вывод информации о возврате
                                         echo '<div class="w-40 pr-3">';
@@ -600,7 +601,6 @@
             }
         });
     </script>
-
     <script>
         function toggleReturnDate() {
             var returnDateLabel = document.querySelector('label[for="returnDate"]');

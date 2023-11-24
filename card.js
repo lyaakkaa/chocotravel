@@ -62,3 +62,35 @@ cardCVV.addEventListener("keyup", (e) => {
     }
 })
 
+
+
+
+
+
+// Устанавливаем начальное время при загрузке страницы
+var startTime = new Date();
+
+// Устанавливаем таймер для проверки времени каждые 60 секунд (60000 миллисекунд)
+var timer = setInterval(function() {
+    // Текущее время
+    var currentTime = new Date();
+
+    // Разница во времени (в миллисекундах)
+    var timeElapsed = currentTime - startTime;
+
+    // Если прошло более 1 минуты (60 000 миллисекунд)
+    if (timeElapsed > 30000) {
+        // Сбрасываем данные в форме
+        document.getElementById('card-number').value = '';
+        document.getElementById('name-text').value = '';
+        document.getElementById('valid-thru-text').value = '';
+        document.getElementById('cvv-text').value = '';
+
+        // Останавливаем таймер
+        clearInterval(timer);
+
+        // Выводим сообщение
+        alert('Прошло более 1 минуты. Ваши данные были сброшены.');
+    }
+}, 60000); // Таймер проверяет каждые 60 секунд
+
