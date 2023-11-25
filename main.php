@@ -123,6 +123,13 @@
                         die("Error: Database connection not established.");
                     }
 
+                    $deleteQuery = "DELETE FROM tickets WHERE isPayed = false";
+                    $deleteResult = pg_query($conn, $deleteQuery);
+
+                    if (!$deleteResult) {
+                        die("Error deleting unpaid tickets: " . pg_last_error($conn));
+                    }
+
                     // Запрос для получения списка городов из таблицы "cities"
                     $query = "SELECT city_name, city_id FROM cities";
                     $querySeat = "SELECT seat_class, seat_id FROM seats";
