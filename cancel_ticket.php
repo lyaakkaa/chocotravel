@@ -108,17 +108,88 @@
         <div class="center">
             <div class="content1">
                 <div class="content-center">
-                    <div class="container-flex">
-                        
-                        <?php
-                        require('db.php');
-                        if (!isset($conn)) {
-                            die("Error: Database connection not established.");
+                    <?php
+                    require('db.php');
+
+                    if (!isset($conn)) {
+                        die("Error: Database connection not established.");
+                    }
+
+                    if (isset($_GET['ticket_id'])) {
+                        $ticket_id = $_GET['ticket_id'];
+
+                        $query = "SELECT flights.airline_id, flights.departure_time, flights.arrival_time, flights.price, airlines.airline_name
+                          FROM tickets
+                          JOIN flights ON tickets.flight_id = flights.flight_id
+                          JOIN airlines ON flights.airline_id = airlines.airline_id
+                          WHERE tickets.ticket_id = $ticket_id";
+
+                        $result = pg_query($conn, $query);
+
+                        if ($result) {
+                            $ticket = pg_fetch_assoc($result);
+
+                            echo "<table border='1'>";
+                            echo "<tr><td>Авиакомпания:</td><td>" . $ticket['airline_name'] . "</td></tr>";
+                            echo "<tr><td>Дата отправления:</td><td>" . $ticket['departure_time'] . "</td></tr>";
+                            echo "<tr><td>Дата прибытия:</td><td>" . $ticket['arrival_time'] . "</td></tr>";
+                            echo "<tr><td>Цена:</td><td>" . $ticket['price'] . " ₸</td></tr>";
+                            echo "</table>";
+
+                            echo '<style>';
+                            echo 'table { border-collapse: collapse; width: 100%; }';
+                            echo 'td, th { border: 1px solid #dddddd; text-align: left; padding: 8px; background-color: #ffffff; }';
+                            echo 'th { background-color: #f2f2f2; }';
+                            echo '</style>';
+
+                            $departure_timestamp = strtotime($ticket['departure_time']);
+                            $current_timestamp = time();
+                            $time_difference_hours = ($departure_timestamp - $current_timestamp) / 3600;
+
+                            if ($time_difference_hours > 3) {
+                                // Assuming $ticket_id is defined before this point
+                                echo "<form id='deleteForm' method='post'>";
+                                echo "<input type='hidden' name='ticket_id' value='$ticket_id'>";
+                                echo "<button type='button' onclick='confirmDelete()'>Удалить билет</button>";
+                                echo "</form>";
+
+                                echo "<script>
+                                    function confirmDelete() {
+                                        var result = confirm('Уверены ли вы отменить билет?');
+                                        if (result) {
+                                            document.getElementById('deleteForm').submit();
+                                        }
+                                    }
+                                </script>";
+                            } else {
+                                // Нельзя отменить билет
+                                echo "<p>Нельзя отменить билет. Слишком близкое время отправления.</p>";
+                            }
+
+                            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                                // Check if the form was submitted
+                                $ticket_id_to_delete = $_POST['ticket_id'];
+                                $delete_query = "DELETE FROM tickets WHERE ticket_id = $ticket_id_to_delete";
+                                $delete_result = pg_query($conn, $delete_query);
+
+                                if ($delete_result) {
+                                    echo "<p>Билет успешно отменен.</p>";
+                                    echo "<script>window.location.href = 'main.php';</script>";
+                                } else {
+                                    echo "Error: " . pg_last_error($conn);
+                                }
+                            }
+
+                        } else {
+                            echo "Error: " . pg_last_error($conn);
                         }
+                    } else {
+                        echo "Error: Ticket ID not provided.";
+                    }
 
-                        ?>
+                    pg_close($conn);
+                    ?>
 
-                    </div>
                 </div>
             </div>
         </div>
@@ -341,4 +412,14 @@
             </div>
         </div>
     </div>
+    <script>
+        function confirmDelete() {
+            var confirmDelete = confirm("Уверены, что хотите отменить билет?");
+
+            if (confirmDelete) {
+                document.getElementById("deleteForm").submit();
+            }
+        }
+    </script>
 </body>
+</html>
