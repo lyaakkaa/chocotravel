@@ -193,7 +193,7 @@ session_start();
                         $result = pg_query($conn, $updateQuery);
 
                         if ($result) {
-                            echo '<script>window.location = "main.php";</script>';
+                            echo '<script>window.location = "success.php";</script>';
                             exit();
                         } else {
                             echo "Error updating payment status: " . pg_last_error($conn);
