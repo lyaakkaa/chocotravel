@@ -54,7 +54,7 @@ session_start();
                     if ($_COOKIE['user'] == 'Yes'):
 //                            echo 'Current user cookie value: ' . $_COOKIE['user'];
                         ?>
-                        <a id="cab_link" href="/cabinet" title="" class="login__link">
+                        <a id="cab_link" href="profile.php" title="" class="login__link">
                             Личный кабинет
                         </a>
 
