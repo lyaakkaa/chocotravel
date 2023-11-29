@@ -352,12 +352,15 @@ html,body,#app {
     color: rgba(255,255,255,0.6);
 }
 
+
+
+
 .jfk{
     position: absolute;
     top: 10px;
     left: 20px;
     font-family: Arial;
-    font-size: 38px;
+    font-size: 24px;
     color: #222;
 }
 
@@ -366,14 +369,15 @@ html,body,#app {
     top: 10px;
     left: 180px;
     font-family: Arial;
-    font-size: 38px;
+    font-size: 24px;
     color: #222;
 }
 
 .plane{
     position: absolute;
-    left: 105px;
-    top: 0px;
+    left: 125px;
+    top: 10px;
+
 }
 
 .sub-content{
@@ -552,20 +556,20 @@ html,body,#app {
 }
 
 .jfkslip{
-    font-size: 30px;
+    font-size: 20px;
     top: 20px;
     left: 410px;
 }
 
 .sfoslip{
-    font-size: 30px;
+    font-size: 20px;
     top: 20px;
     left: 530px;
 }
 
 .planeslip{
-    top: 10px;
-    left: 475px;
+    top: 15px;
+    left: 490px;
 }
 
 .airlineslip{
