@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +14,6 @@
 </head>
 
 <body>
-
     <div class="chocofamily-logos">
         <div id="choco-projects" class="choco-projects">
             <ul class="choco-projects__list">
@@ -69,7 +71,6 @@
             </div>
         </div>
     </div>
-
     <div class="header">
         <div class="main_logo">
             <a href="main.php">
@@ -114,13 +115,13 @@
             <div class="content">
                 <div class="content-center">
                     <?php
-                    include('db.php'); // Подключение к базе данных
+                    include('db.php');
                     if (!isset($conn)) {
                         die("Error: Database connection not established.");
                     }
 
                     $query = "SELECT city_name, city_id FROM cities";
-                    $querySeat = "SELECT class_id, class_name FROM ticket_classes";
+                    $querySeat = "SELECT class_id, class_name, multiplier FROM ticket_classes";
                     $result = pg_query($conn, $query);
                     $resultSeat = pg_query($conn, $querySeat);
                     $seatData = pg_fetch_all($resultSeat);
@@ -151,17 +152,28 @@
                                     <?php endforeach; ?>
                                 </select>
                             </div>
+
+
+
                             <div class="form-group">
                                 <select id="ticket-type" name="ticket-type">
                                     <option value="" disabled selected>Выберите класс места</option>
                                     <?php foreach ($seatData as $seat): ?>
-                                        <option value="<?php echo $seat['seat_id']; ?>"
-                                            <?php if (isset($_POST['ticket-type']) && $_POST['ticket-type'] == $seat['class_id']) echo 'selected'; ?>>
+                                        <option value="<?php echo $seat['class_id']; ?>"
+                                            <?php
+                                            $selectedClass = (isset($_POST['ticket-type']) ? $_POST['ticket-type'] : '');
+                                            if ($selectedClass == $seat['class_id']) {
+                                                echo 'selected';
+                                            }
+                                            ?>>
                                             <?php echo $seat['class_name']; ?>
                                         </option>
                                     <?php endforeach; ?>
+
                                 </select>
                             </div>
+
+
                             <div class="form-group">
                                 <input type="date" id="date" name="date" placeholder="14 окт"
                                        value="<?php echo isset($_POST['date']) ? $_POST['date'] : ''; ?>">
@@ -221,6 +233,20 @@
                             $returnDate = $_POST["returnDate"];
                         }
 
+                        if (isset($_POST['ticket-type'])) {
+//                            print_r($_SESSION);
+                            $_SESSION['ticket_type'] = $_POST['ticket-type'];
+                            $selectedTicketType = $_POST['ticket-type'];
+                            $queryMultiplier = "SELECT multiplier FROM ticket_classes WHERE class_id = $selectedTicketType";
+                            $resultMultiplier = pg_query($conn, $queryMultiplier);
+
+                            if ($resultMultiplier && $rowMultiplier = pg_fetch_assoc($resultMultiplier)) {
+                                $ticket_type_multiplier = $rowMultiplier['multiplier'];
+                            } else {
+                                $ticket_type_multiplier = 1;
+                            }
+                        }
+
                         if ($fromCityName && $toCityName && $returnDate == null) {
                             $query = "SELECT * FROM flights WHERE departure_city_id = $fromCityName AND arrival_city_id = $toCityName";
                             if ($date) {
@@ -260,7 +286,9 @@
                                     echo '</div>';
                                     echo '</div>';
                                     echo '<div class="flex flex-col items-center w-48">';
-                                    echo '<a class="button-link" href="flight_details.php?flight_id=' . $row['flight_id'] . '">Купить за ' . $row['price'] . ' ₸</a>';
+                                    $total_price = $row['price'] * $ticket_type_multiplier;
+                                    $_SESSION['total_price'] = $total_price;
+                                    echo '<a class="button-link" href="flight_details.php?flight_id=' . $row['flight_id'] . '">Купить за ' . $total_price .' ₸</a>';
                                     echo '</div>';
                                     echo '</div>';
                                     echo '</div>';
@@ -318,7 +346,9 @@
                                         echo '</div>';
 
                                         echo '<div class="flex flex-col items-center w-48">';
-                                        echo '<a class="button-link" href="flight_details.php?flight_id=' . $rowOutbound['flight_id'] . '&return_flight_id=' . $rowReturn['flight_id'] . '">Купить за ' . ($rowOutbound['price'] + $rowReturn['price']) . ' ₸</a>';
+                                        $total_price = ($rowOutbound['price'] + $rowReturn['price']) * $ticket_type_multiplier;
+                                        $_SESSION['total_price'] = $total_price;
+                                        echo '<a class="button-link" href="flight_details.php?flight_id=' . $rowOutbound['flight_id'] . '&return_flight_id=' . $rowReturn['flight_id'] . '">Купить за ' . $total_price . ' ₸</a>';
 
                                         echo '</div>';
 
@@ -359,8 +389,6 @@
                             }
 
                         }
-
-
                     } else {
                         echo "Please provide valid search criteria.";
                     }
@@ -369,7 +397,6 @@
             </div>
         </div>
     </div>
-
     <div class="footer">
         <div class="footer-row">
             <div class="footer-col">
@@ -587,8 +614,6 @@
             </div>
         </div>
     </div>
-
-
     <script>
         document.querySelector(".form-zakaz").addEventListener("submit", function (event) {
             const departureDate = new Date(document.querySelector("#date").value);
@@ -620,10 +645,5 @@
         });
     </script>
 
-
-
-
-
 </body>
-
 </html>

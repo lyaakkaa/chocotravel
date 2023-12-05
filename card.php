@@ -125,6 +125,8 @@ session_start();
             $ticketPrice = 0;
             $returnTicketPrice = 0;
 
+            $discount = $_SESSION['discount'];
+
             if ($ticketID) {
                 $query = "SELECT t.flight_id, f.price FROM tickets t
                   JOIN flights f ON t.flight_id = f.flight_id
@@ -145,7 +147,7 @@ session_start();
             }
 
             // Вычисляем общую цену
-            $totalPrice = $ticketPrice + $returnTicketPrice;
+            $totalPrice = ($ticketPrice + $returnTicketPrice) * (1 - $discount);
 
 
             function luhnCheck($number) {

@@ -68,9 +68,6 @@
 
         </div>
     </div>
-
-
-
     <div class="header">
         <div class="main_logo">
             <a href="main.php">

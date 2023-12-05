@@ -1,37 +1,6 @@
-
-/*.form-label {*/
-/*    display: block;*/
-/*    margin-bottom: 8px;*/
-/*    font-weight: bold;*/
-/*}*/
-
-/*.form-input {*/
-/*    width: 100%;*/
-/*    padding: 8px;*/
-/*    margin-bottom: 16px;*/
-/*    box-sizing: border-box;*/
-/*}*/
-
-/*.form-button {*/
-/*    background-color: #4caf50;*/
-/*    color: #fff;*/
-/*    padding: 10px;*/
-/*    border: none;*/
-/*    border-radius: 4px;*/
-/*    cursor: pointer;*/
-/*}*/
-
-/*.form-button:hover {*/
-/*    background-color: #45a049;*/
-/*}*/
-
-
-
-
-
 .container1 {
     display: flex;
-    height: 100vh;
+    height: 900px;
 }
 
 .left {
@@ -93,7 +62,7 @@
     border: 0;
     background-color: #ff8a00;
     border-radius: 3px;
-    margin-top: 10px;
+    margin-top: 35px;
     margin-left: 35px;
     color: #fff;
     letter-spacing: 1px;
@@ -161,3 +130,12 @@
 
 
 
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Добавлен стиль для выравнивания вправо */
+}
+
+.checkbox-group input {
+    margin-left: 5px; /* Расстояние между чекбоксом и текстом */
+}

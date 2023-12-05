@@ -3,7 +3,6 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,9 +10,7 @@ session_start();
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="flight_details.css">
 </head>
-
 <body>
-
 <div class="chocofamily-logos">
     <div id="choco-projects" class="choco-projects">
         <ul class="choco-projects__list">
@@ -72,7 +69,6 @@ session_start();
 
     </div>
 </div>
-
 <div class="header">
     <div class="main_logo">
         <a href="main.php">
@@ -111,7 +107,6 @@ session_start();
         </a>
     </div>
 </div>
-
 <div class="wrapper">
     <div class="center">
         <div class="content">
@@ -125,6 +120,13 @@ session_start();
             $return_flight_id = isset($_GET['return_flight_id']) ? $_GET['return_flight_id'] : null;
             $_SESSION['flight_id'] = $flight_id;
             $_SESSION['return_flight_id'] = $return_flight_id;
+            $class_id = $_SESSION['ticket_type'];
+            $total_price = $_SESSION['total_price'];
+//            print_r($_SESSION);
+
+            $querySeat = "SELECT class_name, class_id FROM ticket_classes";
+            $resultSeat = pg_query($conn, $querySeat);
+            $seatData = pg_fetch_all($resultSeat);
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $user_id = $_SESSION['user']['user_id'];
@@ -132,18 +134,40 @@ session_start();
                 $last_name = $_POST['lastName'];
                 $birthdate = $_POST['birthdate'];
                 $document_number = $_POST['documentNumber'];
-                $expiry_date = $_POST['expiryDate'];
                 $iin = $_POST['iin'];
                 $phone_number = $_POST['phoneNumber'];
                 $email = $_POST['email'];
                 $isPayed = 'f';
 
+
+                $isChild = in_array('child', $_POST['passengerType']) ? 't' : 'f';
+                $isStudent = in_array('student', $_POST['passengerType']) ? 't' : 'f';
+                $isPensioner = in_array('pensioner', $_POST['passengerType']) ? 't' : 'f';
+                $isDisabled = in_array('disabled', $_POST['passengerType']) ? 't' : 'f';
+
+                $discount = 0;
+                if ($isChild === 't') {
+                    $discount += 0.2;
+                }
+                if ($isStudent === 't') {
+                    $discount += 0.15;
+                }
+                if ($isPensioner === 't') {
+                    $discount += 0.1;
+                }
+                if ($isDisabled === 't') {
+                    $discount += 0.25;
+                }
+
+                $_SESSION['discount']  =  $discount;
+
                 if($return_flight_id != null){
                     $query = "INSERT INTO tickets 
-                      (flight_id, user_id, first_name, last_name, birthdate, document_number, expiry_date, iin, phone_number, email, isPayed) 
-                      VALUES 
-                      ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
-                      RETURNING ticket_id";
+                          (flight_id, user_id, first_name, last_name, birthdate, document_number, iin, phone_number, email, isPayed, 
+                           isChild, isStudent, isPensioner, isDisabled, class_id) 
+                          VALUES 
+                          ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
+                          RETURNING ticket_id";
 
                     $result = pg_query_params($conn, $query, array(
                         $flight_id,
@@ -152,11 +176,15 @@ session_start();
                         $last_name,
                         $birthdate,
                         $document_number,
-                        $expiry_date,
                         $iin,
                         $phone_number,
                         $email,
-                        $isPayed
+                        $isPayed,
+                        $isChild,
+                        $isStudent,
+                        $isPensioner,
+                        $isDisabled,
+                        $class_id
                     ));
 
                     if (!$result) {
@@ -168,11 +196,12 @@ session_start();
                         $row = pg_fetch_assoc($result);
                         $ticket_id = $row['ticket_id'];
 
-                        $query_return = "INSERT INTO tickets 
-                          (flight_id, user_id, first_name, last_name, birthdate, document_number, expiry_date, iin, phone_number, email, isPayed) 
-                          VALUES 
-                          ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
-                          RETURNING ticket_id";
+                        $query_return  = "INSERT INTO tickets 
+                              (flight_id, user_id, first_name, last_name, birthdate, document_number, iin, phone_number, email, isPayed, 
+                               isChild, isStudent, isPensioner, isDisabled, class_id) 
+                              VALUES 
+                              ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
+                              RETURNING ticket_id";
 
                         $result_return = pg_query_params($conn, $query_return, array(
                             $return_flight_id,
@@ -181,11 +210,15 @@ session_start();
                             $last_name,
                             $birthdate,
                             $document_number,
-                            $expiry_date,
                             $iin,
                             $phone_number,
                             $email,
-                            $isPayed
+                            $isPayed,
+                            $isChild,
+                            $isStudent,
+                            $isPensioner,
+                            $isDisabled,
+                            $class_id
                         ));
 
                         if (!$result_return) {
@@ -205,9 +238,10 @@ session_start();
                 }
                 else{
                     $query = "INSERT INTO tickets 
-                      (flight_id, user_id, first_name, last_name, birthdate, document_number, expiry_date, iin, phone_number, email, isPayed) 
+                      (flight_id, user_id, first_name, last_name, birthdate, document_number, iin, phone_number, email, isPayed, 
+                       isChild, isStudent, isPensioner, isDisabled, class_id) 
                       VALUES 
-                      ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+                      ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
                       RETURNING ticket_id";
 
                     $result = pg_query_params($conn, $query, array(
@@ -217,11 +251,15 @@ session_start();
                         $last_name,
                         $birthdate,
                         $document_number,
-                        $expiry_date,
                         $iin,
                         $phone_number,
                         $email,
-                        $isPayed
+                        $isPayed,
+                        $isChild,
+                        $isStudent,
+                        $isPensioner,
+                        $isDisabled,
+                        $class_id
                     ));
 
                     if (!$result) {
@@ -277,7 +315,7 @@ session_start();
                         echo '<tr><td>Авиакомпания:</td><td>' . $row['airline_name'] . '</td></tr>';
                         echo '<tr><td>Дата отправления:</td><td>' . date('d/m H:i', strtotime($row['departure_time'])) . '</td></tr>';
                         echo '<tr><td>Дата прибытия:</td><td>' . date('d/m H:i', strtotime($row['arrival_time'])) . '</td></tr>';
-                        echo '<tr><td>Цена:</td><td>' . $row['price'] . ' ₸</td></tr>';
+                        echo '<tr><td>Цена:</td><td>' . $total_price . ' ₸</td></tr>';
                         echo '</table>';
 
                         if(!is_null($return_flight_id)){
@@ -297,16 +335,6 @@ session_start();
                         echo '</style>';
 
 
-
-
-
-
-//                    echo '<pre>';
-//                    print_r($_SESSION);
-//                    echo "bal vlalfasd";
-//                    echo '</pre>';
-
-
                         echo '<form class="container1" style="margin-top: 100px; margin-bottom: 100px" method="post">';
                         echo '  <div class="left">';
                         echo '    <div class="form">';
@@ -318,15 +346,22 @@ session_start();
                         echo '      <input class="form-input" type="date" name="birthdate" required><br>';
                         echo '      <label class="form-label" for="documentNumber">Номер документа:</label>';
                         echo '      <input class="form-input" type="text" name="documentNumber" required><br>';
-                        echo '      <label class="form-label" for="expiryDate">Срок действия документа:</label>';
-                        echo '      <input class="form-input" type="date" name="expiryDate" required><br>';
                         echo '      <label class="form-label" for="iin">ИИН:</label>';
                         echo '      <input class="form-input" type="text" name="iin" required><br>';
                         echo '      <label class="form-label" for="phoneNumber">Номер телефона:</label>';
                         echo '      <input class="form-input" type="tel" name="phoneNumber" required><br>';
                         echo '      <label class="form-label" for="email">Электронная почта:</label>';
                         echo '      <input class="form-input" type="email" name="email" required value="' . (isset($_SESSION['user']['email']) ? htmlspecialchars($_SESSION['user']['email']) : '') . '"><br>';
-                        echo '      <button type="submit" class="form-button">Отправить</button>';
+                        echo '<label class="form-label-1">Типы пассажира:</label><br>';
+                        echo '<div class="checkbox-group">';
+                        echo '<label><input type="checkbox" name="passengerType[]" value="child">Ребенок</label><br>';
+                        echo '<label><input type="checkbox" name="passengerType[]" value="student">Студент</label><br>';
+                        echo '<label><input type="checkbox" name="passengerType[]" value="pensioner">Пенсионер</label><br>';
+                        echo '<label><input type="checkbox" name="passengerType[]" value="disabled">Инвалид</label><br>';
+                        echo '</div>';
+
+
+                        echo '      <button type="submit" class="form-button" >Отправить</button>';
                         echo '    </div>';
                         echo '  </div>';
                         echo '  <div class="right"></div>';
@@ -349,8 +384,6 @@ session_start();
         </div>
     </div>
 </div>
-
-
 <div class="footer">
     <div class="footer-row">
         <div class="footer-col">
