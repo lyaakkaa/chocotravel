@@ -118,36 +118,41 @@ session_start();
             if (!isset($conn)) {
                 die("Error: Database connection not established.");
             }
-            // Получаем цену билета
-            $ticketID = $_GET['ticket_id'];
-            $return_ticket_id = isset($_GET['return_ticket_id']) ? $_GET['return_ticket_id'] : null;
 
-            $ticketPrice = 0;
-            $returnTicketPrice = 0;
+            if (isset($_SESSION['user']['user_id'])) {
+                $userID = $_SESSION['user']['user_id'];
+                $getUserBonusQuery = "SELECT bonus FROM users WHERE user_id = $userID";
+                $getUserBonusResult = pg_query($conn, $getUserBonusQuery);
 
-            $discount = $_SESSION['discount'];
+                $ticketID = $_GET['ticket_id'];
+                $return_ticket_id = isset($_GET['return_ticket_id']) ? $_GET['return_ticket_id'] : null;
 
-            if ($ticketID) {
-                $query = "SELECT t.flight_id, f.price FROM tickets t
-                  JOIN flights f ON t.flight_id = f.flight_id
-                  WHERE t.ticket_id = $ticketID";
-                $result1 = pg_query($conn, $query);
-                $row = pg_fetch_assoc($result1);
-                $ticketPrice = $row['price'];
+                $discount = $_SESSION['discount'];
+
+                $total_price = $_SESSION['total_price'];
+
+                $totalPrice = $total_price * (1 - $discount);
+
+                if ($getUserBonusResult) {
+                    $userBonus = pg_fetch_assoc($getUserBonusResult)['bonus'];
+                    if ($userBonus > 0) {
+                        // Subtract user's bonuses from the total price
+                        $totalPrice -= $userBonus;
+
+                        // Set user's bonus to zero
+                        $updateUserBonusQuery = "UPDATE users SET bonus = 0 WHERE user_id = $userID";
+                        $updateUserBonusResult = pg_query($conn, $updateUserBonusQuery);
+
+                        if (!$updateUserBonusResult) {
+                            die("Error updating user bonus: " . pg_last_error($conn));
+                        }
+
+                        $_SESSION['total_price'] = $totalPrice;
+                        echo '<div class="bonus-message">У вас есть бонусы! Теперь цена с учетом бонусов: ' . $totalPrice . ' тенге.</div>';
+                    }
+                }
             }
 
-            // Получаем цену обратного билета (если есть)
-            if (!is_null($return_ticket_id)) {
-                $query = "SELECT t.flight_id, f.price FROM tickets t
-                  JOIN flights f ON t.flight_id = f.flight_id
-                  WHERE t.ticket_id = $return_ticket_id";
-                $result2 = pg_query($conn, $query);
-                $row = pg_fetch_assoc($result2);
-                $returnTicketPrice = $row['price'];
-            }
-
-            // Вычисляем общую цену
-            $totalPrice = ($ticketPrice + $returnTicketPrice) * (1 - $discount);
 
 
             function luhnCheck($number) {

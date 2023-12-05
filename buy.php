@@ -120,6 +120,7 @@ session_start();
                         die("Error: Database connection not established.");
                     }
 
+
                     $query = "SELECT city_name, city_id FROM cities";
                     $querySeat = "SELECT class_id, class_name, multiplier FROM ticket_classes";
                     $result = pg_query($conn, $query);

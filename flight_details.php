@@ -310,21 +310,33 @@ session_start();
                             $rowReturn = pg_fetch_assoc($resultReturn);
                         }
 
-                        echo '<h2>Информация о рейсе</h2>';
-                        echo '<table>';
-                        echo '<tr><td>Авиакомпания:</td><td>' . $row['airline_name'] . '</td></tr>';
-                        echo '<tr><td>Дата отправления:</td><td>' . date('d/m H:i', strtotime($row['departure_time'])) . '</td></tr>';
-                        echo '<tr><td>Дата прибытия:</td><td>' . date('d/m H:i', strtotime($row['arrival_time'])) . '</td></tr>';
-                        echo '<tr><td>Цена:</td><td>' . $total_price . ' ₸</td></tr>';
-                        echo '</table>';
+                        if(is_null($return_flight_id)){
+                            echo '<h2>Информация о рейсе</h2>';
+                            echo '<table>';
+                            echo '<tr><td>Авиакомпания:</td><td>' . $row['airline_name'] . '</td></tr>';
+                            echo '<tr><td>Дата отправления:</td><td>' . date('d/m H:i', strtotime($row['departure_time'])) . '</td></tr>';
+                            echo '<tr><td>Дата прибытия:</td><td>' . date('d/m H:i', strtotime($row['arrival_time'])) . '</td></tr>';
+                            echo '<tr><td>Цена:</td><td>' . $total_price . ' ₸</td></tr>';
+                            echo '</table>';
+                        }
+
 
                         if(!is_null($return_flight_id)){
+                            $multi = $total_price / ($row['price'] + $rowReturn['price']);
+                            echo '<h2>Информация о рейсе</h2>';
+                            echo '<table>';
+                            echo '<tr><td>Авиакомпания:</td><td>' . $row['airline_name'] . '</td></tr>';
+                            echo '<tr><td>Дата отправления:</td><td>' . date('d/m H:i', strtotime($row['departure_time'])) . '</td></tr>';
+                            echo '<tr><td>Дата прибытия:</td><td>' . date('d/m H:i', strtotime($row['arrival_time'])) . '</td></tr>';
+                            echo '<tr><td>Цена:</td><td>' . $row['price'] * $multi . ' ₸</td></tr>';
+                            echo '</table>';
                             echo '<br>';
                             echo '<table>';
                             echo '<tr><td>Авиакомпания:</td><td>' . $rowReturn['airline_name'] . '</td></tr>';
                             echo '<tr><td>Дата отправления:</td><td>' . date('d/m H:i', strtotime($rowReturn['departure_time'])) . '</td></tr>';
                             echo '<tr><td>Дата прибытия:</td><td>' . date('d/m H:i', strtotime($rowReturn['arrival_time'])) . '</td></tr>';
-                            echo '<tr><td>Цена:</td><td>' . $rowReturn['price'] . ' ₸</td></tr>';
+                            echo '<tr><td>Цена:</td><td>' . $rowReturn['price']* $multi
+                                . ' ₸</td></tr>';
                             echo '</table>';
                         }
 

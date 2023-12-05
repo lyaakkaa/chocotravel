@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -118,6 +121,45 @@
                     include('db.php'); // Подключение к базе данных
                     if (!isset($conn)) {
                         die("Error: Database connection not established.");
+                    }
+
+                    if (isset($_SESSION['user']['user_id'])) {
+                        $userID = $_SESSION['user']['user_id'];
+
+                        // Check if the user already has bonuses
+                        $getUserBonusQuery = "SELECT bonus FROM users WHERE user_id = $userID";
+                        $getUserBonusResult = pg_query($conn, $getUserBonusQuery);
+
+                        if (!$getUserBonusResult) {
+                            die("Error checking user bonuses: " . pg_last_error($conn));
+                        }
+
+                        $userBonus = pg_fetch_assoc($getUserBonusResult)['bonus'];
+
+                        // If the user doesn't have bonuses, check the number of purchased tickets
+                        if ($userBonus == 0) {
+                            $checkTicketsQuery = "SELECT COUNT(*) AS ticket_count FROM tickets WHERE user_id = $userID AND isPayed = true";
+                            $checkTicketsResult = pg_query($conn, $checkTicketsQuery);
+
+                            if (!$checkTicketsResult) {
+                                die("Error checking the number of purchased tickets: " . pg_last_error($conn));
+                            }
+
+                            $ticketCount = pg_fetch_assoc($checkTicketsResult)['ticket_count'];
+
+                            // If the ticket count is greater than or equal to 10, add a bonus
+                            if ($ticketCount >= 2) {
+                                $updateBonusQuery = "UPDATE users SET bonus = 500 WHERE user_id = $userID";
+                                $updateBonusResult = pg_query($conn, $updateBonusQuery);
+
+                                if (!$updateBonusResult) {
+                                    die("Error updating user bonus: " . pg_last_error($conn));
+                                }
+
+                                echo "Congratulations! You have received a bonus of 500 tenge for purchasing more than 10 tickets.";
+                            }
+                        }
+
                     }
 
                     $deleteQuery = "DELETE FROM tickets WHERE isPayed = false";
