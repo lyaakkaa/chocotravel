@@ -132,7 +132,7 @@
 
                     // Запрос для получения списка городов из таблицы "cities"
                     $query = "SELECT city_name, city_id FROM cities";
-                    $querySeat = "SELECT seat_class, seat_id FROM seats";
+                    $querySeat = "SELECT class_name, class_id FROM ticket_classes";
                     $result = pg_query($conn, $query);
                     $resultSeat = pg_query($conn, $querySeat);
                     $seatData = pg_fetch_all($resultSeat);
@@ -161,7 +161,7 @@
                                 <select id="ticket-type" name="ticket-type" required>
                                     <option value="" disabled selected>Выберите класс места</option>
                                     <?php foreach ($seatData as $seat): ?>
-                                        <option value="<?php echo $seat['seat_id']; ?>"><?php echo $seat['seat_class']; ?></option>
+                                        <option value="<?php echo $seat['class_id']; ?>"><?php echo $seat['class_name']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -171,8 +171,6 @@
                             <button type="submit" class="find">Найти</button>
                         </div>
                     </form>
-
-
 
                     <div class="div-text">
                         <h2>Подробнее о поиске авиабилетов на Chocotravel</h2>
@@ -211,7 +209,6 @@
                             <p>Нам доверяют более 200 000 казахстанцев ежегодно</p>
                         </div>
                     </div>
-
 
                     <div class="aboutUs">
                         <p>
@@ -256,7 +253,6 @@
                                 по выбранной программе.</li>
                         </ul>
                     </div>
-
 
                     <div class="main_articles">
                         <div class="main_articles_title">
@@ -328,7 +324,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -551,10 +546,6 @@
             </div>
         </div>
     </div>
-
-
-
-
 </body>
 
 </html>

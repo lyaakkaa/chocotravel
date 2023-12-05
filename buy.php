@@ -119,9 +119,8 @@
                         die("Error: Database connection not established.");
                     }
 
-                    // Запрос для получения списка городов из таблицы "cities"
                     $query = "SELECT city_name, city_id FROM cities";
-                    $querySeat = "SELECT seat_class, seat_id FROM seats";
+                    $querySeat = "SELECT class_id, class_name FROM ticket_classes";
                     $result = pg_query($conn, $query);
                     $resultSeat = pg_query($conn, $querySeat);
                     $seatData = pg_fetch_all($resultSeat);
@@ -157,8 +156,8 @@
                                     <option value="" disabled selected>Выберите класс места</option>
                                     <?php foreach ($seatData as $seat): ?>
                                         <option value="<?php echo $seat['seat_id']; ?>"
-                                            <?php if (isset($_POST['ticket-type']) && $_POST['ticket-type'] == $seat['seat_id']) echo 'selected'; ?>>
-                                            <?php echo $seat['seat_class']; ?>
+                                            <?php if (isset($_POST['ticket-type']) && $_POST['ticket-type'] == $seat['class_id']) echo 'selected'; ?>>
+                                            <?php echo $seat['class_name']; ?>
                                         </option>
                                     <?php endforeach; ?>
                                 </select>

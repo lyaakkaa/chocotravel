@@ -1,14 +1,12 @@
-select * from users;
-
 CREATE TABLE users (
     user_id serial PRIMARY KEY,
 	name VARCHAR(100) NOT NULL,
 	surname VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(60) NOT NULL,
-    created_at TIMESTAMP NOT NULL
+    created_at TIMESTAMP NOT NULL,
+	bonus INT NOT NULL
 );
-
 
 CREATE TABLE airlines (
     airline_id serial PRIMARY KEY,
@@ -18,37 +16,35 @@ CREATE TABLE airlines (
 CREATE TABLE cities (
     city_id serial PRIMARY KEY,
     city_name VARCHAR(50) NOT NULL,
-    country_name VARCHAR(50) NOT NULL
+    city_code VARCHAR(50) NOT NULL
 );
 
 
-CREATE TABLE seats (
-    seat_id serial PRIMARY KEY,
-    seat_number VARCHAR(5) NOT NULL,
-    seat_class VARCHAR(20) NOT NULL
-);
 
 CREATE TABLE flights (
-    flight_id serial PRIMARY KEY,
+    flight_id SERIAL PRIMARY KEY,
     flight_number VARCHAR(10) NOT NULL,
     departure_city_id INT REFERENCES cities(city_id),
     arrival_city_id INT REFERENCES cities(city_id),
     departure_time TIMESTAMP NOT NULL,
     arrival_time TIMESTAMP NOT NULL,
-    price DECIMAL(10, 2) NOT NULL,
+    price DECIMAL(10, 2) GENERATED ALWAYS AS (
+        CASE
+            WHEN EXTRACT(HOUR FROM departure_time) BETWEEN 6 AND 18 THEN base_price * 1.2  -- Daytime, increase price by 20%
+            ELSE base_price * 0.8  -- Nighttime, decrease price by 20%
+        END
+    ) STORED,
+    base_price DECIMAL(10, 2) NOT NULL,  -- Базовая цена
     airline_id INT REFERENCES airlines(airline_id)
 );
 
-
-
-CREATE TABLE passengers (
-    passenger_id serial PRIMARY KEY,
-    ticket_id INT REFERENCES tickets(ticket_id),
-    first_name VARCHAR(50) NOT NULL,
-    last_name VARCHAR(50) NOT NULL,
-    date_of_birth DATE NOT NULL,
-    passport_number VARCHAR(20) NOT NULL
+CREATE TABLE IF NOT EXISTS ticket_classes (
+    class_id SERIAL PRIMARY KEY,
+    class_name VARCHAR(20) NOT NULL
 );
+
+
+
 
 CREATE TABLE IF NOT EXISTS tickets (
     ticket_id SERIAL PRIMARY KEY,
@@ -62,7 +58,13 @@ CREATE TABLE IF NOT EXISTS tickets (
     iin VARCHAR(12) NOT NULL,
     phone_number VARCHAR(15) NOT NULL,
     email VARCHAR(50) NOT NULL,
-	isPayed boolean,
+    isPayed BOOLEAN,
+    isChild BOOLEAN,
+    isStudent BOOLEAN,
+    isPensioner BOOLEAN,
+    isDisabled BOOLEAN,
+    class_id INT,
     FOREIGN KEY (flight_id) REFERENCES flights(flight_id),
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (class_id) REFERENCES ticket_classes(class_id)
 );

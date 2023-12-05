@@ -23,9 +23,10 @@ session_start();
         $email = $_POST["email"];
         $password = password_hash($_POST["password"], PASSWORD_BCRYPT); // Hash the password securely
         $created_at = date('Y-m-d H:i:s');
+        $bonus = 0;
 
-        $query = "INSERT INTO users (name, surname, email, password, created_at) VALUES ($1, $2, $3, $4, NOW()) RETURNING user_id";
-        $result = pg_query_params($conn, $query, array($name, $surname, $email, $password));
+        $query = "INSERT INTO users (name, surname, email, password, created_at, bonus) VALUES ($1, $2, $3, $4, NOW(), $5) RETURNING user_id";
+        $result = pg_query_params($conn, $query, array($name, $surname, $email, $password, $bonus));
 
         if ($result) {
             $row = pg_fetch_assoc($result);
